@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Docs For Class MongoRandomElements</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=utf8'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><img src="../media/logo.png" border="0" alt="phpDocumentor " /></td>
+    <td class="header-top-right">InternetAccessLog<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
+		[ <a href="../elementindex_InternetAccessLog.html" class="menu">index: InternetAccessLog</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">InternetAccessLog</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_InternetAccessLog.html">InternetAccessLog</a><br />
+      	</div>
+      <br />
+                        <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../InternetAccessLog/_MongoRandomElements.class.php.html">MongoRandomElements.class.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../InternetAccessLog/_RandomElements.class.php.html">RandomElements.class.php</a></span><br />
+	  </div>
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../InternetAccessLog/MongoRandomElements.html">MongoRandomElements</a>    	 <br />
+	    		<a href="../InternetAccessLog/RandomElements.html">RandomElements</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: MongoRandomElements</h1>
+Source Location: /MongoRandomElements.class.php<br /><br />
+
+<h2 class="class-name">Class MongoRandomElements</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Class Overview</div>
+	<div class="nav-bar">
+					<span class="disabled">Class Overview</span>
+						
+					| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
+													| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+														| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+						</div>
+	<div class="info-box-body">
+		<table width="100%" border="0">
+		<tr><td valign="top" width="60%" class="class-overview">
+
+        		<p align="center" class="short-description"><strong>This class is used to generate random elements (users, IP's and URL's) and save them into MongoDB
+</strong></p>
+<span class="description"><p>With this elements created we can simulate non FTP and FTP log entries (in our demo the acces by FTP are stored in a separate collection)</p></span>
+		<p class="notes">
+			Located in <a class="field" href="_MongoRandomElements.class.php.html">/MongoRandomElements.class.php</a> [<span class="field">line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a17">17</a></span>]
+		</p>
+
+		
+		<pre><a href="../InternetAccessLog/RandomElements.html">RandomElements</a>
+   |
+   --MongoRandomElements</pre>
+
+		
+		
+		
+		</td>
+
+		
+				<td valign="top" width="20%" class="class-overview">
+		<p align="center" class="short-description"><strong><a href="#sec_methods">Methods</a></strong></p>
+		<ul>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#method__construct">__construct</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#method__destruct">__destruct</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateDomains">createDomains</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateIPs">createIPs</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateUsers">createUsers</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodrandomDomains_exists">randomDomains_exists</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodrandomIPs_exists">randomIPs_exists</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodrandomUsers_exists">randomUsers_exists</a></li>
+		  		</ul>
+		</td>
+		
+		</tr></table>
+		<div class="top">[ <a href="#top">Top</a> ]</div>
+	</div>
+</div>
+
+
+	<a name="sec-inherited"></a>
+	<div class="info-box">
+		<div class="info-box-title">Inherited Properties, Constants, and Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+						| <span class="disabled">Inherited Properties, Constants, and Methods</span>
+															| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+							    		    			    				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+    			    				</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header" width="30%">Inherited Properties</th>
+					<th class="class-table-header" width="40%">Inherited Methods</th>
+					<th class="class-table-header" width="30%">Inherited Constants</th>
+				</tr>
+				<tr>
+					<td width="30%">
+											</td>
+					<td width="40%">
+													<p>Inherited From <span class="classname"><a href="../InternetAccessLog/RandomElements.html">RandomElements</a></span></p>
+							<blockquote>
+								<dl>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDomain">RandomElements::getRandomDomain()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a random Internet domain (a www followed by a random string ended by a valid internet</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomFTPMethod">RandomElements::getRandomFTPMethod()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a semi random HTTP method (90% will be RETR)</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomHTTPMethod">RandomElements::getRandomHTTPMethod()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a semi random HTTP method (90% will be GET)</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomIP">RandomElements::getRandomIP()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a random IP (string with 4 numbers between 0 and 255). No check for validity is made</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomProtocol">RandomElements::getRandomProtocol()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a random protocol (90% will be http)</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomRetourCode">RandomElements::getRandomRetourCode()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a semirandom return code (90% are 200 return code)</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomSize">RandomElements::getRandomSize()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Return a random size between 0 and 50K</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomString">RandomElements::getRandomString()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a random string of the length demanded (10 characters by default)</span>
+										</dd>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomUser">RandomElements::getRandomUser()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Returns a random user, composed of one letter and 6 numbers</span>
+										</dd>
+																	</dl>
+							</blockquote>
+											</td>
+					<td width="30%">
+											</td>
+				</tr>
+			</table>
+			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
+		</div>
+	</div>
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+										| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
+						| <span class="disabled">Constants Summary</span> | <a href="#sec-consts">Constants Detail</a>
+															| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+									</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+			<table border="0" cellspacing="0" cellpadding="0" class="var-summary">
+							<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDEFAULT_DB" title="details" class="const-name-summary">DEFAULT_DB</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Constants for default connection values</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDEFAULT_HOST" title="details" class="const-name-summary">DEFAULT_HOST</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Constants for default connection values</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDEFAULT_PASSWORD" title="details" class="const-name-summary">DEFAULT_PASSWORD</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Constants for default connection values</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDEFAULT_USER" title="details" class="const-name-summary">DEFAULT_USER</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Constants for default connection values</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constRNDDOMAINSC_NAME" title="details" class="const-name-summary">RNDDOMAINSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constRNDIPSC_NAME" title="details" class="const-name-summary">RNDIPSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constRNDUSERSC_NAME" title="details" class="const-name-summary">RNDUSERSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								</table>
+			</div>
+			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+										| <a href="#sec-inherited">Inherited Properties and Methods</a>
+						    		    			    				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+    			    					| <span class="disabled">Method Summary</span> | <a href="#sec-methods">Methods Detail</a>
+		</div>
+		<div class="info-box-body">
+			<div class="method-summary">
+				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
+																																																																																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">MongoRandomElements</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#__construct" title="details" class="method-name">__construct</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#__destruct" title="details" class="method-name">__destruct</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Destructor. Close the open connection to MongoDB database</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createDomains" title="details" class="method-name">createDomains</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random domains in MongoDB</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createIPs" title="details" class="method-name">createIPs</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random IPs in MongoDB</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createUsers" title="details" class="method-name">createUsers</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random users in MongoDB.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#randomDomains_exists" title="details" class="method-name">randomDomains_exists</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition"></td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#randomIPs_exists" title="details" class="method-name">randomIPs_exists</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns true if the IPs collection has at least one IP</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#randomUsers_exists" title="details" class="method-name">randomUsers_exists</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns true if the random users collection has at least one user</td></tr>
+				</div>
+												</table>
+			</div>
+			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
+		</div>
+	</div>
+
+
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+										| <a href="#sec-inherited">Inherited Properties and Methods</a>
+																		| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+														| <a href="#sec-method-summary">Method Summary</a> | <span class="disabled">Methods Detail</span>
+					</div>
+		<div class="info-box-body">
+			<a name='method_detail'></a>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a71">71</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>MongoRandomElements __construct(
+[string
+$user = self::DEFAULT_USER], [string
+$password = self::DEFAULT_PASSWORD], [string
+$host = self::DEFAULT_HOST], [string
+$database = self::DEFAULT_DB]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).
+</strong></p>
+<span class="description"><p><ul><li>The default user and password will be mongodb</li><li>The default host will be localhost</li><li>The default database name will be InternetAccessLog</li></ul></p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$user:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$password:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$host:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$database:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a94">94</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void __destruct(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Destructor. Close the open connection to MongoDB database
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateDomains" id="createDomains"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a191">191</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createDomains(
+
+$number&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random domains in MongoDB
+</strong></p>
+<span class="description"><p>The parameter are the number of domains to create and if we want an unique index to be created for the domain name (default is TRUE)   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateIPs" id="createIPs"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a149">149</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createIPs(
+integer
+$number, [boolean
+$use_index = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random IPs in MongoDB
+</strong></p>
+<span class="description"><p>The parameters are the number of IPs to create and if we want an unique index to be created for the IP name (default is TRUE)   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$use_index:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateUsers" id="createUsers"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a105">105</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createUsers(
+integer
+$number, [boolean
+$use_index = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random users in MongoDB.
+</strong></p>
+<span class="description"><p>The parameters are the number of users to create and if we want an unique index to be created for the user name (default is TRUE)   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$use_index:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomDomains_exists" id="randomDomains_exists"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a219">219</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void randomDomains_exists(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomIPs_exists" id="randomIPs_exists"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a180">180</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>boolean randomIPs_exists(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns true if the IPs collection has at least one IP
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomUsers_exists" id="randomUsers_exists"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">randomUsers_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a136">136</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>boolean randomUsers_exists(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns true if the random users collection has at least one user
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+										| <a href="#sec-const-summary">Constants Summary</a> | <span class="disabled">Constants Detail</span>
+										| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
+															| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+									</div>
+		<div class="info-box-body">
+			<a name="constDEFAULT_DB" id="DEFAULT_DB"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DEFAULT_DB</span>
+			 = <span class="var-default"> &quot;InternetAccessLog&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a33">33</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Constants for default connection values
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDEFAULT_HOST" id="DEFAULT_HOST"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DEFAULT_HOST</span>
+			 = <span class="var-default"> &quot;localhost&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a32">32</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Constants for default connection values
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDEFAULT_PASSWORD" id="DEFAULT_PASSWORD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DEFAULT_PASSWORD</span>
+			 = <span class="var-default"> &quot;mongodb&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a31">31</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Constants for default connection values
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDEFAULT_USER" id="DEFAULT_USER"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DEFAULT_USER</span>
+			 = <span class="var-default"> &quot;mongodb&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a30">30</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Constants for default connection values
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constRNDDOMAINSC_NAME" id="RNDDOMAINSC_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">RNDDOMAINSC_NAME</span>
+			 = <span class="var-default"> &quot;Random_DomainsList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a24">24</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constRNDIPSC_NAME" id="RNDIPSC_NAME"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">RNDIPSC_NAME</span>
+			 = <span class="var-default"> &quot;Random_IPsList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a23">23</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constRNDUSERSC_NAME" id="RNDUSERSC_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">RNDUSERSC_NAME</span>
+			 = <span class="var-default"> &quot;Random_UsersList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a22">22</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+		</div>
+	</div>
+
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Wed, 18 Jul 2012 19:12:54 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
