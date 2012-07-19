@@ -1,0 +1,10 @@
+Tests realized
+==============
+time php test1_mongo.php
+    - Most of time the script is generating the random data!
+
+MongoDB database creation
+=========================
+
+> use InternetAccessLog;
+> db.addUser("mongodb", "mongodb");

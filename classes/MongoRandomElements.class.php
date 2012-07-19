@@ -79,13 +79,13 @@ require_once("RandomElements.class.php");
 		}
 		
 		// Stores the number of elements of each stored random elements collection
-        $database_name = $this->db_databasename;
+        $db = $this->db_databasename;
         $userscol_name = self::RNDUSERSC_NAME;
         $ipscol_name = self::RNDIPSC_NAME;
         $domainscol_name = self::RNDDOMAINSC_NAME;
-		$this->rnd_users_number =  $this->db_conn->$database_name->$userscol_name->count();
-		$this->rnd_ips_number = $this->db_conn->$database_name->$ipscol_name->count();
-		$this->rnd_domains_number = $this->db_conn->$database_name->$domainscol_name->count();
+		$this->rnd_users_number =  $this->db_conn->$db->$userscol_name->count();
+		$this->rnd_ips_number = $this->db_conn->$db->$ipscol_name->count();
+		$this->rnd_domains_number = $this->db_conn->$db->$domainscol_name->count();
 	}
 
     /**
@@ -105,9 +105,9 @@ require_once("RandomElements.class.php");
 	function createUsers($number, $use_index = TRUE)	{
 		$id = $this->rnd_users_number + 1;   // Autonumeric
         
-        $database_name = $this->db_databasename;      
+        $db = $this->db_databasename;      
         $col_name = self::RNDUSERSC_NAME;
-        $col = $this->db_conn->$database_name->$col_name;
+        $col = $this->db_conn->$db->$col_name;
         
         if ($use_index) {
             $col->ensureIndex(array('user' => 1), array("unique" => true));	// Unique index for the 'user' field
@@ -134,9 +134,9 @@ require_once("RandomElements.class.php");
      *  @return boolean
      */
 	function randomUsers_exists()	{
-        $database_name = $this->db_databasename;
-        $userscol_name = self::RNDUSERSC_NAME;
-        $this->db_conn->$database_name->$col_name->count() > 0 ? true : false;
+        $db = $this->db_databasename;
+        $col = self::RNDUSERSC_NAME;
+        $this->db_conn->$db->$col->count() > 0 ? true : false;
 	}
 
     /**
@@ -149,9 +149,9 @@ require_once("RandomElements.class.php");
 	function createIPs($number, $use_index = TRUE)	{
 		$id = $this->rnd_ips_number + 1;   // Autonumeric
         
-        $database_name = $this->db_databasename;      
+        $db = $this->db_databasename;      
         $col_name = self::RNDIPSC_NAME;
-        $col = $this->db_conn->$database_name->$col_name;
+        $col = $this->db_conn->$db->$col_name;
         
         if ($use_index) {
             $this->mngrnd_ips->ensureIndex(array('ip' => 1), array("unique" => true));	// Unique index for the 'ip' field
@@ -178,9 +178,9 @@ require_once("RandomElements.class.php");
      *  @return boolean
      */
 	function randomIPs_exists()	{
-        $database_name = $this->db_databasename;
-        $col_name = self::RNDIPSC_NAME;
-        $this->db_conn->$database_name->$col_name->count() > 0 ? true : false;
+        $db = $this->db_databasename;
+        $col = self::RNDIPSC_NAME;
+        $this->db_conn->$db->$col->count() > 0 ? true : false;
 	}
 
     /**
@@ -191,9 +191,9 @@ require_once("RandomElements.class.php");
 	function createDomains($number)	{
         $id = $this->rnd_domains_number + 1;   // Autonumeric
         
-		$database_name = $this->db_databasename;      
+		$db = $this->db_databasename;      
         $col_name = self::RNDDOMAINSC_NAME;
-        $col = $this->db_conn->$database_name->$userscol_name;
+        $col = $this->db_conn->$db->$userscol_name;
         
         if ($use_index) {
             $col->ensureIndex(array('domain' => 1), array("unique" => true));	// Unique index for the 'domain' field
@@ -215,13 +215,136 @@ require_once("RandomElements.class.php");
         $this->rnd_domains_number = $col->count();
 	}
     
-	// Returns true if the IPs collection for random data exists
+    /**
+     *  Returns true if the random domains collection has at least one domain
+     *  @return boolean
+     */
 	function randomDomains_exists()	{
-		$database_name = $this->db_databasename;
-        $col_name = self::RNDDOMAINSC_NAME;
-        $this->db_conn->$database_name->$col_name->count() > 0 ? true : false;
+		$db = $this->db_databasename;
+        $col = self::RNDDOMAINSC_NAME;
+        $this->db_conn->$db->$col->count() > 0 ? true : false;
+	}
+
+    /**
+     *  Returns a random IP from the generated collection
+     *  @returns string
+     */
+	function searchIP()	{
+    	$position = mt_rand(1, $this->rnd_ips_number);
+        $db = $this->db_databasename;
+        $col = self::RNDIPSC_NAME;
+        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
+		return $result["ip"];
 	}
     
+    /**
+     *  Returns a random user from the generated collection
+     *  @return string
+     */
+	function searchUser()	{
+		$position = mt_rand(1, $this->rnd_users_number);
+        $db = $this->db_databasename;
+        $col = self::RNDUSERSC_NAME;
+        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
+		return $result["user"];
+	}
+    
+    /**
+     *  Returns a random HTTP method from the generated collection
+     *  @returns string
+     */
+	function searchHTTPMethod()	{
+		return $this->getRandomHTTPMethod();
+	}
+    
+    /**
+     *  Returns a random FTP method from the generated collection
+     *  @returns string
+     */
+	function searchFTPMethod()	{
+		return $this->getRandomFTPMethod();
+	}
+	
+    /**
+     *  Returns a random domain
+     *  @returns string
+     */
+	function searchDomain() {
+        $position = mt_rand(1, $this->rnd_domains_number);
+        $db = $this->db_databasename;
+        $col = self::RNDDOMAINSC_NAME;
+        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
+		return $result["domain"];
+	}
+	
+    /**
+     *  Returns a random URI
+     *  @returns string
+     */
+	function searchURI()	{
+        return $this->getRandomString(mt_rand(0,100));
+	}
+
+    /**
+     *  Returns a random size
+     *  @returns integer
+     */
+	function searchSize()	{
+		return $this->getRandomSize();
+	}
+
+    /**
+     *  Returns a random protocol
+     *  @returns string
+     */
+	function searchProtocol()	{
+		return $this->getRandomProtocol();
+	}
+	
+    /**
+     *  Returns a random return code
+     *  @returns integer
+     */
+	function searchReturnCode()	{
+		return $this->getRandomRetourCode();
+	}
+ 
+    /**
+     *  Return a random log entry for non FTP access (http and tunnel)
+     *  It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created
+     *  @param integer $initial_timestamp
+     *  @param integer $final_timestamp
+     *  @returns array
+     */
+	function getRandomNonFTPLogEntry()	{
+		if (func_num_args() == 2)	{	
+			$initial_timestamp = func_get_arg(0);
+			$final_timestamp =  func_get_arg(1);
+			$ts = mt_rand($initial_timestamp, $final_timestamp);
+		}
+		elseif (func_num_args() != 0)	{
+			$arguments = func_get_args();
+			die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
+		}
+		else {
+			$ts = time();
+		}
+		
+		$document = array(
+			'clientip' => $this->searchIP(),
+			'user' => $this->searchUser(),
+			'datetime' => $ts,
+			'method' => $this->searchHTTPMethod(),
+			'protocol' => $this->searchProtocol(),
+			'domain' => $this->searchDomain(),
+			'uri' => $this->searchURI(),
+			'return_code' => $this->searchReturnCode(),
+			'size' => $this->searchSize()	// Size is recorded in the database as string
+		);
+        
+        return $document;
+    }
+
 }
  
 ?>
