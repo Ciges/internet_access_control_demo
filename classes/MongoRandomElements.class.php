@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120718
+ *  @version 20120719
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -75,7 +75,7 @@ require_once("RandomElements.class.php");
             $this->db_databasename = $database;
 		}
 		catch (MongoConnectionException $e) {
-			die("Connection to random database in MongoDB not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+			die("Connection to MongoDB impossible: (".$e->getCode().") ".$e->getMessage()."\n");
 		}
 		
 		// Stores the number of elements of each stored random elements collection
@@ -97,12 +97,14 @@ require_once("RandomElements.class.php");
     
     /**
      *  Save random users in MongoDB.  
-     *  The parameters are the number of users to create and if we want an unique index to be created for the user name (default is TRUE)
+     *  The parameters are the number of users to create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE). 
+     *  If the user name is going to be unique the existence of the name is verified with a query before inserting a new one.
      *  The id will be autonumeric (1, 2, 3 ....)
 	 *  @param integer $number
      *  @param boolean $use_index
+     *  @param boolean $dont_repeat
      */
-	function createUsers($number, $use_index = TRUE)	{
+	function createUsers($number, $use_index = TRUE, $dont_repeat = TRUE)	{
 		$id = $this->rnd_users_number + 1;   // Autonumeric
         
         $db = $this->db_databasename;      
@@ -115,16 +117,23 @@ require_once("RandomElements.class.php");
         $i = 1;
 		while ($i <= $number)	{
 			$user = $this->getRandomUser();
-			if (!$col->findOne(array("user" => $user))) {
-				try {
-					$col->insert(array("_id" => $id, "user" => $user));
+            // We verify if the user is in the collection only if it is needed
+            $insert = TRUE;
+            if ($dont_repeat) {
+                if ($col->findOne(array("user" => $user))) {
+                    $insert = FALSE;
+                }
+            }
+            if ($insert)   {
+                try {
+                    $col->insert(array("_id" => $id, "user" => $user));
                     $id++;
-				}
-				catch (MongoConnectionException $e) {
-					die("Save of User document in MongoDB not possible: (".$e->getCode().") ".$e->getMessage()."\n");
-				}
-				$i++;
-			}
+                }
+                catch (MongoConnectionException $e) {
+                    die("Save of user document in MongoDB not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+                }
+                $i++;
+            }
 		}
         $this->rnd_users_number = $col->count();
 	}
@@ -141,12 +150,14 @@ require_once("RandomElements.class.php");
 
     /**
      *  Save random IPs in MongoDB
-     *  The parameters are the number of IPs to create and if we want an unique index to be created for the IP name (default is TRUE)
+     *  The parameters are the number of IPs to create and to booleans: if we want an unique index to be created for the ip (default is TRUE) and if we want that the ip is unique (default TRUE). 
+     *  If the ip is going to be unique the existence of the name is verified with a query before inserting a new one
      *  The id will be autonumeric (1, 2, 3 ....)
      *  @param integer $number
      *  @param boolean $use_index
+     *  @param boolean $dont_repeat_users
      */
-	function createIPs($number, $use_index = TRUE)	{
+	function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
 		$id = $this->rnd_ips_number + 1;   // Autonumeric
         
         $db = $this->db_databasename;      
@@ -154,12 +165,19 @@ require_once("RandomElements.class.php");
         $col = $this->db_conn->$db->$col_name;
         
         if ($use_index) {
-            $this->mngrnd_ips->ensureIndex(array('ip' => 1), array("unique" => true));	// Unique index for the 'ip' field
+            $col->ensureIndex(array('ip' => 1), array("unique" => true));	// Unique index for the 'ip' field
         }
         $i = 1;
 		while ($i <= $number)	{
 			$ip = $this->getRandomIP();
-			if (!$col->findOne(array("ip" => $ip))) {
+            // We verify if the user is in the collection only if it is needed
+            $insert = TRUE;
+            if ($dont_repeat) {
+                if ($col->findOne(array("ip" => $ip))){
+                    $insert = FALSE;
+                }
+            }
+            if ($insert)   {
 				try {
 					$col->insert(array("_id" => $id, "ip" => $ip));
                     $id++;
@@ -185,15 +203,19 @@ require_once("RandomElements.class.php");
 
     /**
      *  Save random domains in MongoDB
-     *  The parameter are the number of domains to create and if we want an unique index to be created for the domain name (default is TRUE)
+     *  The parameter are the number of domains to create and to booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE). 
+     *  If the domain is going to be unique the existence of the name is verified with a query before inserting a new one
      *  The id will be autonumeric (1, 2, 3 ....)
+     *  @param integer $number
+     *  @param boolean $use_index
+     *  @param boolean $dont_repeat_users
      */
-	function createDomains($number)	{
+	function createDomains($number, $use_index = TRUE, $dont_repeat = TRUE)	{
         $id = $this->rnd_domains_number + 1;   // Autonumeric
         
 		$db = $this->db_databasename;      
         $col_name = self::RNDDOMAINSC_NAME;
-        $col = $this->db_conn->$db->$userscol_name;
+        $col = $this->db_conn->$db->$col_name;
         
         if ($use_index) {
             $col->ensureIndex(array('domain' => 1), array("unique" => true));	// Unique index for the 'domain' field
@@ -201,7 +223,14 @@ require_once("RandomElements.class.php");
         $i = 1;
 		while ($i <= $number)	{
 			$domain = $this->getRandomDomain();
-			if (!$col->findOne(array("domain" => $domain))) {
+            // We verify if the user is in the collection only if it is needed
+            $insert = TRUE;
+            if ($dont_repeat) {
+                if ($col->findOne(array("domain" => $domain))) {
+                    $insert = FALSE;
+                }
+            }
+            if ($insert)   {
 				try {
 					$col->insert(array("_id" => $id, "domain" => $domain));
                     $id++;

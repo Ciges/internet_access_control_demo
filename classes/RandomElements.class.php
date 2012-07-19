@@ -51,7 +51,7 @@ class RandomElements {
      */
     function getRandomUser() {
 		$letter = "abcdefghijklmnopqrstuvwxyz";
-		$user = $letter{rand(0, 25)}.sprintf("%06d", mt_rand(1,999999));
+		$user = $letter{mt_rand(0, 25)}.sprintf("%06d", mt_rand(1,999999));
 		
 		return ucfirst($user);
 	}
@@ -61,7 +61,7 @@ class RandomElements {
      * @return string
      */
 	function getRandomIP()	{
-		$ip = mt_rand(0,255).".".rand(0,255).".".rand(0,255).".".rand(0,255);
+		$ip = mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255);
 		return $ip;
 	}
     
@@ -117,7 +117,7 @@ class RandomElements {
 		$word = range('a', 'z');
 		$len = mt_rand(1, count($word));
 		shuffle($word);
-		$domain .= "www.".substr(implode($word), 0, $len).$this->listOfInternetDomains[rand(0,count($this->listOfInternetDomains)-1)];
+		$domain .= "www.".substr(implode($word), 0, $len).$this->listOfInternetDomains[mt_rand(0,count($this->listOfInternetDomains)-1)];
 		
 		return $domain;
 	}

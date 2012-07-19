@@ -1,10 +1,52 @@
 Tests realized
 ==============
-time php test1_mongo.php
+time php test1_1_mongo.php
     - Most of time the script is generating the random data!
 
+    0m1,88s
+    0m1,86s     1s
+    0m1,84s
+
+time php test1_2_mongo.php
+
+    0m2,04s
+    0m2,02s     2s
+    0m2,15s
+
+time php test1_3_mongo.php
+
+    0m37,27s
+    0m37,05s    37s
+    0m36,62s
+    
+time php test2_1_mongo.php
+
+    0m19,13s
+    0m18,80s    19s
+    0m18,83s
+
+time php test2_2_mongo.php
+
+    0m19,34s
+    0m19,13s    19s
+    0m19,17s
+
+
+time php test2_3_mongo.php
+
+    6m54,83s
+
+time php test1_1_mysql.php
+    
+    - MySQL tables must not exists before sending the test
+    
 MongoDB database creation
 =========================
-
 > use InternetAccessLog;
 > db.addUser("mongodb", "mongodb");
+
+
+MySQL database creation
+=======================
+mysql> create database InternetAccessLog;
+mysql> grant all privileges on InternetAccessLog.* to mysqldb@localhost identified by 'mysqldb';

@@ -61,9 +61,11 @@
 		<h2>c</h2>
 		<dl>
 							<dt><b>createDomains</b></dt>
-				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateDomains">MongoRandomElements::createDomains()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random domains in MongoDB</dd>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateDomains">MongoRandomElements::createDomains()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random domains in MongoDB   The parameter are the number of domains to create and to booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE).</dd>
 							<dt><b>createIPs</b></dt>
-				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateIPs">MongoRandomElements::createIPs()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random IPs in MongoDB</dd>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateIPs">MongoRandomElements::createIPs()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random IPs in MongoDB   The parameters are the number of IPs to create and to booleans: if we want an unique index to be created for the ip (default is TRUE) and if we want that the ip is unique (default TRUE).</dd>
+							<dt><b>createUsers</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">MySQLRandomElements::createUsers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Verify if a random user exists in the database   Save random users in MySQL.</dd>
 							<dt><b>createUsers</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateUsers">MongoRandomElements::createUsers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random users in MongoDB.</dd>
 					</dl>
@@ -78,11 +80,19 @@
 		<h2>d</h2>
 		<dl>
 							<dt><b>DEFAULT_DB</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_DB">MySQLRandomElements::DEFAULT_DB</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DEFAULT_DB</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_DB">MongoRandomElements::DEFAULT_DB</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DEFAULT_HOST</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_HOST">MySQLRandomElements::DEFAULT_HOST</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_HOST</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_HOST">MongoRandomElements::DEFAULT_HOST</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_PASSWORD</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_PASSWORD">MongoRandomElements::DEFAULT_PASSWORD</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DEFAULT_PASSWORD</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_PASSWORD">MySQLRandomElements::DEFAULT_PASSWORD</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DEFAULT_USER</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_USER">MySQLRandomElements::DEFAULT_USER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_USER</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_USER">MongoRandomElements::DEFAULT_USER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 					</dl>
@@ -131,6 +141,10 @@
 				<dd>in file MongoRandomElements.class.php, class <a href="InternetAccessLog/MongoRandomElements.html">MongoRandomElements</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This class is used to generate random elements (users, IP's and URL's) and save them into MongoDB</dd>
 							<dt><b>MongoRandomElements.class.php</b></dt>
 				<dd>procedural page <a href="InternetAccessLog/_MongoRandomElements.class.php.html">MongoRandomElements.class.php</a></dd>
+							<dt><b>MySQLRandomElements</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class <a href="InternetAccessLog/MySQLRandomElements.html">MySQLRandomElements</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This class is used to generate random elements (users, IP's and URL's) and save them into MySQL</dd>
+							<dt><b>MySQLRandomElements.class.php</b></dt>
+				<dd>procedural page <a href="InternetAccessLog/_MySQLRandomElements.class.php.html">MySQLRandomElements.class.php</a></dd>
 					</dl>
 	</div>
 	<a name="r"></a>
@@ -153,11 +167,17 @@
 							<dt><b>randomUsers_exists</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodrandomUsers_exists">MongoRandomElements::randomUsers_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the random users collection has at least one user</dd>
 							<dt><b>RNDDOMAINSC_NAME</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constRNDDOMAINSC_NAME">MySQLRandomElements::RNDDOMAINSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
+							<dt><b>RNDDOMAINSC_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDDOMAINSC_NAME">MongoRandomElements::RNDDOMAINSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>RNDIPSC_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDIPSC_NAME">MongoRandomElements::RNDIPSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
+							<dt><b>RNDIPSC_NAME</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constRNDIPSC_NAME">MySQLRandomElements::RNDIPSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>RNDUSERSC_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDUSERSC_NAME">MongoRandomElements::RNDUSERSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
+							<dt><b>RNDUSERSC_NAME</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constRNDUSERSC_NAME">MySQLRandomElements::RNDUSERSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 					</dl>
 	</div>
 	<a name="s"></a>
@@ -199,14 +219,18 @@
 		<h2>_</h2>
 		<dl>
 							<dt><b>__construct</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#method__construct">MySQLRandomElements::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</dd>
+							<dt><b>__construct</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#method__construct">MongoRandomElements::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</dd>
+							<dt><b>__destruct</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#method__destruct">MySQLRandomElements::__destruct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Destructor. Close the open connection to MySQL database</dd>
 							<dt><b>__destruct</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#method__destruct">MongoRandomElements::__destruct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Destructor. Close the open connection to MongoDB database</dd>
 					</dl>
 	</div>
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Thu, 19 Jul 2012 12:33:22 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 19 Jul 2012 17:13:11 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>
