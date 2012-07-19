@@ -65,7 +65,7 @@
 	private function tableExists($tablename)	{
 		$query = "show table status where Name=\"".$tablename."\"";
         if ($result = $this->db_conn->query($query))	{
-            return count($result->num_rows) > 0;
+            return $result->num_rows > 0;
 		}
 		else	{
 			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
@@ -131,12 +131,14 @@
     
     /**
      *  Save random users in MySQL.  
-     *  The parameters are the number of users to create and if we want an unique index to be created for the user name (default is TRUE)
+     *  The parameters are the number of users to create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE). 
+     *  If the user name is going to be unique the existence of the name is verified with a query before inserting a new one.
      *  The id will be autonumeric (1, 2, 3 ....)
 	 *  @param integer $number
      *  @param boolean $use_index
+     *  @param boolean $dont_repeat
      */
-	function createUsers($number, $use_index = TRUE)	{
+	function createUsers($number, $use_index = TRUE, $dont_repeat = TRUE)	{
 		$id = $this->rnd_users_number + 1;   // Autonumeric
         
         // Table creation if it does not exists
@@ -145,7 +147,7 @@
                 $query = "CREATE TABLE ".self::RNDUSERSC_NAME." (
                 id INT NOT NULL PRIMARY KEY,
                 user CHAR(7),
-                index user_index (user)
+                unique index user_index (user)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             }
             else {
@@ -161,31 +163,36 @@
         $i = 1;
 		while ($i <= $number)	{
             $user = $this->getRandomUser();
+            // We verify if the user is in the collection only if it is needed
+            $insert = TRUE;
+            if ($dont_repeat) {
+                $query = "select id from ".self::RNDUSERSC_NAME." where user=\"".$user."\"";
+                if ($result = $this->db_conn->query($query))   {
+                    $result->num_rows > 0 &&
+                        $insert = FALSE;
+                }
+                else    {
+                    die ("Error sending the query '".$query."' to MySQL");
+                }
+            }
+            if ($insert)   {
+                $query = "insert into ".self::RNDUSERSC_NAME." (id, user) values (".$id.", \"".$user."\")";
+				$this->db_conn->query($query) ||
+					die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+                $id++;
+                $i++;
+            }
         }
-
-        
-/*      
-        if ($use_index) {
-            $col->ensureIndex(array('user' => 1), array("unique" => true));	// Unique index for the 'user' field
-        }
-        $i = 1;
-		while ($i <= $number)	{
-			$user = $this->getRandomUser();
-			if (!$col->findOne(array("user" => $user))) {
-				try {
-					$col->insert(array("_id" => $id, "user" => $user));
-                    $id++;
-				}
-				catch (MongoConnectionException $e) {
-					die("Save of User document in MongoDB not possible: (".$e->getCode().") ".$e->getMessage()."\n");
-				}
-				$i++;
-			}
-		}
-        $this->rnd_users_number = $col->count();
-*/
-	}
+            
+    }
     
+    /** 
+     * Returns true if the "Random_UsersList" table has records
+     * @returns boolean
+     */
+	function randomUser_exists()	{
+		return $this->recordNumber(self::RNDUSERSC_NAME) > 0;
+	}
  }
  
  ?>

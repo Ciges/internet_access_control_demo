@@ -35,10 +35,25 @@ time php test2_2_mongo.php
 time php test2_3_mongo.php
 
     6m54,83s
+    6m55,72s    56s
+    6m58,71s
 
 time php test1_1_mysql.php
-    
+
+    0m8,17s
+    0m13,46s    12s
+    0m15,02s
+
+time php test2_1_mysql.php    
+
+    0m27,88s
+    0m29,54s    28s
+    0m29,15s
+
+MySQL tests
+===========    
     - MySQL tables must not exists before sending the test
+    - The tables are created and included in the time
     
 MongoDB database creation
 =========================
