@@ -61,11 +61,15 @@
 		<h2>c</h2>
 		<dl>
 							<dt><b>createDomains</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodcreateDomains">MySQLRandomElements::createDomains()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random domains in MySQL.</dd>
+							<dt><b>createDomains</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateDomains">MongoRandomElements::createDomains()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random domains in MongoDB   The parameter are the number of domains to create and to booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE).</dd>
+							<dt><b>createIPs</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodcreateIPs">MySQLRandomElements::createIPs()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random IPs in MySQL.</dd>
 							<dt><b>createIPs</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateIPs">MongoRandomElements::createIPs()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random IPs in MongoDB   The parameters are the number of IPs to create and to booleans: if we want an unique index to be created for the ip (default is TRUE) and if we want that the ip is unique (default TRUE).</dd>
 							<dt><b>createUsers</b></dt>
-				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">MySQLRandomElements::createUsers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Verify if a random user exists in the database   Save random users in MySQL.</dd>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">MySQLRandomElements::createUsers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random users in MySQL.</dd>
 							<dt><b>createUsers</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodcreateUsers">MongoRandomElements::createUsers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save random users in MongoDB.</dd>
 					</dl>
@@ -115,6 +119,8 @@
 							<dt><b>getRandomIP</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomIP">RandomElements::getRandomIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP (string with 4 numbers between 0 and 255). No check for validity is made</dd>
 							<dt><b>getRandomNonFTPLogEntry</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">MySQLRandomElements::getRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for non FTP access (http and tunnel)</dd>
+							<dt><b>getRandomNonFTPLogEntry</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodgetRandomNonFTPLogEntry">MongoRandomElements::getRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for non FTP access (http and tunnel)</dd>
 							<dt><b>getRandomProtocol</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomProtocol">RandomElements::getRandomProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol (90% will be http)</dd>
@@ -157,6 +163,8 @@
 		<h2>r</h2>
 		<dl>
 							<dt><b>randomDomains_exists</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodrandomDomains_exists">MySQLRandomElements::randomDomains_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the &quot;Random_DomainsList&quot; table has records</dd>
+							<dt><b>randomDomains_exists</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodrandomDomains_exists">MongoRandomElements::randomDomains_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the random domains collection has at least one domain</dd>
 							<dt><b>RandomElements</b></dt>
 				<dd>in file RandomElements.class.php, class <a href="InternetAccessLog/RandomElements.html">RandomElements</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This class is used to generate random elements (users, IP's and URL's) to make tests (populate tables in MySQL or collections in MongoDB)</dd>
@@ -164,14 +172,16 @@
 				<dd>procedural page <a href="InternetAccessLog/_RandomElements.class.php.html">RandomElements.class.php</a></dd>
 							<dt><b>randomIPs_exists</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodrandomIPs_exists">MongoRandomElements::randomIPs_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the IPs collection has at least one IP</dd>
+							<dt><b>randomIPs_exists</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodrandomIPs_exists">MySQLRandomElements::randomIPs_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the &quot;Random_IPsList&quot; table has records</dd>
 							<dt><b>randomUsers_exists</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodrandomUsers_exists">MongoRandomElements::randomUsers_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the random users collection has at least one user</dd>
 							<dt><b>randomUser_exists</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodrandomUser_exists">MySQLRandomElements::randomUser_exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the &quot;Random_UsersList&quot; table has records</dd>
 							<dt><b>RNDDOMAINSC_NAME</b></dt>
-				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDDOMAINSC_NAME">MongoRandomElements::RNDDOMAINSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
-							<dt><b>RNDDOMAINSC_NAME</b></dt>
 				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constRNDDOMAINSC_NAME">MySQLRandomElements::RNDDOMAINSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
+							<dt><b>RNDDOMAINSC_NAME</b></dt>
+				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDDOMAINSC_NAME">MongoRandomElements::RNDDOMAINSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>RNDIPSC_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constRNDIPSC_NAME">MongoRandomElements::RNDIPSC_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>RNDIPSC_NAME</b></dt>
@@ -192,21 +202,39 @@
 		<h2>s</h2>
 		<dl>
 							<dt><b>searchDomain</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchDomain">MySQLRandomElements::searchDomain()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random domain</dd>
+							<dt><b>searchDomain</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchDomain">MongoRandomElements::searchDomain()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random domain</dd>
+							<dt><b>searchFTPMethod</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchFTPMethod">MySQLRandomElements::searchFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random FTP method from the generated collection</dd>
 							<dt><b>searchFTPMethod</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchFTPMethod">MongoRandomElements::searchFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random FTP method from the generated collection</dd>
 							<dt><b>searchHTTPMethod</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchHTTPMethod">MongoRandomElements::searchHTTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random HTTP method from the generated collection</dd>
+							<dt><b>searchHTTPMethod</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchHTTPMethod">MySQLRandomElements::searchHTTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random HTTP method from the generated collection</dd>
+							<dt><b>searchIP</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchIP">MySQLRandomElements::searchIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP from the generated collection</dd>
 							<dt><b>searchIP</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchIP">MongoRandomElements::searchIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP from the generated collection</dd>
 							<dt><b>searchProtocol</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchProtocol">MySQLRandomElements::searchProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol</dd>
+							<dt><b>searchProtocol</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchProtocol">MongoRandomElements::searchProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol</dd>
+							<dt><b>searchReturnCode</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchReturnCode">MySQLRandomElements::searchReturnCode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random return code</dd>
 							<dt><b>searchReturnCode</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchReturnCode">MongoRandomElements::searchReturnCode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random return code</dd>
 							<dt><b>searchSize</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchSize">MySQLRandomElements::searchSize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random size</dd>
+							<dt><b>searchSize</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchSize">MongoRandomElements::searchSize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random size</dd>
 							<dt><b>searchURI</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchURI">MySQLRandomElements::searchURI()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random URI</dd>
+							<dt><b>searchURI</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchURI">MongoRandomElements::searchURI()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random URI</dd>
+							<dt><b>searchUser</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchUser">MySQLRandomElements::searchUser()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random user from the generated collection</dd>
 							<dt><b>searchUser</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchUser">MongoRandomElements::searchUser()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random user from the generated collection</dd>
 					</dl>
@@ -232,7 +260,7 @@
 	</div>
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Thu, 19 Jul 2012 18:16:46 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 20 Jul 2012 15:40:07 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

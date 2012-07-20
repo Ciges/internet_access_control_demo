@@ -94,8 +94,22 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		<ul>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#method__construct">__construct</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#method__destruct">__destruct</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateDomains">createDomains</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateIPs">createIPs</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">createUsers</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomDomains_exists">randomDomains_exists</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomIPs_exists">randomIPs_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomUser_exists">randomUser_exists</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchDomain">searchDomain</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchFTPMethod">searchFTPMethod</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchHTTPMethod">searchHTTPMethod</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchIP">searchIP</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchProtocol">searchProtocol</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchReturnCode">searchReturnCode</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchSize">searchSize</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchURI">searchURI</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchUser">searchUser</a></li>
 		  		</ul>
 		</td>
 		
@@ -259,7 +273,7 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		<div class="info-box-body">
 			<div class="method-summary">
 				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
-																																																<div class="method-definition">
+																																																																																																																																																																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">MySQLRandomElements</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#__construct" title="details" class="method-name">__construct</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</td></tr>
@@ -271,13 +285,83 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createDomains" title="details" class="method-name">createDomains</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random domains in MySQL.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createIPs" title="details" class="method-name">createIPs</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random IPs in MySQL.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#createUsers" title="details" class="method-name">createUsers</a>()&nbsp;&nbsp;</td>
-					<td class="method-definition">Verify if a random user exists in the database   Save random users in MySQL.</td></tr>
+					<td class="method-definition">Save random users in MySQL.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">array</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getRandomNonFTPLogEntry" title="details" class="method-name">getRandomNonFTPLogEntry</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Return a random log entry for non FTP access (http and tunnel)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#randomDomains_exists" title="details" class="method-name">randomDomains_exists</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns true if the &quot;Random_DomainsList&quot; table has records</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#randomIPs_exists" title="details" class="method-name">randomIPs_exists</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns true if the &quot;Random_IPsList&quot; table has records</td></tr>
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#randomUser_exists" title="details" class="method-name">randomUser_exists</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Returns true if the &quot;Random_UsersList&quot; table has records</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchDomain" title="details" class="method-name">searchDomain</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random domain</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchFTPMethod" title="details" class="method-name">searchFTPMethod</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random FTP method from the generated collection</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchHTTPMethod" title="details" class="method-name">searchHTTPMethod</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random HTTP method from the generated collection</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchIP" title="details" class="method-name">searchIP</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random IP from the generated collection</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchProtocol" title="details" class="method-name">searchProtocol</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random protocol</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">integer</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchReturnCode" title="details" class="method-name">searchReturnCode</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random return code</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">integer</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchSize" title="details" class="method-name">searchSize</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random size</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchURI" title="details" class="method-name">searchURI</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random URI</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#searchUser" title="details" class="method-name">searchUser</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Returns a random user from the generated collection</td></tr>
 				</div>
 												</table>
 			</div>
@@ -383,18 +467,18 @@ $database = self::DEFAULT_DB]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodcreateUsers" id="createUsers"><!-- --></a>
+<a name="methodcreateDomains" id="createDomains"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a141">141</a>]</span>
+	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a267">267</a>]</span>
 </div>
 <br />
 
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
-		<code>void createUsers(
+		<code>void createDomains(
 integer
 $number, [boolean
 $use_index = TRUE], [boolean
@@ -403,9 +487,9 @@ $dont_repeat = TRUE]&nbsp;
     </td></tr></table>
     </td></tr></table><br /></div>
 
-	<p align="center" class="short-description"><strong>Verify if a random user exists in the database   Save random users in MySQL.
+	<p align="center" class="short-description"><strong>Save random domains in MySQL.
 </strong></p>
-<span class="description"><p>The parameters are the number of users to create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE).   If the user name is going to be unique the existence of the name is verified with a query before inserting a new one.   The id will be autonumeric (1, 2, 3 ....)</p></span>
+<span class="description"><p>The parameters are the number of domains to create and two booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE)   If the domain is going to be unique the existence of itis verified with a query before inserting a new one.   The id will be autonumeric (1, 2, 3 ....)</p></span>
 			<strong>Parameters:</strong><br />
 			<table border="0" cellspacing="0" cellpadding="0">
 					<tr><td class="indent">
@@ -435,11 +519,212 @@ $dont_repeat = TRUE]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodrandomUser_exists" id="randomUser_exists"><!-- --></a>
+<a name="methodcreateIPs" id="createIPs"><!-- --></a>
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a193">193</a>]</span>
+	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a202">202</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createIPs(
+integer
+$number, [boolean
+$use_index = TRUE], [boolean
+$dont_repeat = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random IPs in MySQL.
+</strong></p>
+<span class="description"><p>The parameters are the number of IPs to create and two booleans: if we want an unique index to be created for the IP (default is TRUE) and if we want that the IP is unique (default TRUE)   If the IP is going to be unique the existence of itis verified with a query before inserting a new one.   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$use_index:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$dont_repeat:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateUsers" id="createUsers"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a137">137</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createUsers(
+integer
+$number, [boolean
+$use_index = TRUE], [boolean
+$dont_repeat = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random users in MySQL.
+</strong></p>
+<span class="description"><p>The parameters are the number of users two create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE).   If the user name is going to be unique the existence of the name is verified with a query before inserting a new one.   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$use_index:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$dont_repeat:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetRandomNonFTPLogEntry" id="getRandomNonFTPLogEntry"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a426">426</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>array getRandomNonFTPLogEntry(
+integer
+$initial_timestamp, integer
+$final_timestamp&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Return a random log entry for non FTP access (http and tunnel)
+</strong></p>
+<span class="description"><p>It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$initial_timestamp:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$final_timestamp:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomDomains_exists" id="randomDomains_exists"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a319">319</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>boolean randomDomains_exists(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns true if the &quot;Random_DomainsList&quot; table has records
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomIPs_exists" id="randomIPs_exists"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a254">254</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>boolean randomIPs_exists(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns true if the &quot;Random_IPsList&quot; table has records
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomUser_exists" id="randomUser_exists"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a189">189</a>]</span>
 </div>
 <br />
 
@@ -452,6 +737,240 @@ $dont_repeat = TRUE]&nbsp;
     </td></tr></table><br /></div>
 
 	<p align="center" class="short-description"><strong>Returns true if the &quot;Random_UsersList&quot; table has records
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchDomain" id="searchDomain"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a375">375</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchDomain(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random domain
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchFTPMethod" id="searchFTPMethod"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a367">367</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchFTPMethod(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random FTP method from the generated collection
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchHTTPMethod" id="searchHTTPMethod"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a359">359</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchHTTPMethod(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random HTTP method from the generated collection
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchIP" id="searchIP"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a327">327</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchIP(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random IP from the generated collection
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchProtocol" id="searchProtocol"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a407">407</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchProtocol(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random protocol
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchReturnCode" id="searchReturnCode"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a415">415</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>integer searchReturnCode(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random return code
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchSize" id="searchSize"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a399">399</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>integer searchSize(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random size
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchURI" id="searchURI"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a391">391</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchURI(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random URI
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchUser" id="searchUser"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a343">343</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string searchUser(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Returns a random user from the generated collection
 </strong></p>
 
 	<br />
@@ -605,7 +1124,7 @@ $dont_repeat = TRUE]&nbsp;
 
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Thu, 19 Jul 2012 18:16:48 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 20 Jul 2012 15:40:09 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>
