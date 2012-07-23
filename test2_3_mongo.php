@@ -1,6 +1,6 @@
 <?php
 /**
- *  Test 1.3:  MongoDB insertion with indexes and verifying if the user name is already in the table
+ *  Test 1.3:  MongoDB insertion with indexes and verifying if the domain is already in the table
  *  In this test 1.300.000 random domains are generated and saved in MongoDB
  *  Note that most of time the script is generating the random data!
  *

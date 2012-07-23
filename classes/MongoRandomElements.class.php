@@ -4,7 +4,11 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120719
+ *  @version 20120723
+ *
+ *  @todo code report generation in saveRandomNonFTPLogEntry()
+ *  @todo code function getRandomFTPLogEntry()
+ *  @todo code function saveRandomFTPLogEntry()	
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -22,6 +26,8 @@ require_once("RandomElements.class.php");
 	const RNDUSERSC_NAME = "Random_UsersList";
 	const RNDIPSC_NAME = "Random_IPsList";
 	const RNDDOMAINSC_NAME = "Random_DomainsList";
+    const NONFTPLOG_NAME = "NonFTP_Access_log";
+    const FTPLOG_NAME = "FTP_Access_log";
     /**#@-*/
     
     /**#@+
@@ -54,6 +60,8 @@ require_once("RandomElements.class.php");
 	private $rnd_users_number;
 	private $rnd_ips_number;
 	private $rnd_domains_number;
+    private $nonftp_log_recordnumber;
+    private $ftp_log_recordnumber;
     /**#@-*/
     
     /**
@@ -83,9 +91,13 @@ require_once("RandomElements.class.php");
         $userscol_name = self::RNDUSERSC_NAME;
         $ipscol_name = self::RNDIPSC_NAME;
         $domainscol_name = self::RNDDOMAINSC_NAME;
+        $nonftp_log_name = self::NONFTPLOG_NAME;
+        $ftp_log_name = self::FTPLOG_NAME;
 		$this->rnd_users_number =  $this->db_conn->$db->$userscol_name->count();
 		$this->rnd_ips_number = $this->db_conn->$db->$ipscol_name->count();
 		$this->rnd_domains_number = $this->db_conn->$db->$domainscol_name->count();
+        $this->nonftp_log_recordnumber = $this->db_conn->$db->$nonftp_log_name->count();
+        $this->ftp_log_recordnumber = $this->db_conn->$db->$ftp_log_name->count();
 	}
 
     /**
@@ -372,6 +384,44 @@ require_once("RandomElements.class.php");
 		);
         
         return $document;
+    }
+    
+    /**
+     *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated
+     *  The id for the document in Mongo is created as an integer autonumeric.
+     *
+     *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
+     *  @param boolean $create_reports
+     */
+    function saveRandomNonFTPLogEntry($log_entry, $create_reports=TRUE)    {
+		$document = $log_entry;
+        $id = $this->nonftp_log_recordnumber + 1;   // Autonumeric
+		$document["datetime"] = new MongoDate($log_entry["datetime"]);
+		$document["_id"] = $id;
+		
+        $db = $this->db_databasename;
+        $nonftp_log_name = self::NONFTPLOG_NAME;
+        $col = $this->db_conn->$db->$nonftp_log_name;
+		try {
+			$col->insert($document);
+		}
+		catch (MongoException $e) {
+			var_dump($document);
+			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+		}
+		
+        $this->nonftp_log_recordnumber++;
+		
+		# Monthly reports data update
+        /**
+		$timestamp = $logentry["datetime"];
+		$yearmonth = strftime("%Y%m", $timestamp);
+		$this->saveReport($this->UsersReport_prefix.$yearmonth, $document["idpsa"], $timestamp, $document['size']);
+		$this->saveReport($this->DomainsReport_prefix.$yearmonth, $document["domain"], $timestamp, $document['size']);
+		$this->saveReport($this->CategoriesReport_prefix.$yearmonth, $document["category"], $timestamp, $document['size']);
+        */
+        
     }
 
 }

@@ -4,12 +4,16 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120720
+ *  @version 20120723
+ *
+ *  @todo code function saveRandomNonFTPLogEntry()	
+ *  @todo code function getRandomFTPLogEntry()
+ *  @todo code function saveRandomFTPLogEntry()	
  *
  *  @package InternetAccessLog
  *  @filesource
  */
- require_once("RandomElements.class.php");
+require_once("RandomElements.class.php");
 /**
  *  This class is used to generate random elements (users, IP's and URL's) and save them into MySQL
  *  With this elements created we can simulate non FTP and FTP log entries (in our demo the acces by FTP are stored in a separate collection)
