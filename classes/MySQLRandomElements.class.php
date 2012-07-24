@@ -4,9 +4,9 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120723
- *
- *  @todo code function saveRandomNonFTPLogEntry()	
+ *  @version 20120724
+ *	
+ *  @todo code report generation in saveRandomNonFTPLogEntry()
  *  @todo code function getRandomFTPLogEntry()
  *  @todo code function saveRandomFTPLogEntry()	
  *
@@ -26,6 +26,8 @@ require_once("RandomElements.class.php");
 	const RNDUSERSC_NAME = "Random_UsersList";
 	const RNDIPSC_NAME = "Random_IPsList";
 	const RNDDOMAINSC_NAME = "Random_DomainsList";
+    const NONFTPLOG_NAME = "NonFTP_Access_log";
+    const FTPLOG_NAME = "FTP_Access_log";
     /**#@-*/
     
     /**#@+
@@ -58,6 +60,8 @@ require_once("RandomElements.class.php");
 	private $rnd_users_number;
 	private $rnd_ips_number;
 	private $rnd_domains_number;
+    private $nonftp_log_recordnumber;
+    private $ftp_log_recordnumber;
     /**#@-*/
     
     /**
@@ -77,7 +81,7 @@ require_once("RandomElements.class.php");
 	}
     
     /**
-     *  This function returns the number of records for the table passed as parameter
+     *  This function returns the number of records for the table passed as parameter.  If the table does not exists returns 0.
      *  @param string tablename
      *  @returns integer
      *  @access private
@@ -85,8 +89,13 @@ require_once("RandomElements.class.php");
 	private function recordNumber($tablename)	{
 		$query = "show table status where Name=\"".$tablename."\"";
 		if ($result = $this->db_conn->query($query))	{
-			$row = $result->fetch_assoc();
-			return (int) $row["Rows"];
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return (int) $row["Rows"];
+            }
+            else    {
+                return 0;
+            }
 		}
 		else	{
 			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
@@ -119,7 +128,8 @@ require_once("RandomElements.class.php");
 		$this->rnd_users_number =  $this->recordNumber(self::RNDUSERSC_NAME);
 		$this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
 		$this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
-        
+        $this->nonftp_log_recordnumber = $this->recordNumber(self::NONFTPLOG_NAME);
+        $this->ftp_log_recordnumber = $this->recordNumber(self::FTPLOG_NAME);   
 	}
     
     /**
@@ -346,10 +356,10 @@ require_once("RandomElements.class.php");
      */
 	function searchUser()	{
 		$position = mt_rand(1, $this->rnd_users_number);
-        $query = "select name from ".self::RNDUSERSC_NAME." where id=".$position;
+        $query = "select user from ".self::RNDUSERSC_NAME." where id=".$position;
         if ($result = $this->db_conn->query($query))   {
             $row = $result->fetch_assoc();
-            return $row["name"];
+            return $row["user"];
         }
         else    {
             die ("Error sending the query '".$query."' to MySQL");
@@ -378,10 +388,10 @@ require_once("RandomElements.class.php");
      */
 	function searchDomain() {
 		$position = mt_rand(1, $this->rnd_domains_number);
-        $query = "select name from ".self::RNDDOMAINSC_NAME." where id=".$position;
+        $query = "select domain from ".self::RNDDOMAINSC_NAME." where id=".$position;
         if ($result = $this->db_conn->query($query))   {
             $row = $result->fetch_assoc();
-            return $row["name"];
+            return $row["domain"];
         }
         else    {
             die ("Error sending the query '".$query."' to MySQL");
@@ -456,8 +466,50 @@ require_once("RandomElements.class.php");
         return $document;
     } 
  
+    /**
+     *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated
+     *  The id for the document in Mongo is created as an integer autonumeric.
+     *
+     *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
+     *  @param boolean $create_reports
+     */
+    function saveRandomNonFTPLogEntry($log_entry, $create_reports=TRUE)    {
+        
+        // Table creation if it does not exists
+        if (!$this->tableExists(self::NONFTPLOG_NAME)) {
+            $query = "CREATE TABLE ".self::NONFTPLOG_NAME." (
+                clientip VARCHAR(15) NOT NULL,
+                user CHAR(7) NOT NULL,
+                datetime TIMESTAMP NOT NULL,
+                method VARCHAR(10) NOT NULL,
+                protocol VARCHAR(10) NOT NULL,
+                domain VARCHAR(255) NOT NULL,
+                uri VARCHAR(100) NOT NULL,
+                return_code SMALLINT UNSIGNED NOT NULL,
+                size INTEGER UNSIGNED NOT NULL
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+        
+        $query = "insert into ".self::NONFTPLOG_NAME." (clientip, user, datetime, method, protocol, domain, uri, return_code, size) values (".
+                "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y:m:d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
+                "\"".$log_entry['protocol']."\", \"".$log_entry['domain']."\", \"".$log_entry['uri']."\", ".$log_entry['return_code'].", ".$log_entry['size'].")";
+		$this->db_conn->query($query) ||
+			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+                
+		# Monthly reports data update
+        /**
+		$timestamp = $logentry["datetime"];
+		$yearmonth = strftime("%Y%m", $timestamp);
+		$this->saveReport($this->UsersReport_prefix.$yearmonth, $document["idpsa"], $timestamp, $document['size']);
+		$this->saveReport($this->DomainsReport_prefix.$yearmonth, $document["domain"], $timestamp, $document['size']);
+		$this->saveReport($this->CategoriesReport_prefix.$yearmonth, $document["category"], $timestamp, $document['size']);
+        */
  
- 
+    }
 }
  
  ?>
