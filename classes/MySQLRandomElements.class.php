@@ -4,11 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120724
- *	
- *  @todo code report generation in saveRandomNonFTPLogEntry()
- *  @todo code function getRandomFTPLogEntry()
- *  @todo code function saveRandomFTPLogEntry()	
+ *  @version 20120725
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -29,6 +25,13 @@ require_once("RandomElements.class.php");
     const NONFTPLOG_NAME = "NonFTP_Access_log";
     const FTPLOG_NAME = "FTP_Access_log";
     /**#@-*/
+    
+    /**#@+
+     *  Default prefixes for monthly reports
+     */
+    const USERS_REPORT_PREFIX = "Users_Monthly_Report_";
+	const DOMAINS_REPORT_PREFIX = "Domains_Monthly_Report_";
+	/**#@-*/
     
     /**#@+
      * Constants for default connection values
@@ -467,6 +470,102 @@ require_once("RandomElements.class.php");
     } 
  
     /**
+     *  Update Users monthly report
+     *  This function is private and is meant to be used each time an access log is processed to have real time statistics (only by month)
+     *  @param string $user user name
+     *  @param timestamp $timestamp date & time of access
+     *  @param integer $volume size of data transferred
+     *  @access private
+     */
+	private function saveUserReport($user, $timestamp, $volume)  {
+    
+        $table_name = self::USERS_REPORT_PREFIX.strftime("%Y%m", $timestamp);
+        // Table creation if it does not exists
+        if (!$this->tableExists($table_name)) {
+            $query = "CREATE TABLE ".$table_name." (
+                user CHAR(7) NOT NULL,
+                nb INTEGER UNSIGNED NOT NULL,
+                volume INTEGER UNSIGNED NOT NULL,
+                unique index user_index (user)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+        else {
+        	$query = "select * from ".$table_name." where user=\"".$user."\"";
+            if ($result = $this->db_conn->query($query))   {
+                if ($result->num_rows > 0)  {
+                    // There is a user entry for this month
+                    $row = $result->fetch_assoc();
+                    $new_nb = $row['nb'] + 1;
+                    $new_volume = $row['volume'] + $volume;
+                    $query_update = "update ".$table_name." set nb=".$new_nb.", volume=".$new_volume." where user=\"".$user."\"";
+                    $this->db_conn->query($query_update) ||
+                        die ("Error sending the query '".$query_update."' to MySQL: ".$this->db_conn->error."\n");
+                }
+                else  {
+                    // Insertion of a new user entry
+                    $query_insert = "insert into ".$table_name." (user, nb, volume) values (\"".$user."\", 1, ".$volume.")";
+                    $this->db_conn->query($query_insert) ||
+                        die ("Error sending the query '".$query_insert."' to MySQL: ".$this->db_conn->error."\n");
+                }
+            }
+            else    {
+                die ("Error sending the query '".$query."' to MySQL");
+            }
+        }
+	}
+ 
+    /**
+     *  Update Domains monthly report
+     *  This function is private and is meant to be used each time an access log is processed to have real time statistics (only by month)
+     *  @param string $domain domain name
+     *  @param timestamp $timestamp date & time of access
+     *  @param integer $volume size of data transferred
+     *  @access private
+     */
+	private function saveDomainReport($domain, $timestamp, $volume)  {
+    
+        $table_name = self::DOMAINS_REPORT_PREFIX.strftime("%Y%m", $timestamp);
+        // Table creation if it does not exists
+        if (!$this->tableExists($table_name)) {
+            $query = "CREATE TABLE ".$table_name." (
+                domain CHAR(255) NOT NULL,
+                nb INTEGER UNSIGNED NOT NULL,
+                volume INTEGER UNSIGNED NOT NULL,
+                unique index domain_index (domain)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+        else {
+        	$query = "select * from ".$table_name." where domain=\"".$domain."\"";
+            if ($result = $this->db_conn->query($query))   {
+                if ($result->num_rows > 0)  {
+                    // There is a domain entry for this month
+                    $row = $result->fetch_assoc();
+                    $new_nb = $row['nb'] + 1;
+                    $new_volume = $row['volume'] + $volume;
+                    $query_update = "update ".$table_name." set nb=".$new_nb.", volume=".$new_volume." where domain=\"".$domain."\"";
+                    $this->db_conn->query($query_update) ||
+                        die ("Error sending the query '".$query_update."' to MySQL: ".$this->db_conn->error."\n");
+                }
+                else  {
+                    // Insertion of a new domain entry
+                    $query_insert = "insert into ".$table_name." (domain, nb, volume) values (\"".$domain."\", 1, ".$volume.")";
+                    $this->db_conn->query($query_insert) ||
+                        die ("Error sending the query '".$query_insert."' to MySQL: ".$this->db_conn->error."\n");
+                }
+            }
+            else    {
+                die ("Error sending the query '".$query."' to MySQL");
+            }
+        }
+	}
+ 
+    /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
      *  The id for the document in Mongo is created as an integer autonumeric.
@@ -501,15 +600,89 @@ require_once("RandomElements.class.php");
 			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
                 
 		# Monthly reports data update
-        /**
-		$timestamp = $logentry["datetime"];
-		$yearmonth = strftime("%Y%m", $timestamp);
-		$this->saveReport($this->UsersReport_prefix.$yearmonth, $document["idpsa"], $timestamp, $document['size']);
-		$this->saveReport($this->DomainsReport_prefix.$yearmonth, $document["domain"], $timestamp, $document['size']);
-		$this->saveReport($this->CategoriesReport_prefix.$yearmonth, $document["category"], $timestamp, $document['size']);
-        */
+        if ($create_reports)    {
+            $timestamp = $log_entry["datetime"];
+            $this->saveUserReport($log_entry["user"], $timestamp, $log_entry['size']);
+            $this->saveDomainReport($log_entry["domain"], $timestamp, $log_entry['size']);
+            }
  
     }
+ 
+    /**
+     *  Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)
+     *  It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created
+     *  @param integer $initial_timestamp
+     *  @param integer $final_timestamp
+     *  @returns array
+     */
+	function getRandomFTPLogEntry()	{
+		if (func_num_args() == 2)	{	
+			$initial_timestamp = func_get_arg(0);
+			$final_timestamp =  func_get_arg(1);
+			$ts = mt_rand($initial_timestamp, $final_timestamp);
+		}
+		elseif (func_num_args() != 0)	{
+			$arguments = func_get_args();
+			die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
+		}
+		else {
+			$ts = time();
+		}
+		
+		$document = array(
+			'clientip' => $this->searchIP(),
+			'user' => $this->searchUser(),
+			'datetime' => $ts,
+			'method' => $this->searchFTPMethod(),
+			'domain' => $this->searchDomain(),
+			'uri' => $this->searchURI(),
+			'size' => $this->searchSize()	// Size is recorded in the database as string
+		);
+        
+        return $document;
+    } 
+    
+    /**
+     *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated
+     *  The id for the document in Mongo is created as an integer autonumeric.
+     *
+     *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
+     *  @param boolean $create_reports
+     */
+    function saveRandomFTPLogEntry($log_entry, $create_reports=TRUE)    {
+        
+        // Table creation if it does not exists
+        if (!$this->tableExists(self::FTPLOG_NAME)) {
+            $query = "CREATE TABLE ".self::FTPLOG_NAME." (
+                clientip VARCHAR(15) NOT NULL,
+                user CHAR(7) NOT NULL,
+                datetime TIMESTAMP NOT NULL,
+                method VARCHAR(10) NOT NULL,
+                domain VARCHAR(255) NOT NULL,
+                uri VARCHAR(100) NOT NULL,
+                size INTEGER UNSIGNED NOT NULL
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+        
+        $query = "insert into ".self::FTPLOG_NAME." (clientip, user, datetime, method, domain, uri, size) values (".
+                "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y:m:d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
+                "\"".$log_entry['domain']."\", \"".$log_entry['uri']."\", ".$log_entry['size'].")";
+		$this->db_conn->query($query) ||
+			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+                
+		# Monthly reports data update
+        if ($create_reports)    {
+            $timestamp = $log_entry["datetime"];
+            $this->saveUserReport($log_entry["user"], $timestamp, $log_entry['size']);
+            $this->saveDomainReport($log_entry["domain"], $timestamp, $log_entry['size']);
+            }
+ 
+    }
+    
 }
  
  ?>

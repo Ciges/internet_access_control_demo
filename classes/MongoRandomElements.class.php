@@ -4,11 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120723
- *
- *  @todo code report generation in saveRandomNonFTPLogEntry()
- *  @todo code function getRandomFTPLogEntry()
- *  @todo code function saveRandomFTPLogEntry()	
+ *  @version 20120725
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -21,7 +17,7 @@ require_once("RandomElements.class.php");
  class MongoRandomElements extends RandomElements	{
  
     /**#@+
-	 * Default names for random data collections
+	 *  Default names for random data collections
      */
 	const RNDUSERSC_NAME = "Random_UsersList";
 	const RNDIPSC_NAME = "Random_IPsList";
@@ -29,6 +25,13 @@ require_once("RandomElements.class.php");
     const NONFTPLOG_NAME = "NonFTP_Access_log";
     const FTPLOG_NAME = "FTP_Access_log";
     /**#@-*/
+    
+    /**#@+
+     *  Default prefixes for monthly reports
+     */
+    const USERS_REPORT_PREFIX = "Users_Monthly_Report_";
+	const DOMAINS_REPORT_PREFIX = "Domains_Monthly_Report_";
+	/**#@-*/
     
     /**#@+
      * Constants for default connection values
@@ -387,6 +390,43 @@ require_once("RandomElements.class.php");
     }
     
     /**
+     *  Update Users or Domains monthly and daily report
+     *  This function is private and is meant to be used each time an access log is processed to have real time statistics
+     *  @param string $collection_name
+     *  @param string $id document id (user or domain name)
+     *  @param timestamp $timestamp
+     *  @param integer $volume
+     *  @access private
+     */
+	function saveReport($collection_name, $id, $timestamp, $volume)  {
+    
+	    $db = $this->db_databasename;
+        $col = $this->db_conn->$db->$collection_name;
+		# Document creation if it not exists
+		try {
+			if (!$col->findOne(array("_id" => $id))) {
+				$col->insert(array('_id' => $id));
+			}
+	
+			# Updating monthly and daily values
+			$day = (int) strftime("%e", $timestamp);
+			$col->update(
+				array('_id' => $id),
+				array('$inc' => array(
+					'nb' => 1, 
+					'volume' => $volume,
+					"daily.$day.nb" => 1,
+					"daily.$day.volume" => $volume
+					)
+				)
+			);
+		}
+		catch (MongoException $e) {
+			die("Saving/Updating data to ".$collection_name." collection for id ".$id." not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+		}
+	}
+ 
+    /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
      *  The id for the document in Mongo is created as an integer autonumeric.
@@ -414,16 +454,86 @@ require_once("RandomElements.class.php");
         $this->nonftp_log_recordnumber++;
 		
 		# Monthly reports data update
-        /**
-		$timestamp = $logentry["datetime"];
-		$yearmonth = strftime("%Y%m", $timestamp);
-		$this->saveReport($this->UsersReport_prefix.$yearmonth, $document["idpsa"], $timestamp, $document['size']);
-		$this->saveReport($this->DomainsReport_prefix.$yearmonth, $document["domain"], $timestamp, $document['size']);
-		$this->saveReport($this->CategoriesReport_prefix.$yearmonth, $document["category"], $timestamp, $document['size']);
-        */
+        if ($create_reports)    {
+            $timestamp = $log_entry["datetime"];
+            $yearmonth = strftime("%Y%m", $timestamp);
+            $this->saveReport(self::USERS_REPORT_PREFIX.$yearmonth, $document["user"], $timestamp, $document['size']);
+            $this->saveReport(self::DOMAINS_REPORT_PREFIX.$yearmonth, $document["domain"], $timestamp, $document['size']);
+        }
         
     }
 
+    /**
+     *  Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)
+     *  It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created
+     *  @param integer $initial_timestamp
+     *  @param integer $final_timestamp
+     *  @returns array
+     */
+	function getRandomFTPLogEntry()	{
+		if (func_num_args() == 2)	{	
+			$initial_timestamp = func_get_arg(0);
+			$final_timestamp =  func_get_arg(1);
+			$ts = mt_rand($initial_timestamp, $final_timestamp);
+		}
+		elseif (func_num_args() != 0)	{
+			$arguments = func_get_args();
+			die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
+		}
+		else {
+			$ts = time();
+		}
+		
+		$document = array(
+			'clientip' => $this->searchIP(),
+			'user' => $this->searchUser(),
+			'datetime' => $ts,
+			'method' => $this->searchFTPMethod(),
+			'domain' => $this->searchDomain(),
+			'uri' => $this->searchURI(),
+			'size' => $this->searchSize()	// Size is recorded in the database as string
+		);
+        
+        return $document;
+    }
+ 
+    /**
+     *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated
+     *  The id for the document in Mongo is created as an integer autonumeric.
+     *
+     *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
+     *  @param boolean $create_reports
+     */
+    function saveRandomFTPLogEntry($log_entry, $create_reports=TRUE)    {
+		$document = $log_entry;
+        $id = $this->ftp_log_recordnumber + 1;   // Autonumeric
+		$document["datetime"] = new MongoDate($log_entry["datetime"]);
+		$document["_id"] = $id;
+		
+        $db = $this->db_databasename;
+        $nonftp_log_name = self::FTPLOG_NAME;
+        $col = $this->db_conn->$db->$nonftp_log_name;
+		try {
+			$col->insert($document);
+		}
+		catch (MongoException $e) {
+			var_dump($document);
+			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+		}
+		
+        $this->ftp_log_recordnumber++;
+		
+		# Monthly reports data update
+        if ($create_reports)    {
+            $timestamp = $log_entry["datetime"];
+            $yearmonth = strftime("%Y%m", $timestamp);
+            $this->saveReport(self::USERS_REPORT_PREFIX.$yearmonth, $document["user"], $timestamp, $document['size']);
+            $this->saveReport(self::DOMAINS_REPORT_PREFIX.$yearmonth, $document["domain"], $timestamp, $document['size']);
+        }
+        
+    }
+    
 }
  
 ?>
