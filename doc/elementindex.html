@@ -51,6 +51,7 @@
 	[ <a href="elementindex.html#n">n</a> ]
 	[ <a href="elementindex.html#r">r</a> ]
 	[ <a href="elementindex.html#s">s</a> ]
+	[ <a href="elementindex.html#u">u</a> ]
 	[ <a href="elementindex.html#_">_</a> ]
 <br /><br />
 	<a name="c"></a>
@@ -94,13 +95,17 @@
 							<dt><b>DEFAULT_HOST</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_HOST">MongoRandomElements::DEFAULT_HOST</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_PASSWORD</b></dt>
-				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_PASSWORD">MongoRandomElements::DEFAULT_PASSWORD</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
-							<dt><b>DEFAULT_PASSWORD</b></dt>
 				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_PASSWORD">MySQLRandomElements::DEFAULT_PASSWORD</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DEFAULT_PASSWORD</b></dt>
+				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_PASSWORD">MongoRandomElements::DEFAULT_PASSWORD</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_USER</b></dt>
 				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDEFAULT_USER">MySQLRandomElements::DEFAULT_USER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
 							<dt><b>DEFAULT_USER</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDEFAULT_USER">MongoRandomElements::DEFAULT_USER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constants for default connection values</dd>
+							<dt><b>DOMAINS_REPORT_PREFIX</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constDOMAINS_REPORT_PREFIX">MySQLRandomElements::DOMAINS_REPORT_PREFIX</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default prefixes for monthly reports</dd>
+							<dt><b>DOMAINS_REPORT_PREFIX</b></dt>
+				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constDOMAINS_REPORT_PREFIX">MongoRandomElements::DOMAINS_REPORT_PREFIX</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default prefixes for monthly reports</dd>
 					</dl>
 	</div>
 	<a name="f"></a>
@@ -112,6 +117,8 @@
 	<div>
 		<h2>f</h2>
 		<dl>
+							<dt><b>FTPLOG_NAME</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constFTPLOG_NAME">MySQLRandomElements::FTPLOG_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>FTPLOG_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constFTPLOG_NAME">MongoRandomElements::FTPLOG_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 					</dl>
@@ -127,6 +134,10 @@
 		<dl>
 							<dt><b>getRandomDomain</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomDomain">RandomElements::getRandomDomain()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random Internet domain (a www followed by a random string ended by a valid internet</dd>
+							<dt><b>getRandomFTPLogEntry</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodgetRandomFTPLogEntry">MySQLRandomElements::getRandomFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)</dd>
+							<dt><b>getRandomFTPLogEntry</b></dt>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodgetRandomFTPLogEntry">MongoRandomElements::getRandomFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)</dd>
 							<dt><b>getRandomFTPMethod</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomFTPMethod">RandomElements::getRandomFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a semi random HTTP method (90% will be RETR)</dd>
 							<dt><b>getRandomHTTPMethod</b></dt>
@@ -134,9 +145,9 @@
 							<dt><b>getRandomIP</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomIP">RandomElements::getRandomIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP (string with 4 numbers between 0 and 255). No check for validity is made</dd>
 							<dt><b>getRandomNonFTPLogEntry</b></dt>
-				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">MySQLRandomElements::getRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for non FTP access (http and tunnel)</dd>
-							<dt><b>getRandomNonFTPLogEntry</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodgetRandomNonFTPLogEntry">MongoRandomElements::getRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for non FTP access (http and tunnel)</dd>
+							<dt><b>getRandomNonFTPLogEntry</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">MySQLRandomElements::getRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a random log entry for non FTP access (http and tunnel)</dd>
 							<dt><b>getRandomProtocol</b></dt>
 				<dd>in file RandomElements.class.php, method <a href="InternetAccessLog/RandomElements.html#methodgetRandomProtocol">RandomElements::getRandomProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol (90% will be http)</dd>
 							<dt><b>getRandomRetourCode</b></dt>
@@ -177,6 +188,8 @@
 	<div>
 		<h2>n</h2>
 		<dl>
+							<dt><b>NONFTPLOG_NAME</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constNONFTPLOG_NAME">MySQLRandomElements::NONFTPLOG_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 							<dt><b>NONFTPLOG_NAME</b></dt>
 				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constNONFTPLOG_NAME">MongoRandomElements::NONFTPLOG_NAME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default names for random data collections</dd>
 					</dl>
@@ -229,6 +242,12 @@
 	<div>
 		<h2>s</h2>
 		<dl>
+							<dt><b>saveRandomFTPLogEntry</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsaveRandomFTPLogEntry">MySQLRandomElements::saveRandomFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.</dd>
+							<dt><b>saveRandomFTPLogEntry</b></dt>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsaveRandomFTPLogEntry">MongoRandomElements::saveRandomFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.</dd>
+							<dt><b>saveRandomNonFTPLogEntry</b></dt>
+				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsaveRandomNonFTPLogEntry">MySQLRandomElements::saveRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.</dd>
 							<dt><b>saveRandomNonFTPLogEntry</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsaveRandomNonFTPLogEntry">MongoRandomElements::saveRandomNonFTPLogEntry()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.</dd>
 							<dt><b>searchDomain</b></dt>
@@ -236,21 +255,21 @@
 							<dt><b>searchDomain</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchDomain">MySQLRandomElements::searchDomain()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random domain</dd>
 							<dt><b>searchFTPMethod</b></dt>
-				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchFTPMethod">MongoRandomElements::searchFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random FTP method from the generated collection</dd>
-							<dt><b>searchFTPMethod</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchFTPMethod">MySQLRandomElements::searchFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random FTP method from the generated collection</dd>
+							<dt><b>searchFTPMethod</b></dt>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchFTPMethod">MongoRandomElements::searchFTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random FTP method from the generated collection</dd>
 							<dt><b>searchHTTPMethod</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchHTTPMethod">MongoRandomElements::searchHTTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random HTTP method from the generated collection</dd>
 							<dt><b>searchHTTPMethod</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchHTTPMethod">MySQLRandomElements::searchHTTPMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random HTTP method from the generated collection</dd>
 							<dt><b>searchIP</b></dt>
-				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchIP">MongoRandomElements::searchIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP from the generated collection</dd>
-							<dt><b>searchIP</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchIP">MySQLRandomElements::searchIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP from the generated collection</dd>
-							<dt><b>searchProtocol</b></dt>
-				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchProtocol">MongoRandomElements::searchProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol</dd>
+							<dt><b>searchIP</b></dt>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchIP">MongoRandomElements::searchIP()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random IP from the generated collection</dd>
 							<dt><b>searchProtocol</b></dt>
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchProtocol">MySQLRandomElements::searchProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol</dd>
+							<dt><b>searchProtocol</b></dt>
+				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchProtocol">MongoRandomElements::searchProtocol()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random protocol</dd>
 							<dt><b>searchReturnCode</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchReturnCode">MongoRandomElements::searchReturnCode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random return code</dd>
 							<dt><b>searchReturnCode</b></dt>
@@ -267,6 +286,21 @@
 				<dd>in file MySQLRandomElements.class.php, method <a href="InternetAccessLog/MySQLRandomElements.html#methodsearchUser">MySQLRandomElements::searchUser()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random user from the generated collection</dd>
 							<dt><b>searchUser</b></dt>
 				<dd>in file MongoRandomElements.class.php, method <a href="InternetAccessLog/MongoRandomElements.html#methodsearchUser">MongoRandomElements::searchUser()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a random user from the generated collection</dd>
+					</dl>
+	</div>
+	<a name="u"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">u</div>
+		<div style="float: right"><a href="#top">[Top]</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<div>
+		<h2>u</h2>
+		<dl>
+							<dt><b>USERS_REPORT_PREFIX</b></dt>
+				<dd>in file MySQLRandomElements.class.php, class constant <a href="InternetAccessLog/MySQLRandomElements.html#constUSERS_REPORT_PREFIX">MySQLRandomElements::USERS_REPORT_PREFIX</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default prefixes for monthly reports</dd>
+							<dt><b>USERS_REPORT_PREFIX</b></dt>
+				<dd>in file MongoRandomElements.class.php, class constant <a href="InternetAccessLog/MongoRandomElements.html#constUSERS_REPORT_PREFIX">MongoRandomElements::USERS_REPORT_PREFIX</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default prefixes for monthly reports</dd>
 					</dl>
 	</div>
 	<a name="_"></a>
@@ -290,7 +324,7 @@
 	</div>
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Tue, 24 Jul 2012 14:50:46 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 26 Jul 2012 16:06:54 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

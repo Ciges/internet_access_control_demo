@@ -75,7 +75,7 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 </strong></p>
 <span class="description"><p>With this elements created we can simulate non FTP and FTP log entries (in our demo the acces by FTP are stored in a separate collection)</p></span>
 		<p class="notes">
-			Located in <a class="field" href="_MySQLRandomElements.class.php.html">/MySQLRandomElements.class.php</a> [<span class="field">line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a21">21</a></span>]
+			Located in <a class="field" href="_MySQLRandomElements.class.php.html">/MySQLRandomElements.class.php</a> [<span class="field">line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a17">17</a></span>]
 		</p>
 
 		
@@ -97,10 +97,13 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateDomains">createDomains</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateIPs">createIPs</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">createUsers</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomFTPLogEntry">getRandomFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomDomains_exists">randomDomains_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomIPs_exists">randomIPs_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomUser_exists">randomUser_exists</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomFTPLogEntry">saveRandomFTPLogEntry</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomNonFTPLogEntry">saveRandomNonFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchDomain">searchDomain</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchFTPMethod">searchFTPMethod</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchHTTPMethod">searchHTTPMethod</a></li>
@@ -241,6 +244,21 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 				</div>
 								<div class="var-title">
 					<tr>
+					<td class="var-title"><a href="#constDOMAINS_REPORT_PREFIX" title="details" class="const-name-summary">DOMAINS_REPORT_PREFIX</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default prefixes for monthly reports</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constFTPLOG_NAME" title="details" class="const-name-summary">FTPLOG_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constNONFTPLOG_NAME" title="details" class="const-name-summary">NONFTPLOG_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
 					<td class="var-title"><a href="#constRNDDOMAINSC_NAME" title="details" class="const-name-summary">RNDDOMAINSC_NAME</a>&nbsp;&nbsp;</td>
 					<td class="const-summary-description">Default names for random data collections</td></tr>
 				</div>
@@ -253,6 +271,11 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 					<tr>
 					<td class="var-title"><a href="#constRNDUSERSC_NAME" title="details" class="const-name-summary">RNDUSERSC_NAME</a>&nbsp;&nbsp;</td>
 					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constUSERS_REPORT_PREFIX" title="details" class="const-name-summary">USERS_REPORT_PREFIX</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default prefixes for monthly reports</td></tr>
 				</div>
 								</table>
 			</div>
@@ -273,7 +296,7 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		<div class="info-box-body">
 			<div class="method-summary">
 				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
-																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																								<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">MySQLRandomElements</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#__construct" title="details" class="method-name">__construct</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</td></tr>
@@ -300,6 +323,11 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">array</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getRandomFTPLogEntry" title="details" class="method-name">getRandomFTPLogEntry</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">array</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#getRandomNonFTPLogEntry" title="details" class="method-name">getRandomNonFTPLogEntry</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Return a random log entry for non FTP access (http and tunnel)</td></tr>
 				</div>
@@ -317,6 +345,16 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#randomUser_exists" title="details" class="method-name">randomUser_exists</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Returns true if the &quot;Random_UsersList&quot; table has records</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#saveRandomFTPLogEntry" title="details" class="method-name">saveRandomFTPLogEntry</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#saveRandomNonFTPLogEntry" title="details" class="method-name">saveRandomNonFTPLogEntry</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.</td></tr>
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
@@ -386,7 +424,7 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a108">108</a>]</span>
+	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a120">120</a>]</span>
 </div>
 <br />
 
@@ -445,7 +483,7 @@ $database = self::DEFAULT_DB]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a128">128</a>]</span>
+	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a141">141</a>]</span>
 </div>
 <br />
 
@@ -471,7 +509,7 @@ $database = self::DEFAULT_DB]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a271">271</a>]</span>
+	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a284">284</a>]</span>
 </div>
 <br />
 
@@ -523,7 +561,7 @@ $dont_repeat = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a206">206</a>]</span>
+	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a219">219</a>]</span>
 </div>
 <br />
 
@@ -575,7 +613,7 @@ $dont_repeat = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a141">141</a>]</span>
+	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a154">154</a>]</span>
 </div>
 <br />
 
@@ -623,11 +661,56 @@ $dont_repeat = TRUE]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodgetRandomNonFTPLogEntry" id="getRandomNonFTPLogEntry"><!-- --></a>
+<a name="methodgetRandomFTPLogEntry" id="getRandomFTPLogEntry"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a430">430</a>]</span>
+	<span class="method-title">getRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a618">618</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>array getRandomFTPLogEntry(
+integer
+$initial_timestamp, integer
+$final_timestamp&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)
+</strong></p>
+<span class="description"><p>It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$initial_timestamp:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$final_timestamp:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetRandomNonFTPLogEntry" id="getRandomNonFTPLogEntry"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a443">443</a>]</span>
 </div>
 <br />
 
@@ -669,10 +752,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodrandomDomains_exists" id="randomDomains_exists"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a323">323</a>]</span>
+	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a336">336</a>]</span>
 </div>
 <br />
 
@@ -695,10 +778,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodrandomIPs_exists" id="randomIPs_exists"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a258">258</a>]</span>
+	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a271">271</a>]</span>
 </div>
 <br />
 
@@ -721,10 +804,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodrandomUser_exists" id="randomUser_exists"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a193">193</a>]</span>
+	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a206">206</a>]</span>
 </div>
 <br />
 
@@ -746,11 +829,101 @@ $final_timestamp&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodsearchDomain" id="searchDomain"><!-- --></a>
+<a name="methodsaveRandomFTPLogEntry" id="saveRandomFTPLogEntry"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">saveRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a653">653</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void saveRandomFTPLogEntry(
+array
+$log_entry, [boolean
+$create_reports = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+</strong></p>
+<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated   The id for the document in Mongo is created as an integer autonumeric.</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">array</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$log_entry:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> log entry as returned by <a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$create_reports:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsaveRandomNonFTPLogEntry" id="saveRandomNonFTPLogEntry"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a379">379</a>]</span>
+	<span class="method-title">saveRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a576">576</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void saveRandomNonFTPLogEntry(
+array
+$log_entry, [boolean
+$create_reports = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
+</strong></p>
+<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated   The id for the document in Mongo is created as an integer autonumeric.</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">array</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$log_entry:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> log entry as returned by <a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$create_reports:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchDomain" id="searchDomain"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a392">392</a>]</span>
 </div>
 <br />
 
@@ -773,10 +946,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchFTPMethod" id="searchFTPMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a371">371</a>]</span>
+	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a384">384</a>]</span>
 </div>
 <br />
 
@@ -799,10 +972,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchHTTPMethod" id="searchHTTPMethod"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a363">363</a>]</span>
+	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a376">376</a>]</span>
 </div>
 <br />
 
@@ -825,10 +998,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchIP" id="searchIP"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a331">331</a>]</span>
+	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a344">344</a>]</span>
 </div>
 <br />
 
@@ -851,10 +1024,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchProtocol" id="searchProtocol"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a411">411</a>]</span>
+	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a424">424</a>]</span>
 </div>
 <br />
 
@@ -877,10 +1050,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchReturnCode" id="searchReturnCode"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a419">419</a>]</span>
+	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a432">432</a>]</span>
 </div>
 <br />
 
@@ -903,10 +1076,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchSize" id="searchSize"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a403">403</a>]</span>
+	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a416">416</a>]</span>
 </div>
 <br />
 
@@ -929,10 +1102,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchURI" id="searchURI"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a395">395</a>]</span>
+	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a408">408</a>]</span>
 </div>
 <br />
 
@@ -955,10 +1128,10 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchUser" id="searchUser"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a347">347</a>]</span>
+	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a360">360</a>]</span>
 </div>
 <br />
 
@@ -994,13 +1167,13 @@ $final_timestamp&nbsp;
 									</div>
 		<div class="info-box-body">
 			<a name="constDEFAULT_DB" id="DEFAULT_DB"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">DEFAULT_DB</span>
 			 = <span class="var-default"> &quot;InternetAccessLog&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a37">37</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a42">42</a>]</span>
 		</span>
 	</div>
 
@@ -1012,13 +1185,13 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_HOST" id="DEFAULT_HOST"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">DEFAULT_HOST</span>
 			 = <span class="var-default"> &quot;localhost&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a36">36</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a41">41</a>]</span>
 		</span>
 	</div>
 
@@ -1030,13 +1203,13 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_PASSWORD" id="DEFAULT_PASSWORD"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">DEFAULT_PASSWORD</span>
 			 = <span class="var-default"> &quot;mysqldb&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a35">35</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a40">40</a>]</span>
 		</span>
 	</div>
 
@@ -1048,17 +1221,71 @@ $final_timestamp&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_USER" id="DEFAULT_USER"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">DEFAULT_USER</span>
 			 = <span class="var-default"> &quot;mysqldb&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a34">34</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a39">39</a>]</span>
 		</span>
 	</div>
 
 	<p align="center" class="short-description"><strong>Constants for default connection values
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDOMAINS_REPORT_PREFIX" id="DOMAINS_REPORT_PREFIX"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DOMAINS_REPORT_PREFIX</span>
+			 = <span class="var-default"> &quot;Domains_Monthly_Report_&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a33">33</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default prefixes for monthly reports
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constFTPLOG_NAME" id="FTPLOG_NAME"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">FTPLOG_NAME</span>
+			 = <span class="var-default"> &quot;FTP_Access_log&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a26">26</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constNONFTPLOG_NAME" id="NONFTPLOG_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">NONFTPLOG_NAME</span>
+			 = <span class="var-default"> &quot;NonFTP_Access_log&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a25">25</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
 </strong></p>
 	
 
@@ -1072,7 +1299,7 @@ $final_timestamp&nbsp;
 		<span class="var-title">
 			<span class="var-name">RNDDOMAINSC_NAME</span>
 			 = <span class="var-default"> &quot;Random_DomainsList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a28">28</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a24">24</a>]</span>
 		</span>
 	</div>
 
@@ -1090,7 +1317,7 @@ $final_timestamp&nbsp;
 		<span class="var-title">
 			<span class="var-name">RNDIPSC_NAME</span>
 			 = <span class="var-default"> &quot;Random_IPsList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a27">27</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a23">23</a>]</span>
 		</span>
 	</div>
 
@@ -1108,11 +1335,29 @@ $final_timestamp&nbsp;
 		<span class="var-title">
 			<span class="var-name">RNDUSERSC_NAME</span>
 			 = <span class="var-default"> &quot;Random_UsersList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a26">26</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a22">22</a>]</span>
 		</span>
 	</div>
 
 	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constUSERS_REPORT_PREFIX" id="USERS_REPORT_PREFIX"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">USERS_REPORT_PREFIX</span>
+			 = <span class="var-default"> &quot;Users_Monthly_Report_&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a32">32</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default prefixes for monthly reports
 </strong></p>
 	
 
@@ -1124,7 +1369,7 @@ $final_timestamp&nbsp;
 
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Tue, 24 Jul 2012 14:50:49 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 26 Jul 2012 16:06:58 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

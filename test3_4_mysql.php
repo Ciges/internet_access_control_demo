@@ -1,10 +1,10 @@
 <?php
 /**
- *  Test 3.1:  MySQL insertion of 1 million of simulated http (and tunnel) log entries
+ *  Test 3.1:  MySQL insertion of 30 million of simulated http (and tunnel) log entries
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120724
+ *  @version 20120725
  *
  */
 
