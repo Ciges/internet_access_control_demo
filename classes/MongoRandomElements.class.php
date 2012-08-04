@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120725
+ *  @version 20120804
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -63,8 +63,6 @@ require_once("RandomElements.class.php");
 	private $rnd_users_number;
 	private $rnd_ips_number;
 	private $rnd_domains_number;
-    private $nonftp_log_recordnumber;
-    private $ftp_log_recordnumber;
     /**#@-*/
     
     /**
@@ -99,8 +97,6 @@ require_once("RandomElements.class.php");
 		$this->rnd_users_number =  $this->db_conn->$db->$userscol_name->count();
 		$this->rnd_ips_number = $this->db_conn->$db->$ipscol_name->count();
 		$this->rnd_domains_number = $this->db_conn->$db->$domainscol_name->count();
-        $this->nonftp_log_recordnumber = $this->db_conn->$db->$nonftp_log_name->count();
-        $this->ftp_log_recordnumber = $this->db_conn->$db->$ftp_log_name->count();
 	}
 
     /**

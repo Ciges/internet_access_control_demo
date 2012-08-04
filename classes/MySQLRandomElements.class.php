@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120725
+ *  @version 20120804
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -63,9 +63,15 @@ require_once("RandomElements.class.php");
 	private $rnd_users_number;
 	private $rnd_ips_number;
 	private $rnd_domains_number;
-    private $nonftp_log_recordnumber;
-    private $ftp_log_recordnumber;
     /**#@-*/
+    
+    /**
+     * Gets the connection to MySQL
+     * @returns mysqli
+     */
+    public function getDB_conn()    {
+        return $this->db_conn;
+    }
     
     /**
      *  This function says if a table exists in MySQL
@@ -123,7 +129,7 @@ require_once("RandomElements.class.php");
 			$this->db_conn = new mysqli($host, $user, $password, $database);
             $this->db_databasename = $database;
 		}
-		catch (MongoConnectionException $e) {
+		catch (Exception $e) {
 			die("Connection MySQL impossible: (".$e->getCode().") ".$e->getMessage()."\n");
 		}
 		
@@ -131,8 +137,6 @@ require_once("RandomElements.class.php");
 		$this->rnd_users_number =  $this->recordNumber(self::RNDUSERSC_NAME);
 		$this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
 		$this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
-        $this->nonftp_log_recordnumber = $this->recordNumber(self::NONFTPLOG_NAME);
-        $this->ftp_log_recordnumber = $this->recordNumber(self::FTPLOG_NAME);   
 	}
     
     /**
@@ -196,6 +200,8 @@ require_once("RandomElements.class.php");
                 $i++;
             }
         }
+        // Update users numbers property
+        $this->rnd_users_number =  $this->recordNumber(self::RNDUSERSC_NAME);
             
     }
     
@@ -260,8 +266,10 @@ require_once("RandomElements.class.php");
                 $id++;
                 $i++;
             }
-        }
-            
+        }    
+        // Update IPs number property
+        $this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
+
     }
     
     /** 
@@ -326,6 +334,8 @@ require_once("RandomElements.class.php");
                 $i++;
             }
         }
+        // Update Domains number property
+        $this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
             
     }
     
@@ -491,6 +501,11 @@ require_once("RandomElements.class.php");
 
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+                
+            // Insertion of a new user entry
+            $query_insert = "insert into ".$table_name." (user, nb, volume) values (\"".$user."\", 1, ".$volume.")";
+            $this->db_conn->query($query_insert) ||
+                die ("Error sending the query '".$query_insert."' to MySQL: ".$this->db_conn->error."\n");
         }
         else {
         	$query = "select * from ".$table_name." where user=\"".$user."\"";
@@ -539,6 +554,11 @@ require_once("RandomElements.class.php");
 
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+                
+            // Insertion of a new domain entry
+            $query_insert = "insert into ".$table_name." (domain, nb, volume) values (\"".$domain."\", 1, ".$volume.")";
+            $this->db_conn->query($query_insert) ||
+                die ("Error sending the query '".$query_insert."' to MySQL: ".$this->db_conn->error."\n");
         }
         else {
         	$query = "select * from ".$table_name." where domain=\"".$domain."\"";

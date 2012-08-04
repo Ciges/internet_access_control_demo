@@ -7,7 +7,7 @@
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120726
+ *  @version 20120804
  *
  */
 
@@ -25,11 +25,11 @@ echo "Random Domains created\n";
 $start = mktime(0,0,0,4,1,2012);
 $end = mktime(23,59,0,4,30,2012);
 for ($i = 0; $i < 30000000; $i++)	{
-	$log = $mre->getRandomNonFTPLogEntry($start, $end);
+    $log = $mre->getRandomNonFTPLogEntry($start, $end);
     $mre->saveRandomNonFTPLogEntry($log);
 }
 for ($i = 0; $i < 1500000; $i++)	{
-	$log = $mre->getRandomFTPLogEntry($start, $end);
+    $log = $mre->getRandomFTPLogEntry($start, $end);
     $mre->saveRandomFTPLogEntry($log);
 }
 echo "Example data for April created\n";
@@ -37,11 +37,11 @@ echo "Example data for April created\n";
 $start = mktime(0,0,0,5,1,2012);
 $end = mktime(23,59,0,5,31,2012);
 for ($i = 0; $i < 30000000; $i++)	{
-	$log = $mre->getRandomNonFTPLogEntry($start, $end);
+    $log = $mre->getRandomNonFTPLogEntry($start, $end);
     $mre->saveRandomNonFTPLogEntry($log);
 }
 for ($i = 0; $i < 1500000; $i++)	{
-	$log = $mre->getRandomFTPLogEntry($start, $end);
+    $log = $mre->getRandomFTPLogEntry($start, $end);
     $mre->saveRandomFTPLogEntry($log);
 }
 echo "Example data for May created\n";
@@ -49,11 +49,11 @@ echo "Example data for May created\n";
 $start = mktime(0,0,0,6,1,2012);
 $end = mktime(23,59,0,6,30,2012);
 for ($i = 0; $i < 30000000; $i++)	{
-	$log = $mre->getRandomNonFTPLogEntry($start, $end);
+    $log = $mre->getRandomNonFTPLogEntry($start, $end);
     $mre->saveRandomNonFTPLogEntry($log);
 }
 for ($i = 0; $i < 1500000; $i++)	{
-	$log = $mre->getRandomFTPLogEntry($start, $end);
+    $log = $mre->getRandomFTPLogEntry($start, $end);
     $mre->saveRandomFTPLogEntry($log);
 }
 echo "Example data for June created\n";
