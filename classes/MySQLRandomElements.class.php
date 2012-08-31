@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120804
+ *  @version 20120830
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -69,10 +69,53 @@ require_once("RandomElements.class.php");
      * Gets the connection to MySQL
      * @returns mysqli
      */
-    public function getDB_conn()    {
+    public function getDB()    {
         return $this->db_conn;
     }
     
+    /**
+     *  Sends a query to the database and returns the results. If no rows are got null is returned
+     *  @param string query
+     *  @return mixed
+     *  @access public
+     */
+    public function getResults($query)    {
+        if ($results = $this->getDB()->query($query))	{
+            if ($results->num_rows > 0) {
+                return $results;
+            }
+            else    {
+                return null;
+            }
+        }
+        else	{
+            die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+    }
+     
+    /**
+     *  Sends a query to the database and returns the first row as an associative array. If no rows are got null is returned
+     *  @param string query
+     *  @return array
+     *  @access public
+     */
+    public function getRow($query)    {        
+        $results = $this->getResults($query);
+        return $results->fetch_assoc();
+    }
+
+    /**
+     *  Sends a query to the database and returns the first field of the first row. If no rows are got null is returned
+     *  @param string query
+     *  @return array
+     *  @access public
+     */
+    public function getOne($query)    {
+        $results = $this->getResults($query);
+        $row = $results->fetch_row();
+        return $row[0];
+    }
+   
     /**
      *  This function says if a table exists in MySQL
      *  @param string tablename
@@ -88,6 +131,37 @@ require_once("RandomElements.class.php");
 			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
 		}
 	}
+    
+    /**
+     *  This function deletes a table if it exists in MySQL. If the table does not exists returns false (and does nothing)
+     *  @param string tablename
+     *  @return boolean
+     *  @access public
+     */
+	public function dropTable($tablename)	{
+        if ($this->tableExists($tablename))  {
+            if ($this->db_conn->query("drop table ".self::NONFTPLOG_NAME)) {
+                return true;
+                }
+            else    {
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+                }
+            }
+        else    {
+            return false;
+        }
+	}
+    
+    /**
+     *  This function deletes the table used for saving NonFTP logs. If the table does not exists returns false (and does nothing)
+     *  @param string tablename
+     *  @return boolean
+     *  @access public
+     */
+	public function dropTableNonFTPLogEntry()	{
+        $this->dropTable(self::NONFTPLOG_NAME);
+	}
+
     
     /**
      *  This function returns the number of records for the table passed as parameter.  If the table does not exists returns 0.
@@ -110,6 +184,124 @@ require_once("RandomElements.class.php");
 			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
 		}
 	}
+    
+    /** 
+    *  This function queries the database to return the users number (records in Random_UsersList)
+    *  @return integer
+    *  @access public
+    */
+    public function getUserNumber() {
+        $this->rnd_users_number = $this->recordNumber(self::RNDUSERSC_NAME);
+        return $this->rnd_users_number;
+    }
+
+    /**
+     *  This function returns the username searching by the id. If the user does not exist null is returner
+     *  @param integer $userid
+     *  @return string $username
+     *  @access public
+     */
+    public function getUserFromID($userid) {
+        $query = "select user from ".self::RNDUSERSC_NAME." where id=".$userid;
+        if ($result = $this->db_conn->query($query))   {
+            if ($result->num_rows > 0)  {
+                $row = $result->fetch_array();
+                return $row['user'];
+            }
+            else    {
+                return null;
+            }
+        }
+        else    {
+            die ("Error sending the query '".$query."' to MySQL");
+        }
+    }
+    
+    /**
+     *  This function returns the user data from the raports for a year and month specified. If there is no data returns null
+     *  @param string $username
+     *  @param integer $year
+     *  @param integer $month   Number from 1 to 12
+     *  @return array
+     *  @access public
+     */
+    public function getUserCollectedData($username, $year, $month)  {
+        $col = self::USERS_REPORT_PREFIX.$year.sprintf("%02d", $month);
+        $query = "select * from ".$col." where user=\"".$username."\"";
+        if ($result = $this->db_conn->query($query))   {
+            if ($result->num_rows > 0)  {
+                $row = $result->fetch_array();
+                return $row;
+            }
+            else    {
+                return null;
+            }
+        }
+        else    {
+            die ("Error sending the query '".$query."' to MySQL");
+        }
+    }
+    
+    /**
+     *  Helper function to create Users table in database
+     *  @param string $tablename
+     *  @param boolean $useindex    Sets if a unique index for user name must be created
+     *  @access private
+     */
+    private function createUserTable($tablename = self::RNDUSERSC_NAME, $use_index = true) {
+        if (!$this->tableExists($tablename)) {
+            if ($use_index) {
+                $query = "CREATE TABLE ".$tablename." (
+                id INT NOT NULL PRIMARY KEY,
+                user CHAR(7),
+                unique index user_index (user)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            }
+            else {
+                $query = "CREATE TABLE ".$tablename." (
+                id INT NOT NULL PRIMARY KEY,
+                user CHAR(7)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            }
+            $this->db_conn->query($query) ||
+				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }     
+    }
+    
+    /**
+     *  This function add a user to the table passed as second argument. If not collection done then the user will be added to Random_UsersList.
+     *  @param string $username
+     *  @param string $tablename
+     *  @param boolean $useindex    Sets if a unique index for user name must be created
+     *  @access public
+     */
+    public function addUser($username, $tablename = self::RNDUSERSC_NAME, $use_index = true)   {
+        // Table creation if it does not exists
+        $this->createUserTable($tablename, $use_index);
+        
+        $query = "insert into ".$tablename." (id, user) values (".($this->recordNumber($tablename)+1).", \"".$username."\")";
+		$this->db_conn->query($query) ||
+            die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+    }
+    
+    /**
+     *  This function verifies if the user exists in the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
+     *  @param string $username
+     *  @param string $tablename
+     *  @return boolean
+     *  @access public
+     */
+    public function existUser($username, $tablename = self::RNDUSERSC_NAME)    {
+        if ($this->tableExists($tablename)) {
+            $query = "select id from ".$tablename." where user=\"".$username."\"";
+            $results = $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+            return $results->num_rows > 0;
+        }
+        else    {
+            return false;
+        }
+    }
     
     /**
      *  Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host & database name).
@@ -134,7 +326,7 @@ require_once("RandomElements.class.php");
 		}
 		
 		// Stores the number of elements of each stored random elements collection
-		$this->rnd_users_number =  $this->recordNumber(self::RNDUSERSC_NAME);
+		$this->rnd_users_number = $this->recordNumber(self::RNDUSERSC_NAME);
 		$this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
 		$this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
 	}
@@ -159,23 +351,7 @@ require_once("RandomElements.class.php");
 		$id = $this->rnd_users_number + 1;   // Autonumeric
         
         // Table creation if it does not exists
-        if (!$this->tableExists(self::RNDUSERSC_NAME)) {
-            if ($use_index) {
-                $query = "CREATE TABLE ".self::RNDUSERSC_NAME." (
-                id INT NOT NULL PRIMARY KEY,
-                user CHAR(7),
-                unique index user_index (user)
-                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
-            }
-            else {
-                $query = "CREATE TABLE ".self::RNDUSERSC_NAME." (
-                id INT NOT NULL PRIMARY KEY,
-                user CHAR(7)
-                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
-            }
-            $this->db_conn->query($query) ||
-				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-        }
+        $this->createUserTable(self::RNDUSERSC_NAME, $use_index);
         
         $i = 1;
 		while ($i <= $number)	{
@@ -660,7 +836,7 @@ require_once("RandomElements.class.php");
 		);
         
         return $document;
-    } 
+    }
     
     /**
      *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
@@ -702,6 +878,8 @@ require_once("RandomElements.class.php");
             }
  
     }
+    
+    
     
 }
  

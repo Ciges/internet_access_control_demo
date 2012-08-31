@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120804
+ *  @version 20120830
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -64,6 +64,72 @@ require_once("RandomElements.class.php");
 	private $rnd_ips_number;
 	private $rnd_domains_number;
     /**#@-*/
+
+    /** 
+    *  This function queries the database to return the users number (records in Random_UsersList)
+    *  @return integer
+    *  @access public
+    */
+    public function getUserNumber() {
+        $this->rnd_users_number = $this->getUserCollection()->count();
+        return $this->rnd_users_number;
+    }
+
+    /**
+     *  This function returns the username searching by the id
+     *  @param integer $userid
+     *  @return string $username
+     *  @access public
+     */
+    public function getUserFromID($userid) {
+        $row = $this->getUserCollection()->findOne(array('_id' => $userid));
+        return $row['user'];
+    }
+    
+    /**
+     *  This function returns the user data from the raports for a year and month specified. If there is no data returns null
+     *  @param string $username
+     *  @param integer $year
+     *  @param integer $month   Number from 1 to 12
+     *  @return array
+     *  @access public
+     */
+    public function getUserCollectedData($username, $year, $month)  {
+        $col = self::USERS_REPORT_PREFIX.$year.sprintf("%02d", $month);
+        $data = $this->getDB()->$col->findOne(array('_id' => $username));
+        return $data;
+    }
+    
+    /**
+     *  This function add a user to the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
+     *  @param string $username
+     *  @param string $collectionname
+     *  @access public
+     */
+    public function addUser($username, $collectionname = self::RNDUSERSC_NAME)   {
+        $user_col = $this->getDB()->$collectionname;
+        if ($user_col->count() == 0)    {
+            $user_col->ensureIndex(array('user' => 1), array("unique" => true));
+            }
+        try {
+            $doc = array("_id" => $user_col->count()+1, "user" => $username);
+            $user_col->insert($doc);
+            }
+        catch (MongoConnectionException $e) {
+            die("Save of user document in MongoDB not possible: (".$e->getCode().") ".$e->getMessage()."\n");
+        }
+    }
+    
+    /**
+     *  This function verifies if the user exists in the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
+     *  @param string $username
+     *  @param string $tablename
+     *  @return boolean
+     *  @access public
+     */
+    public function existUser($username, $collectionname = self::RNDUSERSC_NAME)    {
+        !is_null($this->getDB()->$collectionname->findOne(array('user' => $username)));
+    }
     
     /**
      *  Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host & database name).
@@ -72,11 +138,11 @@ require_once("RandomElements.class.php");
      *  <li>The default host will be localhost
      *  <li>The default database name will be InternetAccessLog
      *  </ul>
-     * @param string $user
-     * @param string $password
-     * @param string $host
-     * @param string $database
-	*/
+     *  @param string $user
+     *  @param string $password
+     *  @param string $host
+     *  @param string $database
+	 */
 	function __construct($user = self::DEFAULT_USER, $password = self::DEFAULT_PASSWORD, $host = self::DEFAULT_HOST, $database = self::DEFAULT_DB)	{		
 		// Open a connection to MongoDB
 		try {
@@ -105,6 +171,64 @@ require_once("RandomElements.class.php");
 	function __destruct()	{
 		$this->db_conn->close();
 	}
+    
+    /**
+     *  Get the connection created to the database (the db, not the server)
+     *  @return MongoDB
+     */
+     public function getDB()    {
+        $databasename = $this->db_databasename;
+        return $this->db_conn->$databasename;
+     }
+ 
+    /**
+     *  Sends an aggregation array of commands to the database and returns the results (array of documents). If no documents are got null is returned
+     *  @param array $pipeline
+     *  @param string $collection
+     *  @return array
+     *  @access public
+     */
+    public function getResults($pipeline, $collection = "NonFTP_Access_log")    {
+        $data = $this->getDB()->command (
+            array(
+                "aggregate" => $collection,
+                "pipeline" => $pipeline
+            ));
+        return $data['result'];
+    }
+     
+    /**
+     *  Sends an aggregation array of commands to the database and returns the first document. If no documents are got null is returned
+     *  @param array $pipeline
+     *  @param string $collection
+     *  @return array
+     *  @access public
+     */
+    public function getRow($pipeline, $collection = "NonFTP_Access_log")    {        
+        $data = $this->getResults($pipeline, $collection);
+        return $data[0];
+    }
+
+    /**
+     *  Sends an aggregation array of commands to the database and returns the field '_id' of the first document. If no documents are got null is returned
+     *  @param array $pipeline
+     *  @param string $collection
+     *  @return array
+     *  @access public
+     */
+    public function getOne($pipeline, $collection)    {
+        $row = $this->getRow($pipeline, $collection);
+        return $row['_id'];
+    }
+ 
+    /**
+     *  Get a link to the users collectioc
+     *  @return MongoCollection
+     */
+    public function getUserCollection() {
+        $user_col_name = MongoRandomElements::RNDUSERSC_NAME;
+        return $this->getDB()->$user_col_name;
+    }
     
     /**
      *  Save random users in MongoDB.  

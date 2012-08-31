@@ -1,10 +1,10 @@
 <?php
 /**
- *  Test 3.1:  MySQL insertion of 1 million of simulated http (and tunnel) log entries
+ *  Test 3.1:  MySQL insertion of 1 million of simulated http (and tunnel) log entries. The table is deleted first.
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120724
+ *  @version 20120829
  *
  */
 
@@ -16,6 +16,7 @@ $mre = new MySQLRandomElements();
 $start = mktime(0,0,0,5,1,2012);
 $end = mktime(23,59,0,5,31,2012);
 
+$mre->dropTableNonFTPLogEntry();
 for ($i = 0; $i < 1000000; $i++)	{
 	$log = $mre->getRandomNonFTPLogEntry($start, $end);
     $mre->saveRandomNonFTPLogEntry($log, FALSE);
