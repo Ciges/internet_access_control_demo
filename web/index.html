@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web load tests MongoDB vs MySQL</title>
+    <meta content="José Manuel Ciges Regueiro" name="author">
+    <meta content="BlueGriffon wysiwyg editor" name="generator">
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <style type="text/css" media="screen">
+      body { margin: 1em 3em }
+    </style>
+  </head>
+  <body>
+    <p>Hello,</p>
+    <p>In this directory you will find 6 scripts which make part of the load
+      tests collection for a comparative performance study I have made between <a
+        title="MongoDB web page" href="http://www.mongodb.org/">MongoDB</a>
+      2.2.0rc0 and <a title="MySQL web page" href="http://www.mysql.com/">MySQL</a>
+      5.0.28 (with MyISAM tables).</p>
+    <p>The scripts included are:</p>
+    <ul>
+      <li><a href="test4_mongo.php">test4_mongo.php</a> :&nbsp; MongoDB read
+        test. Search and show data for a random user<br>
+      </li>
+      <li><a href="test4_mysql.php">test4_mysql.php</a> :&nbsp; MySQL read test.
+        Search and show data for a random user<br>
+      </li>
+      <li><a href="test5_mongo.php">test5_mongo.php</a> :&nbsp; MongoDB write
+        test. Write a random user<br>
+      </li>
+      <li><a href="test5_mysql.php">test5_mysql.php</a> :&nbsp; MySQL write
+        test. Write a random user</li>
+      <li><a href="test6_mongo.php">test6_mongo.php</a> :&nbsp; MongoDB
+        read/write test. This script makes one of two read or write actions. The
+        read test is made 80% of times, the write one the 20%.</li>
+      <ul>
+        <li>Search and show data for a random user (read test)</li>
+        <li>Write a new random user in the database (write test)</li>
+      </ul>
+      <li><a href="test6_mysql.php">test6_mysql.php</a> :&nbsp; MySQL read/write
+        test. This script makes one of two read or write actions. The read test
+        is made 80% of times, the write one the 20%.</li>
+      <ul>
+        <li>Search and show data for a random user (read test)</li>
+        <li>Write a new random user in the database (write test)</li>
+      </ul>
+    </ul>
+    <p><br>
+    </p>
+    <p> </p>
+  </body>
+</html>

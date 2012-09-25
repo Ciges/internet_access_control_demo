@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Docs For Class MongoRandomElements</title>
 	<link rel="stylesheet" type="text/css" href="../media/style.css">
-	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf8'/>
 </head>
 <body>
 
@@ -94,7 +94,7 @@ Source Location: /MongoRandomElements.class.php<br /><br />
 		<ul>
 		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#method__construct">__construct</a></li>
 		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#method__destruct">__destruct</a></li>
-		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodaddUser">addUser</a></li>
+		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodaddFakeUser">addFakeUser</a></li>
 		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateDomains">createDomains</a></li>
 		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateIPs">createIPs</a></li>
 		  		  <li><a href="../InternetAccessLog/MongoRandomElements.html#methodcreateUsers">createUsers</a></li>
@@ -317,9 +317,9 @@ Source Location: /MongoRandomElements.class.php<br /><br />
 					<td class="method-definition">Destructor. Close the open connection to MongoDB database</td></tr>
 				</div>
 																<div class="method-definition">
-											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
-										<td class="method-definition"><a href="#addUser" title="details" class="method-name">addUser</a>()&nbsp;&nbsp;</td>
-					<td class="method-definition">This function add a user to the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.</td></tr>
+											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#addFakeUser" title="details" class="method-name">addFakeUser</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">This function add a fake user to the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.</td></tr>
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
@@ -484,7 +484,7 @@ Source Location: /MongoRandomElements.class.php<br /><br />
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a146">146</a>]</span>
+	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a147">147</a>]</span>
 </div>
 <br />
 
@@ -543,7 +543,7 @@ $database = self::DEFAULT_DB]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a171">171</a>]</span>
+	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a172">172</a>]</span>
 </div>
 <br />
 
@@ -565,18 +565,18 @@ $database = self::DEFAULT_DB]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodaddUser" id="addUser"><!-- --></a>
+<a name="methodaddFakeUser" id="addFakeUser"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">addUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a109">109</a>]</span>
+	<span class="method-title">addFakeUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a112">112</a>]</span>
 </div>
 <br />
 
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
-		<code>void addUser(
+		<code>boolean addFakeUser(
 string
 $username, [string
 $collectionname = self::RNDUSERSC_NAME]&nbsp;
@@ -584,9 +584,9 @@ $collectionname = self::RNDUSERSC_NAME]&nbsp;
     </td></tr></table>
     </td></tr></table><br /></div>
 
-	<p align="center" class="short-description"><strong>This function add a user to the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
+	<p align="center" class="short-description"><strong>This function add a fake user to the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
 </strong></p>
-
+<span class="description"><p>This function is coded for load tests, not for real user. The id is the id generated by Mongo   Returns true if the user has been succesfull added, false if not</p></span>
 			<strong>Parameters:</strong><br />
 			<table border="0" cellspacing="0" cellpadding="0">
 					<tr><td class="indent">
@@ -621,7 +621,7 @@ $collectionname = self::RNDUSERSC_NAME]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a348">348</a>]</span>
+	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a351">351</a>]</span>
 </div>
 <br />
 
@@ -680,7 +680,7 @@ $dont_repeat_users&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a295">295</a>]</span>
+	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a298">298</a>]</span>
 </div>
 <br />
 
@@ -739,7 +739,7 @@ $dont_repeat_users&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a242">242</a>]</span>
+	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a245">245</a>]</span>
 </div>
 <br />
 
@@ -791,7 +791,7 @@ $dont_repeat = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">existUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a130">130</a>]</span>
+	<span class="method-title">existUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a131">131</a>]</span>
 </div>
 <br />
 
@@ -850,7 +850,7 @@ $tablename&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getDB</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a179">179</a>]</span>
+	<span class="method-title">getDB</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a180">180</a>]</span>
 </div>
 <br />
 
@@ -883,7 +883,7 @@ $tablename&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getOne</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a219">219</a>]</span>
+	<span class="method-title">getOne</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a222">222</a>]</span>
 </div>
 <br />
 
@@ -935,7 +935,7 @@ $collection&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a593">593</a>]</span>
+	<span class="method-title">getRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a595">595</a>]</span>
 </div>
 <br />
 
@@ -980,7 +980,7 @@ $final_timestamp&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a483">483</a>]</span>
+	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a486">486</a>]</span>
 </div>
 <br />
 
@@ -1025,7 +1025,7 @@ $final_timestamp&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getResults</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a191">191</a>]</span>
+	<span class="method-title">getResults</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a192">192</a>]</span>
 </div>
 <br />
 
@@ -1077,7 +1077,7 @@ $collection = &quot;NonFTP_Access_log&quot;]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getRow</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a207">207</a>]</span>
+	<span class="method-title">getRow</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a210">210</a>]</span>
 </div>
 <br />
 
@@ -1188,7 +1188,7 @@ $month&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getUserCollection</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a228">228</a>]</span>
+	<span class="method-title">getUserCollection</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a231">231</a>]</span>
 </div>
 <br />
 
@@ -1299,7 +1299,7 @@ $userid&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a386">386</a>]</span>
+	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a389">389</a>]</span>
 </div>
 <br />
 
@@ -1325,7 +1325,7 @@ $userid&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a333">333</a>]</span>
+	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a336">336</a>]</span>
 </div>
 <br />
 
@@ -1351,7 +1351,7 @@ $userid&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">randomUsers_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a280">280</a>]</span>
+	<span class="method-title">randomUsers_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a283">283</a>]</span>
 </div>
 <br />
 
@@ -1377,7 +1377,7 @@ $userid&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">saveRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a628">628</a>]</span>
+	<span class="method-title">saveRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a630">630</a>]</span>
 </div>
 <br />
 
@@ -1422,7 +1422,7 @@ $create_reports = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">saveRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a557">557</a>]</span>
+	<span class="method-title">saveRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a560">560</a>]</span>
 </div>
 <br />
 
@@ -1467,7 +1467,7 @@ $create_reports = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a436">436</a>]</span>
+	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a439">439</a>]</span>
 </div>
 <br />
 
@@ -1493,7 +1493,7 @@ $create_reports = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a428">428</a>]</span>
+	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a431">431</a>]</span>
 </div>
 <br />
 
@@ -1519,7 +1519,7 @@ $create_reports = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a420">420</a>]</span>
+	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a423">423</a>]</span>
 </div>
 <br />
 
@@ -1545,7 +1545,7 @@ $create_reports = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a396">396</a>]</span>
+	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a399">399</a>]</span>
 </div>
 <br />
 
@@ -1571,7 +1571,7 @@ $create_reports = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a464">464</a>]</span>
+	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a467">467</a>]</span>
 </div>
 <br />
 
@@ -1597,7 +1597,7 @@ $create_reports = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a472">472</a>]</span>
+	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a475">475</a>]</span>
 </div>
 <br />
 
@@ -1623,7 +1623,7 @@ $create_reports = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a456">456</a>]</span>
+	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a459">459</a>]</span>
 </div>
 <br />
 
@@ -1649,7 +1649,7 @@ $create_reports = TRUE]&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a448">448</a>]</span>
+	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a451">451</a>]</span>
 </div>
 <br />
 
@@ -1675,7 +1675,7 @@ $create_reports = TRUE]&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a408">408</a>]</span>
+	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MongoRandomElements.class.php.html#a411">411</a>]</span>
 </div>
 <br />
 
@@ -1913,7 +1913,7 @@ $create_reports = TRUE]&nbsp;
 
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Fri, 31 Aug 2012 18:24:51 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Mon, 24 Sep 2012 14:01:17 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

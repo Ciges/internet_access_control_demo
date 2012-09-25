@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120830
+ *  @version 20120914
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -270,20 +270,33 @@ require_once("RandomElements.class.php");
     
     /**
      *  This function add a user to the table passed as second argument. If not collection done then the user will be added to Random_UsersList.
+     *  This function is coded for load tests, not for real use. The id is autonumeric
+     *  Returns true if the user has been succesfull added, false if not
      *  @param string $username
      *  @param string $tablename
-     *  @param boolean $useindex    Sets if a unique index for user name must be created
      *  @access public
+     *  @return boolean
      */
-    public function addUser($username, $tablename = self::RNDUSERSC_NAME, $use_index = true)   {
+    public function addFakeUser($username, $tablename = self::RNDUSERSC_NAME)   {
         // Table creation if it does not exists
-        $this->createUserTable($tablename, $use_index);
+        if (!$this->tableExists($tablename))    {
+            $query = "CREATE TABLE ".$tablename." (
+                id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                user CHAR(7)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            $this->db_conn->query($query) ||
+				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
         
-        $query = "insert into ".$tablename." (id, user) values (".($this->recordNumber($tablename)+1).", \"".$username."\")";
-		$this->db_conn->query($query) ||
-            die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+        $query = "insert into ".$tablename." (user) values (\"".$username."\")";
+		if($this->db_conn->query($query))   {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
-    
+
     /**
      *  This function verifies if the user exists in the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.
      *  @param string $username

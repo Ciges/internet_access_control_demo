@@ -8,7 +8,7 @@
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120829
+ *  @version 20120917
  */
 function ver($var)   {
     echo "<pre>";
@@ -43,16 +43,14 @@ if (rand(0,9) < 8)	{
 }
 else    {
     // Write test
-
-    // If the user is in the collection we get another one
     $username = $mre->getRandomUser();
-    while ($mre->existUser($username, "fakeusers"))  {
-        $username = $mre->getRandomUser();
+    if ($mre->addFakeUser($username, "fakeusers"))  {
+        echo("<p>User ".$username." added to the database</p>");
+    }
+    else    {
+        header('HTTP/1.1 500 Internal Server Error');
     }
 
-    $mre->addUser($username, "fakeusers");
-    echo("<p>User ".$username." added to the database</p>");
-    
 }
 
 ?>
