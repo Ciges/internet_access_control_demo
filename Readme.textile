@@ -1,0 +1,104 @@
+h2. Testing MongoDB vs MySQL performance
+
+In this directory there is a list of scripts used to compare MongoDB vs MySQL performance. For a full description of the work done open the document "&#8220;An Open Source NoSQL solution for Internet Access Logs Analysis&#8221;":NoSQL_Project_MSWL_Memory.odt
+
+This work makes part of the fifth edition of the "Master on Free Software Projects Development and Management":http://www.mastersoftwarelibre.com/, created by the galician open source consultancy "Igalia":http://www.igalia.com and the "Universidad Rey Juan Carlos":http://www.urjc.es/ university at Madrid.
+
+h3. How to run this tests
+
+h4.  Database and users creation
+
+In this repository there is a collection of shell scripts to run the tests.
+
+This scripts use the following database names and users by default:
+* For MySQL:  database "InternetAccessLog", with user and password "mysqldb" 
+* For MongoDB: collection "InternetAccessLog", with user and password "mongodb"
+
+So before starting we will have to create both and give the permissions:
+
+*Creating database and user in MySQL*
+<code>
+mysql> create database InternetAccessLog;
+mysql> grant all privileges on InternetAccessLog.* to mysqldb@localhost identified by 'mysqldb';
+</code>
+
+*Creating collection and user in MongoDB*
+<code>
+> use InternetAccessLog
+> db.addUser("mongodb", "mongodb")
+</code>
+
+h4. Generating random data
+The following PHP scripts create 3 monts of random data as explained before:
+* "createData_3months_mongo.php"
+* "createData_3months_mysql.php"
+
+To run them we can use the *console PHP interpreter* with
+<code>
+php -c path/to/my/php.ini phpscript
+</code>
+
+h4. List of  runnable scripts
+
+As with the data generation script, to run them on use the *console PHP interpreter*. There are two PHP scripts per test: one for MySQL and the second one for MongoDB. The relation of scripts is the following:
+
+|Scripts|Test|
+|test1_1_mongo.php, test1_1_mysql.php|Generation and saving of 70.000 random users without using indexes and allowing repeated values|
+|test1_2_mongo.php, test1_2_mysql.php|Generation and saving of 70.000 random IPs without using indexes and allowing repeated values|
+|test1_3_mongo.php, test1_3_mysql.php|Generation and saving of 1.300.000 random domains without using indexes and allowing repeated values|
+|test2_1_mongo.php, test2_1_mysql.php|Generation and saving of 70.000 random users using indexes and verifying (sending a read query) that the user does not exists before sending the save command|
+|test2_2_mongo.php, test2_2_mysql.php|Generation and saving of 70.000 random IPs using indexes and verifying (sending a read query) that the IP does not exists before sending the save command|
+|test2_3_mongo.php, test2_3_mysql.php|Generation and saving of 1.300.000 random domains using indexes and verifying (sending a read query) that the domain does not exists before sending the save command|
+|test3_1_mongo.php, test3_1_mysql.php|Generation and saving of 1 million of non FTP log entries|
+|test3_2_mongo.php, test3_2_mysql.php|Generation and saving of 5 millions of non FTP log entries|
+|test3_3_mongo.php, test3_3_mysql.php|Generation and saving of 10 millions of non FTP log entries|
+|test3_4_mongo.php, test3_4_mysql.php|Generation and saving of 30 millions of non FTP log entries|
+|test9_1_mongo.php, test9_1_mysql.php|Analyse query:  Gets the 10 domains most visited and the number of visits for each one|
+|test9_2_mongo.php, test9_2_mysql.php|Analyse query:  Gets the 10 domains most visited in the second half of June and the number of visits for each one|
+|test9_3_mongo.php, test9_3_mysql.php|Analyse query:  Gets the 10 users with most hits|
+|test9_4_mongo.php, test9_4_mysql.php|Analyse query:  Gets the mean by day for traffic volume in June|
+
+h4. Multi-user concurrent tests
+
+This scripts, +under the "web" directory+, are though to we hosted in a web server.  One we have configured our webserver to made then available I have used:
+* *"Apache JMeter2":http://jmeter.apache.org/* with *the plugin "Stepping Thread Group"* to run the load tests
+* *"R":http://www.r-project.org/* to create graphical representation from CSV files with the data created with Jmeter
+
+The scripts available under web directory are:
+
+|Scripts|Function|Test|
+|test4_mongo.php, test4_mysql.php|Search and show data for a random user|Concurrent reads|
+|test5_mongo.php, test5_mysql.php|Write a random user|Concurrent writes|
+|test6_mongo.php, test6_mysql.php|MongoDB read/write test. This scripts makes one of two actions: Search and show data for a random user (read test) or Write a new random user in the database (write test).  The read test is made 80% of times, the write one the 20%.|Concurrent reads & writes|
+
+Once the web server configured if we accede to the URL corresponding to the directory we should see a description message with links to the different scripts
+
+h4. Using JMeter to run load tests
+
+I have defined *two scenarios for each test and three types of tests.* Then we have six different tests:
+* Concurrent reads, incrementing users from 0 to 50
+* Concurrent reads, 50 users
+* Concurrent writes, incrementing users from 0 to 50
+* Concurrent writes, 50 users
+* Concurrent reads (80%) & writes (20%), incrementing users from 0 to 50
+* Concurrent reads (80%) & writes (20%), 50 users
+
+In the file "MongoDB vs MySQL.jmx" there is all the configuration needed for JMeter
+ 
+To run each tests we should
+* Change the URL of the server to our address
+* In "View Results in Table" change the path where the CSV file should be saved
+* Enable in Jmeter only the test we want to run, disabling the rest (if not more than one test will be run)
+
+h4. Getting a graphical representation of load tests with R
+
+Each load test will generate *tens of thousands of samples that will be stored in CSV files*. We have *two files for each tests type*, one with MySQL response times and the second one with MongoDB response time.
+
+For each test type I have developed a R script that reads this two files and represents graphically a summary of samples and draws a line that shows response time evolution for both types of servers.
+
+This scripts are available also in the web directory and for running them you have simply to use the command source. Their names are self explanatory. If we had six tests we have then six R scripts, one for showing the comparative results of each one.
+
+To load in R and show the graphic you have simply to load the script. By example for loading the first one:
+<code>
+source("Concurrent reads 50 users.R")
+</code>
