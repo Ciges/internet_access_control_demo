@@ -1,8 +1,17 @@
 h2. Testing MongoDB vs MySQL performance
 
-In this directory there is a list of scripts used to compare MongoDB vs MySQL performance. For a full description of the work done open the document "&#8220;An Open Source NoSQL solution for Internet Access Logs Analysis&#8221;":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.odt?raw=true
+In this directory there are a list of scripts developed to compare MongoDB vs MySQL performance, the results got and the documentation writen for the project ''&#8220;An Open Source NoSQL solution for Internet Access Logs Analysis&#8221;''
+
+
+If you prefer a brief description a presentation is also available
 
 This work makes part of the fifth edition of the "Master on Free Software Projects Development and Management":http://www.mastersoftwarelibre.com/, created by the galician open source consultancy "Igalia":http://www.igalia.com and the "Universidad Rey Juan Carlos":http://www.urjc.es/ university at Madrid.
+
+h3. Documents available
+
+The documents available are:
+* A memory of 72 pages, with a full description of the work done, in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.pdf?raw=true and "OpenDocument":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.odt?raw=true formats.
+* A presentation with a quick summary, also in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.pdf?raw=true and OpenDocument:internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.odp?raw=true formats. You can view this presentation also on "SlideShare":http://www.slideshare.net/Ciges/no-sql-projetmswlpresentation
 
 h3. How to run this tests
 
