@@ -1,6 +1,6 @@
 h2. Testing MongoDB vs MySQL performance
 
-In this directory there are a list of scripts developed to compare MongoDB vs MySQL performance, the results got and the documentation writen for the project ''&#8220;An Open Source NoSQL solution for Internet Access Logs Analysis&#8221;''
+In this directory there are a list of scripts developed to compare MongoDB vs MySQL performance, the results got and the documentation writen for the project *"An Open Source NoSQL solution for Internet Access Logs Analysis"*
 
 
 If you prefer a brief description a presentation is also available
