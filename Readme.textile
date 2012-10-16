@@ -10,8 +10,8 @@ This work makes part of the fifth edition of the "Master on Free Software Projec
 h3. Documents available
 
 The documents available are:
-* A memory of 72 pages, with a full description of the work done, in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.pdf?raw=true and "OpenDocument":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.odt?raw=true formats.
-* A presentation with a quick summary, also in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.pdf?raw=true and "OpenDocument":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.odp?raw=true formats. You can view this presentation also on "SlideShare":http://www.slideshare.net/Ciges/no-sql-projectmswlpresentation
+* *A memory of 72 pages, with a full description* of the work done, in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.pdf?raw=true and "OpenDocument":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Memory.odt?raw=true formats.
+* A *presentation with a quick summary*, also in "PDF":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.pdf?raw=true and "OpenDocument":internet_access_control_demo/blob/master/NoSQL_Project_MSWL_Presentation.odp?raw=true formats. You can view this presentation also on "SlideShare":http://www.slideshare.net/Ciges/no-sql-projectmswlpresentation
 
 h3. How to run this tests
 
