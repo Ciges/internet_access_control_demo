@@ -40,6 +40,7 @@ require_once("RandomElements.class.php");
     const DEFAULT_PASSWORD = "mongodb";
     const DEFAULT_HOST = "localhost";
     const DEFAULT_DB = "InternetAccessLog";
+    const DEFAULT_SAFEMODE = true;
 	/**#@-*/
     
     /**
@@ -113,7 +114,7 @@ require_once("RandomElements.class.php");
         $user_col = $this->getDB()->$collectionname;
         try {
             $doc = array("user" => $username);
-            $user_col->insert($doc);
+            $user_col->insert($doc, array("safe" => $this->safemode));
             return true;
         }
         catch (MongoConnectionException $e) {
@@ -156,6 +157,7 @@ require_once("RandomElements.class.php");
 		
 		// Stores the number of elements of each stored random elements collection
         $db = $this->db_databasename;
+        $this->safemode = self::DEFAULT_SAFEMODE;
         $userscol_name = self::RNDUSERSC_NAME;
         $ipscol_name = self::RNDIPSC_NAME;
         $domainscol_name = self::RNDDOMAINSC_NAME;
@@ -264,7 +266,7 @@ require_once("RandomElements.class.php");
             }
             if ($insert)   {
                 try {
-                    $col->insert(array("_id" => $id, "user" => $user));
+                    $col->insert(array("_id" => $id, "user" => $user), array("safe" => $this->safemode));
                     $id++;
                 }
                 catch (MongoConnectionException $e) {
@@ -317,7 +319,7 @@ require_once("RandomElements.class.php");
             }
             if ($insert)   {
 				try {
-					$col->insert(array("_id" => $id, "ip" => $ip));
+					$col->insert(array("_id" => $id, "ip" => $ip), array("safe" => $this->safemode));
                     $id++;
 				}
 				catch (MongoConnectionException $e) {
@@ -370,7 +372,7 @@ require_once("RandomElements.class.php");
             }
             if ($insert)   {
 				try {
-					$col->insert(array("_id" => $id, "domain" => $domain));
+					$col->insert(array("_id" => $id, "domain" => $domain), array("safe" => $this->safemode));
                     $id++;
 				}
 				catch (MongoConnectionException $e) {
@@ -528,7 +530,7 @@ require_once("RandomElements.class.php");
 		# Document creation if it not exists
 		try {
 			if (!$col->findOne(array("_id" => $id))) {
-				$col->insert(array('_id' => $id));
+				$col->insert(array('_id' => $id), array("safe" => $this->safemode));
 			}
 	
 			# Updating monthly and daily values
@@ -541,7 +543,8 @@ require_once("RandomElements.class.php");
 					"daily.$day.nb" => 1,
 					"daily.$day.volume" => $volume
 					)
-				)
+				),
+				array("safe" => $this->safemode)
 			);
 		}
 		catch (MongoException $e) {
@@ -567,7 +570,7 @@ require_once("RandomElements.class.php");
         $nonftp_log_name = self::NONFTPLOG_NAME;
         $col = $this->db_conn->$db->$nonftp_log_name;
 		try {
-			$col->insert($document);
+			$col->insert($document, array("safe" => $this->safemode));
 		}
 		catch (MongoException $e) {
 			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
@@ -637,7 +640,7 @@ require_once("RandomElements.class.php");
         $nonftp_log_name = self::FTPLOG_NAME;
         $col = $this->db_conn->$db->$nonftp_log_name;
 		try {
-			$col->insert($document);
+			$col->insert($document, array("safe" => $this->safemode));
 		}
 		catch (MongoException $e) {
 			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
