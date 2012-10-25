@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120914
+ *  @version 20121025
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -40,7 +40,7 @@ require_once("RandomElements.class.php");
     const DEFAULT_PASSWORD = "mongodb";
     const DEFAULT_HOST = "localhost";
     const DEFAULT_DB = "InternetAccessLog";
-    const DEFAULT_SAFEMODE = true;
+    const DEFAULT_SAFEMODE = false;
 	/**#@-*/
     
     /**
@@ -134,18 +134,20 @@ require_once("RandomElements.class.php");
     }
     
     /**
-     *  Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host & database name).
+     *  Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host & database name). The fifth parameter tells if the insertions will we made in safe mode or not (by default they are NOT safe)
      *  <ul>
      *  <li>The default user and password will be mongodb
      *  <li>The default host will be localhost
      *  <li>The default database name will be InternetAccessLog
+     *  <li>Inertions will be NOT safe by default
      *  </ul>
      *  @param string $user
      *  @param string $password
      *  @param string $host
      *  @param string $database
+     *  @param boolean $safemode
 	 */
-	function __construct($user = self::DEFAULT_USER, $password = self::DEFAULT_PASSWORD, $host = self::DEFAULT_HOST, $database = self::DEFAULT_DB)	{		
+	function __construct($user = self::DEFAULT_USER, $password = self::DEFAULT_PASSWORD, $host = self::DEFAULT_HOST, $database = self::DEFAULT_DB, $safemode = self::DEFAULT_SAFEMODE)	{
 		// Open a connection to MongoDB
 		try {
 			$this->db_conn = new Mongo("mongodb://".$user.":".$password."@".$host."/".$database);
@@ -157,7 +159,7 @@ require_once("RandomElements.class.php");
 		
 		// Stores the number of elements of each stored random elements collection
         $db = $this->db_databasename;
-        $this->safemode = self::DEFAULT_SAFEMODE;
+        $this->safemode = $safemode;
         $userscol_name = self::RNDUSERSC_NAME;
         $ipscol_name = self::RNDIPSC_NAME;
         $domainscol_name = self::RNDDOMAINSC_NAME;
