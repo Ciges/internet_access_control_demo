@@ -7,7 +7,7 @@
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120804
+ *  @version 20121031
  *
  */
 
@@ -58,5 +58,13 @@ for ($i = 0; $i < 1500000; $i++)	{
 }
 echo "Example data for June created\n";
 
+// Index creation on data
+echo "Creating indexes on log tables ... ";
+$db = $mre->getDB();
+$query = "alter table ".MySQLRandomElements::FTPLOG_NAME." add index (clientip), add index (user), add index (datetime), add index (domain)";
+$db->query($query) || die ("Index creation: error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+$query = "alter table ".MySQLRandomElements::NONFTPLOG_NAME." add index (clientip), add index (user), add index (datetime), add index (domain)";
+$db->query($query) || die ("Index creation: Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+echo "OK\n";
 
 ?>

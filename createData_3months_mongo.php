@@ -7,7 +7,7 @@
  *
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page @link http://www.ciges.net
  *  @license GNU GPLv3 @link http://www.gnu.org/copyleft/gpl.html
- *  @version 20120725
+ *  @version 20121031
  *
  */
 
@@ -58,5 +58,17 @@ for ($i = 0; $i < 1500000; $i++)	{
 }
 echo "Example data for June created\n";
 
-
+// Index creation on data
+echo "Creating indexes on log collections ... ";
+$col = MongoRandomElements::NONFTPLOG_NAME;
+$mre->getDB()->$col->ensureIndex(array('clientip' => 1));
+$mre->getDB()->$col->ensureIndex(array('user' => 1));
+$mre->getDB()->$col->ensureIndex(array('datetime' => 1));
+$mre->getDB()->$col->ensureIndex(array('domain' => 1));
+$col = MongoRandomElements::FTPLOG_NAME;
+$mre->getDB()->$col->ensureIndex(array('clientip' => 1));
+$mre->getDB()->$col->ensureIndex(array('user' => 1));
+$mre->getDB()->$col->ensureIndex(array('datetime' => 1));
+$mre->getDB()->$col->ensureIndex(array('domain' => 1));
+echo "OK\n";
 ?>
