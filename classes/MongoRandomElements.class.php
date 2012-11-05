@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20121025
+ *  @version 20121102
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -83,12 +83,15 @@ require_once("RandomElements.class.php");
      *  @access public
      */
     public function getUserFromID($userid) {
-        $row = $this->getUserCollection()->findOne(array('_id' => $userid));
-        return $row['user'];
+        $cursor = $this->getUserCollection()->find(array('_id' => $userid));
+        if ($cursor->hasNext()) {
+            $row = $cursor->getNext();
+            return $row['user'];
+        }
     }
     
     /**
-     *  This function returns the user data from the raports for a year and month specified. If there is no data returns null
+     *  This function returns the user data from the reports for a year and month specified. If there is no data returns null
      *  @param string $username
      *  @param integer $year
      *  @param integer $month   Number from 1 to 12
@@ -97,8 +100,10 @@ require_once("RandomElements.class.php");
      */
     public function getUserCollectedData($username, $year, $month)  {
         $col = self::USERS_REPORT_PREFIX.$year.sprintf("%02d", $month);
-        $data = $this->getDB()->$col->findOne(array('_id' => $username));
-        return $data;
+        $cursor = $this->getUserCollection()->find(array('_id' => $userid));
+        if ($cursor->hasNext()) {
+            return $cursor->getNext();
+        }
     }
     
     /**
@@ -130,7 +135,8 @@ require_once("RandomElements.class.php");
      *  @access public
      */
     public function existUser($username, $collectionname = self::RNDUSERSC_NAME)    {
-        !is_null($this->getDB()->$collectionname->findOne(array('user' => $username)));
+        $cursor = $this->getDB()->$collectionname->find(array('user' => $username))->limit(1); 
+        $cursor->count() > 0;
     }
     
     /**
@@ -262,7 +268,8 @@ require_once("RandomElements.class.php");
             // We verify if the user is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                if ($col->findOne(array("user" => $user))) {
+                $cursor = $col->find(array("user" => $user))->limit(1);
+                if ($cursor->count() > 0)  {
                     $insert = FALSE;
                 }
             }
@@ -315,7 +322,8 @@ require_once("RandomElements.class.php");
             // We verify if the user is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                if ($col->findOne(array("ip" => $ip))){
+                $cursor = $col->find(array("ip" => $ip))->limit(1);
+                if ($cursor->count() > 0)  {
                     $insert = FALSE;
                 }
             }
@@ -368,9 +376,10 @@ require_once("RandomElements.class.php");
             // We verify if the user is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                if ($col->findOne(array("domain" => $domain))) {
+                $cursor = $col->find(array("domain" => $domain))->limit(1);
+                if ($cursor->count() > 0)  {
                     $insert = FALSE;
-                }
+                }   
             }
             if ($insert)   {
 				try {
@@ -402,10 +411,12 @@ require_once("RandomElements.class.php");
      */
 	function searchIP()	{
     	$position = mt_rand(1, $this->rnd_ips_number);
-        $db = $this->db_databasename;
         $col = self::RNDIPSC_NAME;
-        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
-		return $result["ip"];
+        $cursor = $this->getDB()->$col->find(array('_id' => $position));
+        if ($cursor->hasNext()) {
+            $row = $cursor->getNext();
+            return $row['ip'];
+        }
 	}
     
     /**
@@ -416,8 +427,11 @@ require_once("RandomElements.class.php");
 		$position = mt_rand(1, $this->rnd_users_number);
         $db = $this->db_databasename;
         $col = self::RNDUSERSC_NAME;
-        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
-		return $result["user"];
+        $cursor = $this->getDB()->$col->find(array('_id' => $position));
+        if ($cursor->hasNext()) {
+            $row = $cursor->getNext();
+            return $row["user"];
+        }
 	}
     
     /**
@@ -444,8 +458,11 @@ require_once("RandomElements.class.php");
         $position = mt_rand(1, $this->rnd_domains_number);
         $db = $this->db_databasename;
         $col = self::RNDDOMAINSC_NAME;
-        $result = $this->db_conn->$db->$col->findOne(array("_id" => $position));
-		return $result["domain"];
+        $cursor = $this->getDB()->$col->find(array("_id" => $position));
+        if ($cursor->hasNext()) {
+            $row = $cursor->getNext();
+            return $row["domain"];
+        }
 	}
 	
     /**
@@ -531,7 +548,8 @@ require_once("RandomElements.class.php");
         $col = $this->db_conn->$db->$collection_name;
 		# Document creation if it not exists
 		try {
-			if (!$col->findOne(array("_id" => $id))) {
+            $cursor = $col->find(array("_id" => $id));
+			if ($cursor->count() == 0) {
 				$col->insert(array('_id' => $id), array("safe" => $this->safemode));
 			}
 	
@@ -557,16 +575,14 @@ require_once("RandomElements.class.php");
     /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
-     *  The id for the document in Mongo is created as an integer autonumeric.
+     *  The id for the document in Mongo is created automatically by MongoDB (as an ObjectID)
      *
      *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
      *  @param boolean $create_reports
      */
     function saveRandomNonFTPLogEntry($log_entry, $create_reports=TRUE)    {
 		$document = $log_entry;
-        $id = $this->nonftp_log_recordnumber + 1;   // Autonumeric
 		$document["datetime"] = new MongoDate($log_entry["datetime"]);
-		$document["_id"] = $id;
 		
         $db = $this->db_databasename;
         $nonftp_log_name = self::NONFTPLOG_NAME;
@@ -577,8 +593,6 @@ require_once("RandomElements.class.php");
 		catch (MongoException $e) {
 			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
 		}
-		
-        $this->nonftp_log_recordnumber++;
 		
 		# Monthly reports data update
         if ($create_reports)    {
@@ -627,16 +641,14 @@ require_once("RandomElements.class.php");
     /**
      *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
-     *  The id for the document in Mongo is created as an integer autonumeric.
+     *  The id for the document in Mongo is created automatically by MongoDB (as an ObjectID)
      *
      *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
      *  @param boolean $create_reports
      */
     function saveRandomFTPLogEntry($log_entry, $create_reports=TRUE)    {
 		$document = $log_entry;
-        $id = $this->ftp_log_recordnumber + 1;   // Autonumeric
 		$document["datetime"] = new MongoDate($log_entry["datetime"]);
-		$document["_id"] = $id;
 		
         $db = $this->db_databasename;
         $nonftp_log_name = self::FTPLOG_NAME;
@@ -647,8 +659,6 @@ require_once("RandomElements.class.php");
 		catch (MongoException $e) {
 			die("Saving document to SOR_Access_log collection not possible: (".$e->getCode().") ".$e->getMessage()."\n");
 		}
-		
-        $this->ftp_log_recordnumber++;
 		
 		# Monthly reports data update
         if ($create_reports)    {
