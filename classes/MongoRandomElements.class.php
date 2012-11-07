@@ -100,7 +100,7 @@ require_once("RandomElements.class.php");
      */
     public function getUserCollectedData($username, $year, $month)  {
         $col = self::USERS_REPORT_PREFIX.$year.sprintf("%02d", $month);
-        $cursor = $this->getUserCollection()->find(array('_id' => $userid));
+        $cursor = $this->getDB()->$col->find(array('_id' => $username));
         if ($cursor->hasNext()) {
             return $cursor->getNext();
         }
