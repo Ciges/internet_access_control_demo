@@ -120,9 +120,9 @@ The results of running cloc on this directory (excluding "doc" directory, which 
 
 *Summary*
 
-p((. 63 text files.
-p((. 63 unique files.
-p((. 20 files ignored.
+63 text files.
+63 unique files.
+20 files ignored.
 
 86.0 files/s, 5816.0 lines/s
 
