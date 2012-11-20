@@ -111,3 +111,27 @@ To load in R and show the graphic you have simply to load the script. By example
 <code>
 source("Concurrent reads 50 users.R")
 </code>
+
+h3. Code size estimation with CLOC
+
+For showing a size estimation of this code I have used "CLOC":http://cloc.sourceforge.net/ to count the "source lines of code":http://en.wikipedia.org/wiki/Source_lines_of_code.
+
+The results of running cloc on this directory (excluding "doc" directory, which includes documentation in HTML generated automatically with "phpdoc":http://www.phpdoc.org/ and hidden .git directory) are:
+
+bq..      63 text files.
+      63 unique files.
+      20 files ignored.
+
+http://cloc.sourceforge.net v 1.53  T=0.5 s (86.0 files/s, 5816.0 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+PHP                             39            305            997           1507
+HTML                             1              0              0             51
+SQL                              1              1             13              9
+Javascript                       1              2             12              8
+Bourne Shell                     1              1              0              2
+-------------------------------------------------------------------------------
+SUM:                            43            309           1022           1577
+-------------------------------------------------------------------------------
+
