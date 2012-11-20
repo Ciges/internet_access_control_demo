@@ -118,7 +118,7 @@ For showing a size estimation of this code I have used "CLOC":http://cloc.source
 
 The results of running cloc on this directory (excluding "doc" directory, which includes documentation in HTML generated automatically with "phpdoc":http://www.phpdoc.org/ and hidden .git directory) are:
 
-bq..      63 text files.
+bc..      63 text files.
       63 unique files.
       20 files ignored.
 
