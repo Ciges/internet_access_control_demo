@@ -128,8 +128,6 @@ The results of running cloc on this directory (excluding "doc" directory, which 
 
 *Lines of code by language*
 
-<div style="text-align: center;">
-
 |_. Language|_. files|_. blank|_. comment|_. code|
 |PHP|39|305|997|1507|
 |HTML|1|0|0|51|
@@ -137,5 +135,3 @@ The results of running cloc on this directory (excluding "doc" directory, which 
 |Javascript|1|2|12|8|
 |Bourne Shell|1|1|0|2|
 |*SUM:*|*43*|*309*|*1022*|*1577*|
-
-</div>
