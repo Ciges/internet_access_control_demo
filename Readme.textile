@@ -120,15 +120,16 @@ The results of running cloc on this directory (excluding "doc" directory, which 
 
 *Summary*
 
-p((.63 text files.
-p((.63 unique files.
-p((.20 files ignored.
+p((. 63 text files.
+p((. 63 unique files.
+p((. 20 files ignored.
 
 86.0 files/s, 5816.0 lines/s
 
 *Lines of code by language*
 
 <div style="text-align: center;">
+
 |_. Language|_. files|_. blank|_. comment|_. code|
 |PHP|39|305|997|1507|
 |HTML|1|0|0|51|
@@ -136,4 +137,5 @@ p((.20 files ignored.
 |Javascript|1|2|12|8|
 |Bourne Shell|1|1|0|2|
 |*SUM:*|*43*|*309*|*1022*|*1577*|
+
 </div>
