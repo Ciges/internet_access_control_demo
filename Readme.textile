@@ -126,9 +126,9 @@ The results of running cloc on this directory (excluding "doc" directory, which 
 
 86.0 files/s, 5816.0 lines/s
 
-Lines of code by language
+*Lines of code by language*
 
-|Language|files|blank|comment|code|
+=|Language|files|blank|comment|code|
 |PHP|39|305|997|1507|
 |HTML|1|0|0|51|
 |SQL|1|1|13|9|
