@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MongoDB (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20121102
+ *  @version 20121129
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -87,6 +87,30 @@ require_once("RandomElements.class.php");
         if ($cursor->hasNext()) {
             $row = $cursor->getNext();
             return $row['user'];
+        }
+    }
+
+    /** 
+    *  This function queries the database to return the domains number (records in Random_DomainsList)
+    *  @return integer
+    *  @access public
+    */
+    public function getDomainNumber() {
+        $this->rnd_domains_number = $this->getDomainCollection()->count();
+        return $this->rnd_domains_number;
+    }
+
+    /**
+     *  This function returns the domain searching by the id. If the domain does not exist null is returner
+     *  @param integer $id
+     *  @return string $domain
+     *  @access public
+     */
+    public function getDomainFromID($id) {
+        $cursor = $this->getDomainCollection()->find(array('_id' => $id));
+        if ($cursor->hasNext()) {
+            $row = $cursor->getNext();
+            return $row['domain'];
         }
     }
     
@@ -235,11 +259,20 @@ require_once("RandomElements.class.php");
     }
  
     /**
-     *  Get a link to the users collectioc
+     *  Get a link to the users collection
      *  @return MongoCollection
      */
     public function getUserCollection() {
         $user_col_name = MongoRandomElements::RNDUSERSC_NAME;
+        return $this->getDB()->$user_col_name;
+    }
+
+    /**
+     *  Get a link to the domains collection
+     *  @return MongoCollection
+     */
+    public function getDomainCollection() {
+        $user_col_name = MongoRandomElements::RNDDOMAINSC_NAME;
         return $this->getDB()->$user_col_name;
     }
     

@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120718
+ *  @version 20121112
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -157,6 +157,18 @@ class RandomElements {
 		return mt_rand(0,50*1024);
 	}
     
+    /** 
+     * Return a random date between the two dates passes as parameters. Parameters and return value are English textual datetime descriptions 'Y-m-d H:i:s'
+     * @param string $mindate  English textual datetime description 'Y-m-d H:i:s' of minimun date
+     * @param string $maxdate  English textual datetime description 'Y-m-d H:i:s' of maximun date
+     * @return string
+     */
+    function getRandomDate($mindate, $maxdate)   {
+        $min = strtotime($mindate);
+        $max = strtotime($maxdate);
+        return date('Y-m-d H:i:s', rand($min, $max));
+    }
+     
 }
  
 ?>

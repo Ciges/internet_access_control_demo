@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20120914
+ *  @version 20121128
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -207,6 +207,38 @@ require_once("RandomElements.class.php");
             if ($result->num_rows > 0)  {
                 $row = $result->fetch_array();
                 return $row['user'];
+            }
+            else    {
+                return null;
+            }
+        }
+        else    {
+            die ("Error sending the query '".$query."' to MySQL");
+        }
+    }
+
+    /** 
+    *  This function queries the database to return the domains number (records in Random_DomainsList)
+    *  @return integer
+    *  @access public
+    */
+    public function getDomainNumber() {
+        $this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
+        return $this->rnd_domains_number;
+    }
+
+    /**
+     *  This function returns the domain searching by the id. If the domain does not exist null is returner
+     *  @param integer $id
+     *  @return string $domain
+     *  @access public
+     */
+    public function getDomainFromID($id) {
+        $query = "select domain from ".self::RNDDOMAINSC_NAME." where id=".$id;
+        if ($result = $this->db_conn->query($query))   {
+            if ($result->num_rows > 0)  {
+                $row = $result->fetch_array();
+                return $row['domain'];
             }
             else    {
                 return null;
