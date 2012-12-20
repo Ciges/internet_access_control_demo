@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20121128
+ *  @version 20121220
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -260,6 +260,31 @@ require_once("RandomElements.class.php");
     public function getUserCollectedData($username, $year, $month)  {
         $col = self::USERS_REPORT_PREFIX.$year.sprintf("%02d", $month);
         $query = "select * from ".$col." where user=\"".$username."\"";
+        if ($result = $this->db_conn->query($query))   {
+            if ($result->num_rows > 0)  {
+                $row = $result->fetch_array();
+                return $row;
+            }
+            else    {
+                return null;
+            }
+        }
+        else    {
+            die ("Error sending the query '".$query."' to MySQL");
+        }
+    }
+
+    /**
+     *  This function returns the domain data from the reports for a year and month specified. If there is no data returns null
+     *  @param string $domainname
+     *  @param integer $year
+     *  @param integer $month   Number from 1 to 12
+     *  @return array
+     *  @access public
+     */
+    public function getDomainCollectedData($domainname, $year, $month)  {
+        $col = self::DOMAINS_REPORT_PREFIX.$year.sprintf("%02d", $month);
+        $query = "select * from ".$col." where domain=\"".$username."\"";
         if ($result = $this->db_conn->query($query))   {
             if ($result->num_rows > 0)  {
                 $row = $result->fetch_array();
