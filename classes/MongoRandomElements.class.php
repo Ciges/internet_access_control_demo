@@ -338,7 +338,7 @@ require_once("RandomElements.class.php");
      *  @param integer $number
      *  @param boolean $use_index
      *  @param boolean $dont_repeat_users
-     */
+     **/
 	function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
 		$id = $this->rnd_ips_number + 1;   // Autonumeric
         
@@ -489,7 +489,6 @@ require_once("RandomElements.class.php");
      */
 	function searchDomain() {
         $position = mt_rand(1, $this->rnd_domains_number);
-        $db = $this->db_databasename;
         $col = self::RNDDOMAINSC_NAME;
         $cursor = $this->getDB()->$col->find(array("_id" => $position));
         if ($cursor->hasNext()) {
@@ -604,6 +603,30 @@ require_once("RandomElements.class.php");
 			die("Saving/Updating data to ".$collection_name." collection for id ".$id." not possible: (".$e->getCode().") ".$e->getMessage()."\n");
 		}
 	}
+ 
+    /**
+     *  Reads ALL logs entries fron both collections NonFTP and FTP and saves reports entries for users and domains
+     *  @access public
+     */
+    function generateReports()  {
+        $log_collections = array(self::NONFTPLOG_NAME, self::FTPLOG_NAME);
+        foreach ($log_collections as $col)  {
+            $cursor = $this->getDB()->$col->find();
+            $i = 1;
+            while ($cursor->hasNext()) {
+                $log_entry = $cursor->getNext();
+                $timestamp = $log_entry["datetime"]->sec;
+                $yearmonth = strftime("%Y%m", $timestamp);
+                $this->saveReport(self::USERS_REPORT_PREFIX.$yearmonth, $log_entry["user"], $timestamp, $log_entry['size']);
+                $this->saveReport(self::DOMAINS_REPORT_PREFIX.$yearmonth, $log_entry["domain"], $timestamp, $log_entry['size']);
+                
+                if ($i % 10000 == 0)    {
+                    printf("%d\n", $i);
+                    }
+                $i++;
+            }
+        }
+    }
  
     /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
