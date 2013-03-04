@@ -26,16 +26,12 @@ This scripts use the following database names and users by default:
 So before starting we will have to create both and give the permissions:
 
 *Creating database and user in MySQL*
-<code>
-mysql> create database InternetAccessLog;
-mysql> grant all privileges on InternetAccessLog.* to mysqldb@localhost identified by 'mysqldb';
-</code>
+<pre><code>mysql> create database InternetAccessLog;
+mysql> grant all privileges on InternetAccessLog.* to mysqldb@localhost identified by 'mysqldb';</code></pre>
 
 *Creating collection and user in MongoDB*
-<code>
-> use InternetAccessLog
-> db.addUser("mongodb", "mongodb")
-</code>
+<pre><code>> use InternetAccessLog
+> db.addUser("mongodb", "mongodb")</code></pre>
 
 h4. Generating random data
 The following PHP scripts create 3 monts of random data as explained before:
@@ -43,9 +39,7 @@ The following PHP scripts create 3 monts of random data as explained before:
 * "createData_3months_mysql.php"
 
 To run them we can use the *console PHP interpreter* with
-<code>
-php -c path/to/my/php.ini phpscript
-</code>
+<pre><code>php -c path/to/my/php.ini phpscript</code></pre>
 
 h4. List of  runnable scripts
 
