@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements (users, URL's ...)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20121112
+ *  @version 20130313
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -31,7 +31,7 @@ class RandomElements {
      * @access private
      * @var array
      */
-	private $listOfProtocols = array("ftp", "http", "tunn");
+	private $listOfProtocols = array("http", "tunn");
     /**
      * List of possible first level internet domains
      * @access private
@@ -52,24 +52,24 @@ class RandomElements {
     function getRandomUser() {
 		$letter = "abcdefghijklmnopqrstuvwxyz";
 		$user = $letter{mt_rand(0, 25)}.sprintf("%06d", mt_rand(1,999999));
-		
+
 		return ucfirst($user);
 	}
-    
+
     /**
      * Returns a random IP (string with 4 numbers between 0 and 255). No check for validity is made
      * @return string
      */
-	function getRandomIP()	{
+    function getRandomIP()	{
 		$ip = mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255);
 		return $ip;
 	}
-    
+
     /**
      * Returns a semi random HTTP method (90% will be GET)
      * @return string
      */
-	function getRandomHTTPMethod()	{
+    function getRandomHTTPMethod()	{
 		if (mt_rand(0,9) == 9)	{
 			return $this->listOfHTTPMethods[array_rand($this->listOfHTTPMethods)];
 		}
@@ -79,22 +79,22 @@ class RandomElements {
 		}
 		return ;
 	}
-    
-    /** 
+
+    /**
      * Returns a semi random HTTP method (90% will be RETR)
      * @return string
      */
-	function getRandomFTPMethod()	{
-		if (mt_rand(0,9) == 9)	{
-			return $this->listOfFTPMethods[array_rand($this->listOfFTPMethods)];
-		}
-		else
-			{
-			return "RETR";
-		}
-		return ;
-	}
-    
+    function getRandomFTPMethod()	{
+            if (mt_rand(0,9) == 9)	{
+                    return $this->listOfFTPMethods[array_rand($this->listOfFTPMethods)];
+            }
+            else
+                    {
+                    return "RETR";
+            }
+            return ;
+    }
+
     /**
      * Returns a random protocol (90% will be http)
      * @return string
@@ -108,33 +108,33 @@ class RandomElements {
 			return "http";
 		}
 	}
-    
+
     /**
-     * Returns a random Internet domain (a www followed by a random string ended by a valid internet 
+     * Returns a random Internet domain (a www followed by a random string ended by a valid internet
      * @return string
      */
 	function getRandomDomain()	{
 		$word = range('a', 'z');
 		$len = mt_rand(1, count($word));
 		shuffle($word);
-		$domain .= "www.".substr(implode($word), 0, $len).$this->listOfInternetDomains[mt_rand(0,count($this->listOfInternetDomains)-1)];
-		
+		$domain = "www.".substr(implode($word), 0, $len).$this->listOfInternetDomains[mt_rand(0,count($this->listOfInternetDomains)-1)];
+
 		return $domain;
 	}
-    
+
     /**
      * Returns a random string of the length demanded (10 characters by default)
      * @param integer $length
      * @return string
      */
-	function getRandomString($length = 10)	{
-		$res = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'), array("/"));
-		$len = mt_rand(0, $length);
-		shuffle($res);
-		
-		return substr(implode($res), 0, $length);
-	}
-	
+    function getRandomString($length = 10)	{
+        $res = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'), array("/"));
+        $len = mt_rand(0, $length);
+        shuffle($res);
+
+        return substr(implode($res), 0, $length);
+    }
+
     /**
      * Returns a semirandom return code (90% are 200 return code)
      * @return integer
@@ -148,7 +148,7 @@ class RandomElements {
 			return 200;
 		}
 	}
-	
+
     /**
      * Return a random size between 0 and 50K
      * @return integer
@@ -156,8 +156,8 @@ class RandomElements {
 	function getRandomSize()	{
 		return mt_rand(0,50*1024);
 	}
-    
-    /** 
+
+    /**
      * Return a random date between the two dates passes as parameters. Parameters and return value are English textual datetime descriptions 'Y-m-d H:i:s'
      * @param string $mindate  English textual datetime description 'Y-m-d H:i:s' of minimun date
      * @param string $maxdate  English textual datetime description 'Y-m-d H:i:s' of maximun date
@@ -168,7 +168,7 @@ class RandomElements {
         $max = strtotime($maxdate);
         return date('Y-m-d H:i:s', rand($min, $max));
     }
-     
+
 }
- 
+
 ?>

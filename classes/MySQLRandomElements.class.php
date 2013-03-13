@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20121220
+ *  @version 20130313
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -15,33 +15,32 @@ require_once("RandomElements.class.php");
  *  With this elements created we can simulate non FTP and FTP log entries (in our demo the acces by FTP are stored in a separate collection)
  */
  class MySQLRandomElements extends RandomElements	{
- 
-    /**#@+
-	 * Default names for random data collections
+
+    /**
+     * Default names for random data collections
      */
-	const RNDUSERSC_NAME = "Random_UsersList";
-	const RNDIPSC_NAME = "Random_IPsList";
-	const RNDDOMAINSC_NAME = "Random_DomainsList";
+    const DATA_RNDUSERSC_NAME = "DATA_Random_UsersList";
+    const DATA_RNDIPSC_NAME = "DATA_Random_IPsList";
+    const DATA_RNDDOMAINSC_NAME = "DATA_Random_DomainsList";
+    const DATA_RNDURISC_NAME = "DATA_Random_URIsList";
+
     const NONFTPLOG_NAME = "NonFTP_Access_log";
     const FTPLOG_NAME = "FTP_Access_log";
-    /**#@-*/
-    
-    /**#@+
+
+    /**
      *  Default prefixes for monthly reports
      */
     const USERS_REPORT_PREFIX = "Users_Monthly_Report_";
-	const DOMAINS_REPORT_PREFIX = "Domains_Monthly_Report_";
-	/**#@-*/
-    
-    /**#@+
+    const DOMAINS_REPORT_PREFIX = "Domains_Monthly_Report_";
+
+    /**
      * Constants for default connection values
      */
     const DEFAULT_USER = "mysqldb";
     const DEFAULT_PASSWORD = "mysqldb";
     const DEFAULT_HOST = "localhost";
     const DEFAULT_DB = "InternetAccessLog";
-	/**#@-*/
-    
+
     /**
      * Connection to the database
      * @access private
@@ -54,17 +53,27 @@ require_once("RandomElements.class.php");
      * @var Mongo
      */
     private $db_databasename;
-    
-    /**#@+
+
+    /**
+     * Arrays to load random data in memory
+     * @access private
+     * @var array;
+     */
+    private $rnd_users;
+    private $rnd_ips;
+    private $rnd_domains;
+    private $rnd_uris;
+
+    /**
      * Number of element of each created collection in MySQL (for cache purposes)
      * @access private
      * @var string
      */
-	private $rnd_users_number;
-	private $rnd_ips_number;
-	private $rnd_domains_number;
-    /**#@-*/
-    
+    private $rnd_users_number;
+    private $rnd_ips_number;
+    private $rnd_domains_number;
+    private $rnd_uris_number;
+
     /**
      * Gets the connection to MySQL
      * @returns mysqli
@@ -72,7 +81,7 @@ require_once("RandomElements.class.php");
     public function getDB()    {
         return $this->db_conn;
     }
-    
+
     /**
      *  Sends a query to the database and returns the results. If no rows are got null is returned
      *  @param string query
@@ -92,14 +101,14 @@ require_once("RandomElements.class.php");
             die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
     }
-     
+
     /**
      *  Sends a query to the database and returns the first row as an associative array. If no rows are got null is returned
      *  @param string query
      *  @return array
      *  @access public
      */
-    public function getRow($query)    {        
+    public function getRow($query)    {
         $results = $this->getResults($query);
         return $results->fetch_assoc();
     }
@@ -115,30 +124,30 @@ require_once("RandomElements.class.php");
         $row = $results->fetch_row();
         return $row[0];
     }
-   
+
     /**
      *  This function says if a table exists in MySQL
      *  @param string tablename
      *  @returns boolean
      *  @access private
      */
-	private function tableExists($tablename)	{
-		$query = "show table status where Name=\"".$tablename."\"";
+    private function tableExists($tablename)	{
+        $query = "show table status where Name=\"".$tablename."\"";
         if ($result = $this->db_conn->query($query))	{
             return $result->num_rows > 0;
-		}
-		else	{
-			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-		}
-	}
-    
+            }
+            else	{
+                    die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+            }
+    }
+
     /**
      *  This function deletes a table if it exists in MySQL. If the table does not exists returns false (and does nothing)
      *  @param string tablename
      *  @return boolean
      *  @access public
      */
-	public function dropTable($tablename)	{
+    public function dropTable($tablename)	{
         if ($this->tableExists($tablename))  {
             if ($this->db_conn->query("drop table ".self::NONFTPLOG_NAME)) {
                 return true;
@@ -150,42 +159,51 @@ require_once("RandomElements.class.php");
         else    {
             return false;
         }
-	}
-    
+    }
+
     /**
      *  This function deletes the table used for saving NonFTP logs. If the table does not exists returns false (and does nothing)
      *  @param string tablename
      *  @return boolean
      *  @access public
      */
-	public function dropTableNonFTPLogEntry()	{
+    public function dropTableNonFTPLogEntry()	{
         $this->dropTable(self::NONFTPLOG_NAME);
 	}
 
-    
+    /**
+     * Sends a query to the database and stops the script if it is no succesfull
+     * @returns boolean
+     * @access private
+     */
+    private function sendQuery($query)  {
+        $this->db_conn->query($query) ||
+            die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+    }
+
     /**
      *  This function returns the number of records for the table passed as parameter.  If the table does not exists returns 0.
      *  @param string tablename
      *  @returns integer
      *  @access private
      */
-	private function recordNumber($tablename)	{
-		$query = "show table status where Name=\"".$tablename."\"";
-		if ($result = $this->db_conn->query($query))	{
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                return (int) $row["Rows"];
+    private function recordNumber($tablename)	{
+        $query = "show table status where Name=\"".$tablename."\"";
+        if ($result = $this->db_conn->query($query))	{
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return (int) $row["Rows"];
+        }
+        else    {
+            return 0;
+        }
             }
-            else    {
-                return 0;
+            else	{
+                    die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
             }
-		}
-		else	{
-			die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-		}
-	}
-    
-    /** 
+    }
+
+    /**
     *  This function queries the database to return the users number (records in Random_UsersList)
     *  @return integer
     *  @access public
@@ -202,22 +220,13 @@ require_once("RandomElements.class.php");
      *  @access public
      */
     public function getUserFromID($userid) {
-        $query = "select user from ".self::RNDUSERSC_NAME." where id=".$userid;
-        if ($result = $this->db_conn->query($query))   {
-            if ($result->num_rows > 0)  {
-                $row = $result->fetch_array();
-                return $row['user'];
-            }
-            else    {
-                return null;
-            }
+        if ($userid > count($this->$rnd_users_number))  {
+            return null;
         }
-        else    {
-            die ("Error sending the query '".$query."' to MySQL");
-        }
+        return $this->$rnd_users[$userid];
     }
 
-    /** 
+    /**
     *  This function queries the database to return the domains number (records in Random_DomainsList)
     *  @return integer
     *  @access public
@@ -234,21 +243,12 @@ require_once("RandomElements.class.php");
      *  @access public
      */
     public function getDomainFromID($id) {
-        $query = "select domain from ".self::RNDDOMAINSC_NAME." where id=".$id;
-        if ($result = $this->db_conn->query($query))   {
-            if ($result->num_rows > 0)  {
-                $row = $result->fetch_array();
-                return $row['domain'];
-            }
-            else    {
-                return null;
-            }
+        if ($id > count($this->$rnd_domains_number))  {
+            return null;
         }
-        else    {
-            die ("Error sending the query '".$query."' to MySQL");
-        }
+        return $this->$rnd_domains[$id];
     }
-    
+
     /**
      *  This function returns the user data from the raports for a year and month specified. If there is no data returns null
      *  @param string $username
@@ -298,14 +298,14 @@ require_once("RandomElements.class.php");
             die ("Error sending the query '".$query."' to MySQL");
         }
     }
-    
+
     /**
      *  Helper function to create Users table in database
      *  @param string $tablename
      *  @param boolean $useindex    Sets if a unique index for user name must be created
      *  @access private
      */
-    private function createUserTable($tablename = self::RNDUSERSC_NAME, $use_index = true) {
+    private function createUserTable($tablename = self::DATA_RNDUSERSC_NAME, $use_index = true) {
         if (!$this->tableExists($tablename)) {
             if ($use_index) {
                 $query = "CREATE TABLE ".$tablename." (
@@ -322,9 +322,9 @@ require_once("RandomElements.class.php");
             }
             $this->db_conn->query($query) ||
 				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-        }     
+        }
     }
-    
+
     /**
      *  This function add a user to the table passed as second argument. If not collection done then the user will be added to Random_UsersList.
      *  This function is coded for load tests, not for real use. The id is autonumeric
@@ -334,7 +334,7 @@ require_once("RandomElements.class.php");
      *  @access public
      *  @return boolean
      */
-    public function addFakeUser($username, $tablename = self::RNDUSERSC_NAME)   {
+    public function addFakeUser($username, $tablename = self::DATA_RNDUSERSC_NAME)   {
         // Table creation if it does not exists
         if (!$this->tableExists($tablename))    {
             $query = "CREATE TABLE ".$tablename." (
@@ -344,7 +344,7 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
 				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
-        
+
         $query = "insert into ".$tablename." (user) values (\"".$username."\")";
 		if($this->db_conn->query($query))   {
             return true;
@@ -372,7 +372,7 @@ require_once("RandomElements.class.php");
             return false;
         }
     }
-    
+
     /**
      *  Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host & database name).
      *  <ul>
@@ -385,51 +385,54 @@ require_once("RandomElements.class.php");
      * @param string $host
      * @param string $database
 	*/
-	function __construct($user = self::DEFAULT_USER, $password = self::DEFAULT_PASSWORD, $host = self::DEFAULT_HOST, $database = self::DEFAULT_DB)	{		
-		// Open a connection to MySQL
-		try {
-			$this->db_conn = new mysqli($host, $user, $password, $database);
+    function __construct($user = self::DEFAULT_USER, $password = self::DEFAULT_PASSWORD, $host = self::DEFAULT_HOST, $database = self::DEFAULT_DB)	{
+        // Open a connection to MySQL
+        try {
+            $this->db_conn = new mysqli($host, $user, $password, $database);
             $this->db_databasename = $database;
-		}
-		catch (Exception $e) {
-			die("Connection MySQL impossible: (".$e->getCode().") ".$e->getMessage()."\n");
-		}
-		
-		// Stores the number of elements of each stored random elements collection
-		$this->rnd_users_number = $this->recordNumber(self::RNDUSERSC_NAME);
-		$this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
-		$this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
-	}
-    
+        }
+        catch (Exception $e) {
+            die("Connection MySQL impossible: (".$e->getCode().") ".$e->getMessage()."\n");
+        }
+
+        // Stores the number of elements of each stored random elements collection
+        $this->rnd_users_number = $this->recordNumber(self::DATA_RNDUSERSC_NAME);
+        $this->rnd_ips_number = $this->recordNumber(self::DATA_RNDIPSC_NAME);
+        $this->rnd_domains_number = $this->recordNumber(self::DATA_RNDDOMAINSC_NAME);
+        $this->rnd_uris_number = $this->recordNumber(self::DATA_RNDURISC_NAME);
+        // Load the data in RAM
+        $this->loadDataInRAM();
+    }
+
     /**
      *  Destructor. Close the open connection to MySQL database
  	 */
-	function __destruct()	{
+    function __destruct()	{
 		$this->db_conn->close();
-	}     
-    
+	}
+
     /**
-     *  Save random users in MySQL.  
-     *  The parameters are the number of users two create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE). 
+     *  Save random users in MySQL.
+     *  The parameters are the number of users two create and to booleans: if we want an unique index to be created for the user name (default is TRUE) and if we want that the user name is unique (default TRUE).
      *  If the user name is going to be unique the existence of the name is verified with a query before inserting a new one.
      *  The id will be autonumeric (1, 2, 3 ....)
 	 *  @param integer $number
      *  @param boolean $use_index
      *  @param boolean $dont_repeat
      */
-	function createUsers($number, $use_index = TRUE, $dont_repeat = TRUE)	{
-		$id = $this->rnd_users_number + 1;   // Autonumeric
-        
+    function createUsers($number, $use_index = TRUE, $dont_repeat = TRUE)	{
+        $id = $this->rnd_users_number + 1;   // Autonumeric
+
         // Table creation if it does not exists
-        $this->createUserTable(self::RNDUSERSC_NAME, $use_index);
-        
+        $this->createUserTable(self::DATA_RNDUSERSC_NAME, $use_index);
+
         $i = 1;
-		while ($i <= $number)	{
+        while ($i <= $number)	{
             $user = $this->getRandomUser();
             // We verify if the user is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                $query = "select id from ".self::RNDUSERSC_NAME." where user=\"".$user."\"";
+                $query = "select id from ".self::DATA_RNDUSERSC_NAME." where user=\"".$user."\"";
                 if ($result = $this->db_conn->query($query))   {
                     $result->num_rows > 0 &&
                         $insert = FALSE;
@@ -439,7 +442,7 @@ require_once("RandomElements.class.php");
                 }
             }
             if ($insert)   {
-                $query = "insert into ".self::RNDUSERSC_NAME." (id, user) values (".$id.", \"".$user."\")";
+                $query = "insert into ".self::DATA_RNDUSERSC_NAME." (id, user) values (".$id.", \"".$user."\")";
 				$this->db_conn->query($query) ||
 					die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
                 $id++;
@@ -447,20 +450,20 @@ require_once("RandomElements.class.php");
             }
         }
         // Update users numbers property
-        $this->rnd_users_number =  $this->recordNumber(self::RNDUSERSC_NAME);
-            
+        $this->rnd_users_number =  $this->recordNumber(self::DATA_RNDUSERSC_NAME);
+
     }
-    
-    /** 
+
+    /**
      * Returns true if the "Random_UsersList" table has records
      * @returns boolean
      */
-	function randomUser_exists()	{
-		return $this->recordNumber(self::RNDUSERSC_NAME) > 0;
+    function randomUser_exists()	{
+	return $this->recordNumber(self::RNDUSERSC_NAME) > 0;
 	}
-    
+
     /**
-     *  Save random IPs in MySQL.  
+     *  Save random IPs in MySQL.
      *  The parameters are the number of IPs to create and two booleans: if we want an unique index to be created for the IP (default is TRUE) and if we want that the IP is unique (default TRUE)
      *  If the IP is going to be unique the existence of itis verified with a query before inserting a new one.
      *  The id will be autonumeric (1, 2, 3 ....)
@@ -468,20 +471,20 @@ require_once("RandomElements.class.php");
      *  @param boolean $use_index
      *  @param boolean $dont_repeat
      */
-	function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
-		$id = $this->rnd_ips_number + 1;   // Autonumeric
-        
+    function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
+        $id = $this->rnd_ips_number + 1;   // Autonumeric
+
         // Table creation if it does not exists
-        if (!$this->tableExists(self::RNDIPSC_NAME)) {
+        if (!$this->tableExists(self::DATA_RNDIPSC_NAME)) {
             if ($use_index) {
-                $query = "CREATE TABLE ".self::RNDIPSC_NAME." (
+                $query = "CREATE TABLE ".self::DATA_RNDIPSC_NAME." (
                 id INT NOT NULL PRIMARY KEY,
                 ip VARCHAR(15),
                 unique index ip_index (ip)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             }
             else {
-                $query = "CREATE TABLE ".self::RNDIPSC_NAME." (
+                $query = "CREATE TABLE ".self::DATA_RNDIPSC_NAME." (
                 id INT NOT NULL PRIMARY KEY,
                 ip VARCHAR(15)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
@@ -489,14 +492,14 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
 				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
-        
+
         $i = 1;
 		while ($i <= $number)	{
             $ip = $this->getRandomIP();
             // We verify if IP is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                $query = "select id from ".self::RNDIPSC_NAME." where ip=\"".$ip."\"";
+                $query = "select id from ".self::DATA_RNDIPSC_NAME." where ip=\"".$ip."\"";
                 if ($result = $this->db_conn->query($query))   {
                     $result->num_rows > 0 &&
                         $insert = FALSE;
@@ -506,49 +509,49 @@ require_once("RandomElements.class.php");
                 }
             }
             if ($insert)   {
-                $query = "insert into ".self::RNDIPSC_NAME." (id, ip) values (".$id.", \"".$ip."\")";
+                $query = "insert into ".self::DATA_RNDIPSC_NAME." (id, ip) values (".$id.", \"".$ip."\")";
 				$this->db_conn->query($query) ||
 					die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
                 $id++;
                 $i++;
             }
-        }    
+        }
         // Update IPs number property
-        $this->rnd_ips_number = $this->recordNumber(self::RNDIPSC_NAME);
+        $this->rnd_ips_number = $this->recordNumber(self::DATA_RNDIPSC_NAME);
 
     }
-    
-    /** 
+
+    /**
      * Returns true if the "Random_IPsList" table has records
      * @returns boolean
      */
-	function randomIPs_exists()	{
-		return $this->recordNumber(self::RNDIPSC_NAME) > 0;
+    function randomIPs_exists()	{
+        return $this->recordNumber(self::RNDIPSC_NAME) > 0;
 	}
-    
+
     /**
-     *  Save random domains in MySQL.  
+     *  Save random domains in MySQL.
      *  The parameters are the number of domains to create and two booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE)
      *  If the domain is going to be unique the existence of itis verified with a query before inserting a new one.
      *  The id will be autonumeric (1, 2, 3 ....)
-	 *  @param integer $number
+     *  @param integer $number
      *  @param boolean $use_index
      *  @param boolean $dont_repeat
      */
-	function createDomains($number, $use_index = TRUE, $dont_repeat = TRUE)	{
-		$id = $this->rnd_domains_number + 1;   // Autonumeric
-        
+    function createDomains($number, $use_index = TRUE, $dont_repeat = TRUE)	{
+	$id = $this->rnd_domains_number + 1;   // Autonumeric
+
         // Table creation if it does not exists
-        if (!$this->tableExists(self::RNDDOMAINSC_NAME)) {
+        if (!$this->tableExists(self::DATA_RNDDOMAINSC_NAME)) {
             if ($use_index) {
-                $query = "CREATE TABLE ".self::RNDDOMAINSC_NAME." (
+                $query = "CREATE TABLE ".self::DATA_RNDDOMAINSC_NAME." (
                 id INT NOT NULL PRIMARY KEY,
                 domain VARCHAR(255),
                 unique index domain_index (domain)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             }
             else {
-                $query = "CREATE TABLE ".self::RNDDOMAINSC_NAME." (
+                $query = "CREATE TABLE ".self::DATA_RNDDOMAINSC_NAME." (
                 id INT NOT NULL PRIMARY KEY,
                 domain VARCHAR(255)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
@@ -556,14 +559,14 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
 				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
-        
+
         $i = 1;
 		while ($i <= $number)	{
             $domain = $this->getRandomDomain();
             // We verify if the domain is in the collection only if it is needed
             $insert = TRUE;
             if ($dont_repeat) {
-                $query = "select id from ".self::RNDDOMAINSC_NAME." where domain=\"".$domain."\"";
+                $query = "select id from ".self::DATA_RNDDOMAINSC_NAME." where domain=\"".$domain."\"";
                 if ($result = $this->db_conn->query($query))   {
                     $result->num_rows > 0 &&
                         $insert = FALSE;
@@ -573,7 +576,7 @@ require_once("RandomElements.class.php");
                 }
             }
             if ($insert)   {
-                $query = "insert into ".self::RNDDOMAINSC_NAME." (id, domain) values (".$id.", \"".$domain."\")";
+                $query = "insert into ".self::DATA_RNDDOMAINSC_NAME." (id, domain) values (".$id.", \"".$domain."\")";
 				$this->db_conn->query($query) ||
 					die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
                 $id++;
@@ -581,114 +584,163 @@ require_once("RandomElements.class.php");
             }
         }
         // Update Domains number property
-        $this->rnd_domains_number = $this->recordNumber(self::RNDDOMAINSC_NAME);
-            
+        $this->rnd_domains_number = $this->recordNumber(self::DATA_RNDDOMAINSC_NAME);
     }
-    
-    /** 
+
+    /**
      * Returns true if the "Random_DomainsList" table has records
      * @returns boolean
      */
-	function randomDomains_exists()	{
-		return $this->recordNumber(self::RNDDOMAINSC_NAME) > 0;
-	}  
- 
+    function randomDomains_exists()	{
+        return $this->recordNumber(self::RNDDOMAINSC_NAME) > 0;
+    }
+
+    /**
+     *  Save random URIs in MySQL.
+     *  The parameter is the number of URIs to create.
+     *  The id will be autonumeric (1, 2, 3 ....)
+     *  @param integer $number
+     */
+    function createURIs($number)     {
+        $id = $this->rnd_uris_number + 1;   // Autonumeric
+
+        // Table creation if it does not exists
+        if (!$this->tableExists(self::DATA_RNDURISC_NAME)) {
+            $query = "CREATE TABLE ".self::DATA_RNDURISC_NAME." (
+                id INT NOT NULL PRIMARY KEY,
+                uri VARCHAR(100)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+        }
+
+        $i = 1;
+        while ($i <= $number)   {
+            $uri = $this->getRandomString(mt_rand(0,100));
+            $query = "insert into ".self::DATA_RNDURISC_NAME." (id, uri) values (".$id.", \"".$uri."\")";
+            $this->db_conn->query($query) ||
+                die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
+            $id++;
+            $i++;
+        }
+        // Update Domains number property
+        $this->rnd_uris_number = $this->recordNumber(self::DATA_RNDURISC_NAME);
+    }
+
+    /**
+     * Create in memory tables and loads user, ips and domains data from persitent ones
+     */
+    function loadDataInRAM()  {
+        // Load users
+        if ($this->tableExists(self::DATA_RNDUSERSC_NAME)) {
+            $this->rnd_users = array();
+            $results = $this->getResults("select * from ".self::DATA_RNDUSERSC_NAME);
+            while ($user = $results->fetch_assoc()) {
+                $this->rnd_users[$user['id']] = $user['user'];
+            }
+        }
+        // Load ips
+        if ($this->tableExists(self::DATA_RNDIPSC_NAME)) {
+            $this->rnd_ips = array();
+            $results = $this->getResults("select * from ".self::DATA_RNDIPSC_NAME);
+            while ($ip = $results->fetch_assoc()) {
+                $this->rnd_ips[$ip['id']] = $ip['ip'];
+            }
+        }
+        // Load domains
+        if ($this->tableExists(self::DATA_RNDDOMAINSC_NAME)) {
+            $this->rnd_domains = array();
+            $results = $this->getResults("select * from ".self::DATA_RNDDOMAINSC_NAME);
+            while ($domain = $results->fetch_assoc()) {
+                $this->rnd_domains[$domain['id']] = $domain['domain'];
+            }
+        }
+        // Load URIs
+        if ($this->tableExists(self::DATA_RNDURISC_NAME)) {
+            $this->rnd_uris = array();
+            $results = $this->getResults("select * from ".self::DATA_RNDURISC_NAME);
+            while ($uri = $results->fetch_assoc()) {
+                $this->rnd_uris[$uri['id']] = $uri['uri'];
+            }
+        }
+    }
+
     /**
      *  Returns a random IP from the generated collection
      *  @returns string
      */
-	function searchIP()	{
+    function searchIP()	{
     	$position = mt_rand(1, $this->rnd_ips_number);
-        $query = "select ip from ".self::RNDIPSC_NAME." where id=".$position;
-        if ($result = $this->db_conn->query($query))   {
-            $row = $result->fetch_assoc();
-            return $row["ip"];
-        }
-        else    {
-            die ("Error sending the query '".$query."' to MySQL");
-        }
-	}
-    
+        return $this->rnd_ips[$position];
+    }
+
     /**
      *  Returns a random user from the generated collection
      *  @return string
      */
-	function searchUser()	{
-		$position = mt_rand(1, $this->rnd_users_number);
-        $query = "select user from ".self::RNDUSERSC_NAME." where id=".$position;
-        if ($result = $this->db_conn->query($query))   {
-            $row = $result->fetch_assoc();
-            return $row["user"];
-        }
-        else    {
-            die ("Error sending the query '".$query."' to MySQL");
-        }
-	}
-    
+    function searchUser()	{
+	$position = mt_rand(1, $this->rnd_users_number);
+        return $this->rnd_users[$position];
+    }
+
     /**
      *  Returns a random HTTP method from the generated collection
      *  @returns string
      */
-	function searchHTTPMethod()	{
-		return $this->getRandomHTTPMethod();
+    function searchHTTPMethod()	{
+	return $this->getRandomHTTPMethod();
 	}
-    
+
     /**
      *  Returns a random FTP method from the generated collection
      *  @returns string
      */
-	function searchFTPMethod()	{
-		return $this->getRandomFTPMethod();
+    function searchFTPMethod()	{
+	return $this->getRandomFTPMethod();
 	}
-	
+
     /**
      *  Returns a random domain
      *  @returns string
      */
-	function searchDomain() {
-		$position = mt_rand(1, $this->rnd_domains_number);
-        $query = "select domain from ".self::RNDDOMAINSC_NAME." where id=".$position;
-        if ($result = $this->db_conn->query($query))   {
-            $row = $result->fetch_assoc();
-            return $row["domain"];
-        }
-        else    {
-            die ("Error sending the query '".$query."' to MySQL");
-        }
-	}
-	
+    function searchDomain() {
+	$position = mt_rand(1, $this->rnd_domains_number);
+        return $this->rnd_domains[$position];
+    }
+
     /**
      *  Returns a random URI
      *  @returns string
      */
-	function searchURI()	{
-        return $this->getRandomString(mt_rand(0,100));
+    function searchURI()	{
+        $position = mt_rand(1, $this->rnd_uris_number);
+        return $this->rnd_uris[$position];
 	}
 
     /**
      *  Returns a random size
      *  @returns integer
      */
-	function searchSize()	{
-		return $this->getRandomSize();
+    function searchSize()	{
+	return $this->getRandomSize();
 	}
 
     /**
      *  Returns a random protocol
      *  @returns string
      */
-	function searchProtocol()	{
-		return $this->getRandomProtocol();
+    function searchProtocol()	{
+	return $this->getRandomProtocol();
 	}
-	
+
     /**
      *  Returns a random return code
      *  @returns integer
      */
-	function searchReturnCode()	{
-		return $this->getRandomRetourCode();
+    function searchReturnCode()	{
+	return $this->getRandomRetourCode();
 	}
- 
+
     /**
      *  Return a random log entry for non FTP access (http and tunnel)
      *  It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created
@@ -696,35 +748,35 @@ require_once("RandomElements.class.php");
      *  @param integer $final_timestamp
      *  @returns array
      */
-	function getRandomNonFTPLogEntry()	{
-		if (func_num_args() == 2)	{	
-			$initial_timestamp = func_get_arg(0);
-			$final_timestamp =  func_get_arg(1);
-			$ts = mt_rand($initial_timestamp, $final_timestamp);
-		}
-		elseif (func_num_args() != 0)	{
-			$arguments = func_get_args();
-			die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
-		}
-		else {
-			$ts = time();
-		}
-		
-		$document = array(
-			'clientip' => $this->searchIP(),
-			'user' => $this->searchUser(),
-			'datetime' => $ts,
-			'method' => $this->searchHTTPMethod(),
-			'protocol' => $this->searchProtocol(),
-			'domain' => $this->searchDomain(),
-			'uri' => $this->searchURI(),
-			'return_code' => $this->searchReturnCode(),
-			'size' => $this->searchSize()	// Size is recorded in the database as string
-		);
-        
+    function getRandomNonFTPLogEntry()	{
+        if (func_num_args() == 2)	{
+                $initial_timestamp = func_get_arg(0);
+                $final_timestamp =  func_get_arg(1);
+                $ts = mt_rand($initial_timestamp, $final_timestamp);
+        }
+        elseif (func_num_args() != 0)	{
+                $arguments = func_get_args();
+                die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
+        }
+        else {
+                $ts = time();
+        }
+
+        $document = array(
+                'clientip' => $this->searchIP(),
+                'user' => $this->searchUser(),
+                'datetime' => $ts,
+                'method' => $this->searchHTTPMethod(),
+                'protocol' => $this->searchProtocol(),
+                'domain' => $this->searchDomain(),
+                'uri' => $this->searchURI(),
+                'return_code' => $this->searchReturnCode(),
+                'size' => $this->searchSize()	// Size is recorded in the database as string
+        );
+
         return $document;
-    } 
- 
+    }
+
     /**
      *  Update Users monthly report
      *  This function is private and is meant to be used each time an access log is processed to have real time statistics (only by month)
@@ -733,7 +785,7 @@ require_once("RandomElements.class.php");
      *  @param integer $volume size of data transferred
      *  @access private
      */
-	private function saveUserReport($user, $timestamp, $volume)  {
+    private function saveUserReport($user, $timestamp, $volume)  {
     
         $table_name = self::USERS_REPORT_PREFIX.strftime("%Y%m", $timestamp);
         // Table creation if it does not exists
@@ -747,7 +799,7 @@ require_once("RandomElements.class.php");
 
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-                
+
             // Insertion of a new user entry
             $query_insert = "insert into ".$table_name." (user, nb, volume) values (\"".$user."\", 1, ".$volume.")";
             $this->db_conn->query($query_insert) ||
@@ -776,8 +828,8 @@ require_once("RandomElements.class.php");
                 die ("Error sending the query '".$query."' to MySQL");
             }
         }
-	}
- 
+    }
+
     /**
      *  Update Domains monthly report
      *  This function is private and is meant to be used each time an access log is processed to have real time statistics (only by month)
@@ -786,8 +838,8 @@ require_once("RandomElements.class.php");
      *  @param integer $volume size of data transferred
      *  @access private
      */
-	private function saveDomainReport($domain, $timestamp, $volume)  {
-    
+    private function saveDomainReport($domain, $timestamp, $volume)  {
+
         $table_name = self::DOMAINS_REPORT_PREFIX.strftime("%Y%m", $timestamp);
         // Table creation if it does not exists
         if (!$this->tableExists($table_name)) {
@@ -800,7 +852,7 @@ require_once("RandomElements.class.php");
 
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
-                
+
             // Insertion of a new domain entry
             $query_insert = "insert into ".$table_name." (domain, nb, volume) values (\"".$domain."\", 1, ".$volume.")";
             $this->db_conn->query($query_insert) ||
@@ -829,8 +881,8 @@ require_once("RandomElements.class.php");
                 die ("Error sending the query '".$query."' to MySQL");
             }
         }
-	}
- 
+    }
+
     /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
@@ -840,7 +892,7 @@ require_once("RandomElements.class.php");
      *  @param boolean $create_reports
      */
     function saveRandomNonFTPLogEntry($log_entry, $create_reports=TRUE)    {
-        
+
         // Table creation if it does not exists
         if (!$this->tableExists(self::NONFTPLOG_NAME)) {
             $query = "CREATE TABLE ".self::NONFTPLOG_NAME." (
@@ -858,22 +910,22 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
-        
+
         $query = "insert into ".self::NONFTPLOG_NAME." (clientip, user, datetime, method, protocol, domain, uri, return_code, size) values (".
                 "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y:m:d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
                 "\"".$log_entry['protocol']."\", \"".$log_entry['domain']."\", \"".$log_entry['uri']."\", ".$log_entry['return_code'].", ".$log_entry['size'].")";
 		$this->db_conn->query($query) ||
 			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
-                
+
 		# Monthly reports data update
         if ($create_reports)    {
             $timestamp = $log_entry["datetime"];
             $this->saveUserReport($log_entry["user"], $timestamp, $log_entry['size']);
             $this->saveDomainReport($log_entry["domain"], $timestamp, $log_entry['size']);
             }
- 
+
     }
- 
+
     /**
      *  Return a random log entry for FTP access. It is very similar to HTTP and tunnel access but with less fields (there is no protocol and return code)
      *  It has two optional arguments, initial and final timestamps, if we want to get a random time in log entry created
@@ -881,33 +933,33 @@ require_once("RandomElements.class.php");
      *  @param integer $final_timestamp
      *  @returns array
      */
-	function getRandomFTPLogEntry()	{
-		if (func_num_args() == 2)	{	
-			$initial_timestamp = func_get_arg(0);
-			$final_timestamp =  func_get_arg(1);
-			$ts = mt_rand($initial_timestamp, $final_timestamp);
-		}
-		elseif (func_num_args() != 0)	{
-			$arguments = func_get_args();
-			die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
-		}
-		else {
-			$ts = time();
-		}
-		
-		$document = array(
-			'clientip' => $this->searchIP(),
-			'user' => $this->searchUser(),
-			'datetime' => $ts,
-			'method' => $this->searchFTPMethod(),
-			'domain' => $this->searchDomain(),
-			'uri' => $this->searchURI(),
-			'size' => $this->searchSize()	// Size is recorded in the database as string
-		);
-        
+    function getRandomFTPLogEntry()	{
+        if (func_num_args() == 2)	{
+                $initial_timestamp = func_get_arg(0);
+                $final_timestamp =  func_get_arg(1);
+                $ts = mt_rand($initial_timestamp, $final_timestamp);
+        }
+        elseif (func_num_args() != 0)	{
+                $arguments = func_get_args();
+                die("Incorrect arguments number in getRrandomSORLogEntry function: ".implode(" ", $arguments)."\n");
+        }
+        else {
+                $ts = time();
+        }
+
+        $document = array(
+                'clientip' => $this->searchIP(),
+                'user' => $this->searchUser(),
+                'datetime' => $ts,
+                'method' => $this->searchFTPMethod(),
+                'domain' => $this->searchDomain(),
+                'uri' => $this->searchURI(),
+                'size' => $this->searchSize()	// Size is recorded in the database as string
+        );
+
         return $document;
     }
-    
+
     /**
      *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
@@ -917,7 +969,7 @@ require_once("RandomElements.class.php");
      *  @param boolean $create_reports
      */
     function saveRandomFTPLogEntry($log_entry, $create_reports=TRUE)    {
-        
+
         // Table creation if it does not exists
         if (!$this->tableExists(self::FTPLOG_NAME)) {
             $query = "CREATE TABLE ".self::FTPLOG_NAME." (
@@ -933,24 +985,22 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
-        
+
         $query = "insert into ".self::FTPLOG_NAME." (clientip, user, datetime, method, domain, uri, size) values (".
                 "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y:m:d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
                 "\"".$log_entry['domain']."\", \"".$log_entry['uri']."\", ".$log_entry['size'].")";
 		$this->db_conn->query($query) ||
 			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
-                
+
 		# Monthly reports data update
         if ($create_reports)    {
             $timestamp = $log_entry["datetime"];
             $this->saveUserReport($log_entry["user"], $timestamp, $log_entry['size']);
             $this->saveDomainReport($log_entry["domain"], $timestamp, $log_entry['size']);
             }
- 
+
     }
-    
-    
-    
+
+
 }
- 
- ?>
+?>
