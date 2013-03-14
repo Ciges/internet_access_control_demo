@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20130313
+ *  @version 20130314
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -684,6 +684,122 @@ require_once("RandomElements.class.php");
     }
 
     /**
+     * Export user table in CSV format saving it in path passed as parameter (Users.csv under CSV directory by default)
+     * @param string $filename
+     * @access public
+     */
+    function exportUsersToCSV($filename = "CSV/Users.csv") {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+
+        ($fh = fopen($filename, "a")) || die("Not possible to open ".$filename." file");
+        fwrite($fh, "id,user\n");
+        for ($i = 1; $i <= $this->rnd_users_number; $i++)  {
+            fputcsv($fh, array($i,$this->rnd_users[$i])) || die("Not possible to write in  ".$filename." file");
+        }
+        fclose($fh);
+    }
+
+    /**
+     * Export ip's table in CSV format saving it in path passed as parameter (IPs.csv under CSV directory by default)
+     * @param string $filename
+     * @access public
+     */
+    function exportIPsToCSV($filename = "CSV/IPs.csv") {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+
+        ($fh = fopen($filename, "a")) || die("Not possible to open ".$filename." file");
+        fwrite($fh, "id,ip\n");
+        for ($i = 1; $i <= $this->rnd_ips_number; $i++)  {
+            fputcsv($fh, array($i,$this->rnd_ips[$i])) || die("Not possible to write in  ".$filename." file");
+        }
+        fclose($fh);
+    }
+
+    /**
+     * Export domains table in CSV format saving it in path passed as parameter (Domains.csv under CSV directory by default)
+     * @param string $filename
+     * @access public
+     */
+    function exportDomainsToCSV($filename = "CSV/Domains.csv") {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+
+        ($fh = fopen($filename, "a")) || die("Not possible to open ".$filename." file");
+        fwrite($fh, "id,domain\n");
+        for ($i = 1; $i <= $this->rnd_domains_number; $i++)  {
+            fputcsv($fh, array($i,$this->rnd_domains[$i])) || die("Not possible to write in  ".$filename." file");
+        }
+        fclose($fh);
+    }
+
+    /**
+     * Export URIs table in CSV format saving it in path passed as parameter (URIs.csv under CSV directory by default)
+     * @param string $filename
+     * @access public
+     */
+    function exportURIsToCSV($filename = "CSV/URIs.csv") {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+
+        ($fh = fopen($filename, "a")) || die("Not possible to open ".$filename." file");
+        fwrite($fh, "id,uri\n");
+        for ($i = 1; $i <= $this->rnd_uris_number; $i++)  {
+            fputcsv($fh, array($i,$this->rnd_uris[$i])) || die("Not possible to write in  ".$filename." file");
+        }
+        fclose($fh);
+    }
+
+    /**
+     * Writes the first line (title) of a CSV file for non ftp log entry (NonFTP_Access_log.csv under CSV directory by default). If it exist it will be truncated. Returns the file handle
+     * @param string filename
+     * @returns filehandle
+     * @access public
+     */
+    function createRandomNonFTPLogEntryCSV($filename = "CSV/NonFTP_Access_log.csv")     {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+        ($fh = fopen($filename, "w")) || die("Not possible to open ".$filename." file");
+        fwrite($fh, "clientip,user,datetime,method,protocol,domain,uri,return_code,size\n");
+        return $fh;
+    }
+
+    /**
+     * Adds the non ftp log entry passed as parameter to a CSV file (NonFTP_Access_log.csv under CSV directory by default).
+     * A third optional parameter is the file handle (to not open and close the file in a for loop which calls this function)
+     * @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
+     * @param string $filename
+     * @param filehandle $fh
+     * @access public
+     */
+    function saveRandomNonFTPLogEntryToCSV($log_entry, $filename = "CSV/NonFTP_Access_log.csv", $fh = NULL)  {
+        if (dirname($filename) == "CSV" and !file_exists("CSV"))        {
+            mkdir("CSV");
+        }
+
+        if (is_null($fh))       {
+            // A file handle is not given
+            if (!file_exists($filename))    {
+                $fh = $this->createRandomNonFTPLogEntryCSV($filename);
+            }
+            else {
+                $fh = fopen($filename, "a");
+            }
+        }
+        fputcsv($fh, $log_entry) || die("Not possible to write in  ".$filename." file");
+        if (is_null($fh))       {
+            fclose($fh);
+        }
+
+    }
+
+    /**
      *  Returns a random HTTP method from the generated collection
      *  @returns string
      */
@@ -786,7 +902,7 @@ require_once("RandomElements.class.php");
      *  @access private
      */
     private function saveUserReport($user, $timestamp, $volume)  {
-    
+
         $table_name = self::USERS_REPORT_PREFIX.strftime("%Y%m", $timestamp);
         // Table creation if it does not exists
         if (!$this->tableExists($table_name)) {
