@@ -149,7 +149,7 @@ require_once("RandomElements.class.php");
      */
     public function dropTable($tablename)	{
         if ($this->tableExists($tablename))  {
-            if ($this->db_conn->query("drop table ".self::NONFTPLOG_NAME)) {
+            if ($this->db_conn->query("drop table if exists ".$tablename)) {
                 return true;
                 }
             else    {
@@ -305,7 +305,7 @@ require_once("RandomElements.class.php");
      *  @param boolean $useindex    Sets if a unique index for user name must be created
      *  @access private
      */
-    private function createUserTable($tablename = self::DATA_RNDUSERSC_NAME, $use_index = true) {
+    private function createUsersTable($tablename = self::DATA_RNDUSERSC_NAME, $use_index = true) {
         if (!$this->tableExists($tablename)) {
             if ($use_index) {
                 $query = "CREATE TABLE ".$tablename." (
@@ -424,7 +424,7 @@ require_once("RandomElements.class.php");
         $id = $this->rnd_users_number + 1;   // Autonumeric
 
         // Table creation if it does not exists
-        $this->createUserTable(self::DATA_RNDUSERSC_NAME, $use_index);
+        $this->createUsersTable(self::DATA_RNDUSERSC_NAME, $use_index);
 
         $i = 1;
         while ($i <= $number)	{
@@ -463,17 +463,12 @@ require_once("RandomElements.class.php");
 	}
 
     /**
-     *  Save random IPs in MySQL.
-     *  The parameters are the number of IPs to create and two booleans: if we want an unique index to be created for the IP (default is TRUE) and if we want that the IP is unique (default TRUE)
-     *  If the IP is going to be unique the existence of itis verified with a query before inserting a new one.
-     *  The id will be autonumeric (1, 2, 3 ....)
-	 *  @param integer $number
-     *  @param boolean $use_index
-     *  @param boolean $dont_repeat
+     *  Helper function to create IPs table in database
+     *  @param string $tablename
+     *  @param boolean $useindex    Sets if a unique index for IP name must be created
+     *  @access private
      */
-    function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
-        $id = $this->rnd_ips_number + 1;   // Autonumeric
-
+    private function createIPsTable($tablename = self::DATA_RNDIPSC_NAME, $use_index = true) {
         // Table creation if it does not exists
         if (!$this->tableExists(self::DATA_RNDIPSC_NAME)) {
             if ($use_index) {
@@ -490,11 +485,27 @@ require_once("RandomElements.class.php");
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             }
             $this->db_conn->query($query) ||
-				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
+    }
+
+    /**
+     *  Save random IPs in MySQL.
+     *  The parameters are the number of IPs to create and two booleans: if we want an unique index to be created for the IP (default is TRUE) and if we want that the IP is unique (default TRUE)
+     *  If the IP is going to be unique the existence of itis verified with a query before inserting a new one.
+     *  The id will be autonumeric (1, 2, 3 ....)
+	 *  @param integer $number
+     *  @param boolean $use_index
+     *  @param boolean $dont_repeat
+     */
+    function createIPs($number, $use_index = TRUE, $dont_repeat = TRUE)	{
+        $id = $this->rnd_ips_number + 1;   // Autonumeric
+
+        // Table creation if it does not exists
+        $this->createIPsTable(self::DATA_RNDIPSC_NAME, $use_index);
 
         $i = 1;
-		while ($i <= $number)	{
+	while ($i <= $number)	{
             $ip = $this->getRandomIP();
             // We verify if IP is in the collection only if it is needed
             $insert = TRUE;
@@ -530,17 +541,12 @@ require_once("RandomElements.class.php");
 	}
 
     /**
-     *  Save random domains in MySQL.
-     *  The parameters are the number of domains to create and two booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE)
-     *  If the domain is going to be unique the existence of itis verified with a query before inserting a new one.
-     *  The id will be autonumeric (1, 2, 3 ....)
-     *  @param integer $number
-     *  @param boolean $use_index
-     *  @param boolean $dont_repeat
+     *  Helper function to create Domains table in database
+     *  @param string $tablename
+     *  @param boolean $useindex    Sets if a unique index for IP name must be created
+     *  @access private
      */
-    function createDomains($number, $use_index = TRUE, $dont_repeat = TRUE)	{
-	$id = $this->rnd_domains_number + 1;   // Autonumeric
-
+    private function createDomainsTable($tablename = self::DATA_RNDDOMAINSC_NAME, $use_index = true) {
         // Table creation if it does not exists
         if (!$this->tableExists(self::DATA_RNDDOMAINSC_NAME)) {
             if ($use_index) {
@@ -557,8 +563,24 @@ require_once("RandomElements.class.php");
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             }
             $this->db_conn->query($query) ||
-				die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
+                die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
+    }
+
+    /**
+     *  Save random domains in MySQL.
+     *  The parameters are the number of domains to create and two booleans: if we want an unique index to be created for the domain (default is TRUE) and if we want that the domain is unique (default TRUE)
+     *  If the domain is going to be unique the existence of itis verified with a query before inserting a new one.
+     *  The id will be autonumeric (1, 2, 3 ....)
+     *  @param integer $number
+     *  @param boolean $use_index
+     *  @param boolean $dont_repeat
+     */
+    function createDomains($number, $use_index = TRUE, $dont_repeat = TRUE)	{
+	$id = $this->rnd_domains_number + 1;   // Autonumeric
+
+        // Table creation if it does not exists
+        $this->createIPsTable(self::DATA_RNDDOMAINSC_NAME, $use_index);
 
         $i = 1;
 		while ($i <= $number)	{
@@ -596,14 +618,11 @@ require_once("RandomElements.class.php");
     }
 
     /**
-     *  Save random URIs in MySQL.
-     *  The parameter is the number of URIs to create.
-     *  The id will be autonumeric (1, 2, 3 ....)
-     *  @param integer $number
+     *  Helper function to create URIs table in database
+     *  @param string $tablename
+     *  @access private
      */
-    function createURIs($number)     {
-        $id = $this->rnd_uris_number + 1;   // Autonumeric
-
+    private function createURIsTable($tablename = self::DATA_RNDURISC_NAME) {
         // Table creation if it does not exists
         if (!$this->tableExists(self::DATA_RNDURISC_NAME)) {
             $query = "CREATE TABLE ".self::DATA_RNDURISC_NAME." (
@@ -613,6 +632,18 @@ require_once("RandomElements.class.php");
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
         }
+    }
+    /**
+     *  Save random URIs in MySQL.
+     *  The parameter is the number of URIs to create.
+     *  The id will be autonumeric (1, 2, 3 ....)
+     *  @param integer $number
+     */
+    function createURIs($number)     {
+        $id = $this->rnd_uris_number + 1;   // Autonumeric
+
+        // Table creation if it does not exists
+        $this->createIPsTable(self::DATA_RNDURISC_NAME);
 
         $i = 1;
         while ($i <= $number)   {
@@ -634,33 +665,37 @@ require_once("RandomElements.class.php");
         // Load users
         if ($this->tableExists(self::DATA_RNDUSERSC_NAME)) {
             $this->rnd_users = array();
-            $results = $this->getResults("select * from ".self::DATA_RNDUSERSC_NAME);
-            while ($user = $results->fetch_assoc()) {
-                $this->rnd_users[$user['id']] = $user['user'];
+            if ($results = $this->getResults("select * from ".self::DATA_RNDUSERSC_NAME))  {
+                while ($user = $results->fetch_assoc()) {
+                    $this->rnd_users[$user['id']] = $user['user'];
+                }
             }
         }
         // Load ips
         if ($this->tableExists(self::DATA_RNDIPSC_NAME)) {
             $this->rnd_ips = array();
-            $results = $this->getResults("select * from ".self::DATA_RNDIPSC_NAME);
-            while ($ip = $results->fetch_assoc()) {
-                $this->rnd_ips[$ip['id']] = $ip['ip'];
+            if ($results = $this->getResults("select * from ".self::DATA_RNDIPSC_NAME))  {
+                while ($ip = $results->fetch_assoc()) {
+                    $this->rnd_ips[$ip['id']] = $ip['ip'];
+                }
             }
         }
         // Load domains
         if ($this->tableExists(self::DATA_RNDDOMAINSC_NAME)) {
             $this->rnd_domains = array();
-            $results = $this->getResults("select * from ".self::DATA_RNDDOMAINSC_NAME);
-            while ($domain = $results->fetch_assoc()) {
-                $this->rnd_domains[$domain['id']] = $domain['domain'];
+            if ($results = $this->getResults("select * from ".self::DATA_RNDDOMAINSC_NAME))  {
+                while ($domain = $results->fetch_assoc()) {
+                    $this->rnd_domains[$domain['id']] = $domain['domain'];
+                }
             }
         }
         // Load URIs
         if ($this->tableExists(self::DATA_RNDURISC_NAME)) {
             $this->rnd_uris = array();
-            $results = $this->getResults("select * from ".self::DATA_RNDURISC_NAME);
-            while ($uri = $results->fetch_assoc()) {
-                $this->rnd_uris[$uri['id']] = $uri['uri'];
+            if ($results = $this->getResults("select * from ".self::DATA_RNDURISC_NAME))  {
+                while ($uri = $results->fetch_assoc()) {
+                    $this->rnd_uris[$uri['id']] = $uri['uri'];
+                }
             }
         }
     }
@@ -694,11 +729,26 @@ require_once("RandomElements.class.php");
         }
 
         ($fh = fopen($filename, "a")) || die("Not possible to open ".$filename." file");
-        fwrite($fh, "id,user\n");
+        fwrite($fh, "id,user\n") || die("Not possible to write in  ".$filename." file");
         for ($i = 1; $i <= $this->rnd_users_number; $i++)  {
             fputcsv($fh, array($i,$this->rnd_users[$i])) || die("Not possible to write in  ".$filename." file");
         }
         fclose($fh);
+    }
+
+    /**
+     * Import users data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+     * The MySQL user must have the global privilege FILE!
+     * @param string $filename
+     * @access public
+     */
+    function importUsersFromCSV($filename = "CSV/Users.csv")  {
+        if ($filename == "CSV/Users.csv")  {
+            $filename = getcwd()."/".$filename;
+            }
+        $this->dropTable(self::DATA_RNDUSERSC_NAME);
+        $this->createUsersTable();
+        $this->sendQuery("load data infile \"".$filename."\" into table ".self::DATA_RNDUSERSC_NAME." fields terminated by ',' ignore 1 lines");
     }
 
     /**
@@ -720,6 +770,21 @@ require_once("RandomElements.class.php");
     }
 
     /**
+     * Import IPs data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+     * The MySQL user must have the global privilege FILE!
+     * @param string $filename
+     * @access public
+     */
+    function importIPsFromCSV($filename = "CSV/IPs.csv")  {
+        if ($filename == "CSV/IPs.csv")  {
+            $filename = getcwd()."/".$filename;
+            }
+        $this->dropTable(self::DATA_RNDIPSC_NAME);
+        $this->createIPsTable();
+        $this->sendQuery("load data infile \"".$filename."\" into table ".self::DATA_RNDIPSC_NAME." fields terminated by ',' ignore 1 lines");
+    }
+
+    /**
      * Export domains table in CSV format saving it in path passed as parameter (Domains.csv under CSV directory by default)
      * @param string $filename
      * @access public
@@ -735,6 +800,21 @@ require_once("RandomElements.class.php");
             fputcsv($fh, array($i,$this->rnd_domains[$i])) || die("Not possible to write in  ".$filename." file");
         }
         fclose($fh);
+    }
+
+    /**
+     * Import Domains data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+     * The MySQL user must have the global privilege FILE!
+     * @param string $filename
+     * @access public
+     */
+    function importDomainsFromCSV($filename = "CSV/Domains.csv")  {
+        if ($filename == "CSV/Domains.csv")  {
+            $filename = getcwd()."/".$filename;
+            }
+        $this->dropTable(self::DATA_RNDDOMAINSC_NAME);
+        $this->createDomainsTable();
+        $this->sendQuery("load data infile \"".$filename."\" into table ".self::DATA_RNDDOMAINSC_NAME." fields terminated by ',' ignore 1 lines");
     }
 
     /**
@@ -755,6 +835,20 @@ require_once("RandomElements.class.php");
         fclose($fh);
     }
 
+    /**
+     * Import URIs data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+     * The MySQL user must have the global privilege FILE!
+     * @param string $filename
+     * @access public
+     */
+    function importURIsFromCSV($filename = "CSV/URIs.csv")  {
+        if ($filename == "CSV/URIs.csv")  {
+            $filename = getcwd()."/".$filename;
+            }
+        $this->dropTable(self::DATA_RNDURISC_NAME);
+        $this->createURIsTable();
+        $this->sendQuery("load data infile \"".$filename."\" into table ".self::DATA_RNDURISC_NAME." fields terminated by ',' ignore 1 lines");
+    }
     /**
      * Writes the first line (title) of a CSV file for non ftp log entry (NonFTP_Access_log.csv under CSV directory by default). If it exist it will be truncated. Returns the file handle
      * @param string filename
@@ -1001,8 +1095,8 @@ require_once("RandomElements.class.php");
 
     /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
-     *  By default the reports are created. If the second argument is FALSE they will not be generated
-     *  The id for the document in Mongo is created as an integer autonumeric.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated.
+     *  A id field autonumeric will be created.
      *
      *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
      *  @param boolean $create_reports
@@ -1012,6 +1106,7 @@ require_once("RandomElements.class.php");
         // Table creation if it does not exists
         if (!$this->tableExists(self::NONFTPLOG_NAME)) {
             $query = "CREATE TABLE ".self::NONFTPLOG_NAME." (
+                id int not null auto_increment,
                 clientip VARCHAR(15) NOT NULL,
                 user CHAR(7) NOT NULL,
                 datetime TIMESTAMP NOT NULL,
@@ -1079,7 +1174,7 @@ require_once("RandomElements.class.php");
     /**
      *  Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated
-     *  The id for the document in Mongo is created as an integer autonumeric.
+     *  A id field autonumeric will be created.
      *
      *  @param array $log_entry log entry as returned by {@link getRandomNonFTPLogEntry}
      *  @param boolean $create_reports
@@ -1089,6 +1184,7 @@ require_once("RandomElements.class.php");
         // Table creation if it does not exists
         if (!$this->tableExists(self::FTPLOG_NAME)) {
             $query = "CREATE TABLE ".self::FTPLOG_NAME." (
+                id int not null auto_increment,
                 clientip VARCHAR(15) NOT NULL,
                 user CHAR(7) NOT NULL,
                 datetime TIMESTAMP NOT NULL,
