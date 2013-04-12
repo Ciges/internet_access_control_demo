@@ -16,9 +16,7 @@
   <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
   <tr>
     <td colspan="2" class="header-menu">
-      
-                        
-                      		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
+                                                    		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
 		[ <a href="../elementindex_InternetAccessLog.html" class="menu">index: InternetAccessLog</a> ]
             [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -97,11 +95,20 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodaddFakeUser">addFakeUser</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateDomains">createDomains</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateIPs">createIPs</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateRandomNonFTPLogEntryCSV">createRandomNonFTPLogEntryCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateURIs">createURIs</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodcreateUsers">createUsers</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methoddropTable">dropTable</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methoddropTableNonFTPLogEntry">dropTableNonFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodexistUser">existUser</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodexportDomainsToCSV">exportDomainsToCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodexportIPsToCSV">exportIPsToCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodexportURIsToCSV">exportURIsToCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodexportUsersToCSV">exportUsersToCSV</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetDB">getDB</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetDomainCollectedData">getDomainCollectedData</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetDomainFromID">getDomainFromID</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetDomainNumber">getDomainNumber</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetOne">getOne</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomFTPLogEntry">getRandomFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></li>
@@ -110,11 +117,18 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetUserCollectedData">getUserCollectedData</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetUserFromID">getUserFromID</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodgetUserNumber">getUserNumber</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodimportDomainsFromCSV">importDomainsFromCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodimportIPsFromCSV">importIPsFromCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodimportURIsFromCSV">importURIsFromCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodimportUsersFromCSV">importUsersFromCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodloadDataInRAM">loadDataInRAM</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomDomains_exists">randomDomains_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomIPs_exists">randomIPs_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodrandomUser_exists">randomUser_exists</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomFTPLogEntry">saveRandomFTPLogEntry</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomNonFTPLogEntry">saveRandomNonFTPLogEntry</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomNonFTPLogEntryToCSV">saveRandomNonFTPLogEntryToCSV</a></li>
+		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsaveRandomNonFTPLogEntry_fromCSV">saveRandomNonFTPLogEntry_fromCSV</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchDomain">searchDomain</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchFTPMethod">searchFTPMethod</a></li>
 		  		  <li><a href="../InternetAccessLog/MySQLRandomElements.html#methodsearchHTTPMethod">searchHTTPMethod</a></li>
@@ -156,6 +170,12 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 													<p>Inherited From <span class="classname"><a href="../InternetAccessLog/RandomElements.html">RandomElements</a></span></p>
 							<blockquote>
 								<dl>
+																			<dt>
+											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDate">RandomElements::getRandomDate()</a></span>
+										</dt>
+										<dd>
+											<span class="method-definition">Return a random date between the two dates passes as parameters. Parameters and return value are English textual datetime descriptions 'Y-m-d H:i:s'</span>
+										</dd>
 																			<dt>
 											<span class="method-definition"><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDomain">RandomElements::getRandomDomain()</a></span>
 										</dt>
@@ -235,18 +255,38 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 			<table border="0" cellspacing="0" cellpadding="0" class="var-summary">
 							<div class="var-title">
 					<tr>
+					<td class="var-title"><a href="#constDATA_RNDDOMAINSC_NAME" title="details" class="const-name-summary">DATA_RNDDOMAINSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description"></td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDATA_RNDIPSC_NAME" title="details" class="const-name-summary">DATA_RNDIPSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description"></td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDATA_RNDURISC_NAME" title="details" class="const-name-summary">DATA_RNDURISC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description"></td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
+					<td class="var-title"><a href="#constDATA_RNDUSERSC_NAME" title="details" class="const-name-summary">DATA_RNDUSERSC_NAME</a>&nbsp;&nbsp;</td>
+					<td class="const-summary-description">Default names for random data collections</td></tr>
+				</div>
+								<div class="var-title">
+					<tr>
 					<td class="var-title"><a href="#constDEFAULT_DB" title="details" class="const-name-summary">DEFAULT_DB</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Constants for default connection values</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
 					<td class="var-title"><a href="#constDEFAULT_HOST" title="details" class="const-name-summary">DEFAULT_HOST</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Constants for default connection values</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
 					<td class="var-title"><a href="#constDEFAULT_PASSWORD" title="details" class="const-name-summary">DEFAULT_PASSWORD</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Constants for default connection values</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
@@ -256,32 +296,17 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 								<div class="var-title">
 					<tr>
 					<td class="var-title"><a href="#constDOMAINS_REPORT_PREFIX" title="details" class="const-name-summary">DOMAINS_REPORT_PREFIX</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default prefixes for monthly reports</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
 					<td class="var-title"><a href="#constFTPLOG_NAME" title="details" class="const-name-summary">FTPLOG_NAME</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default names for random data collections</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
 					<td class="var-title"><a href="#constNONFTPLOG_NAME" title="details" class="const-name-summary">NONFTPLOG_NAME</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default names for random data collections</td></tr>
-				</div>
-								<div class="var-title">
-					<tr>
-					<td class="var-title"><a href="#constRNDDOMAINSC_NAME" title="details" class="const-name-summary">RNDDOMAINSC_NAME</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default names for random data collections</td></tr>
-				</div>
-								<div class="var-title">
-					<tr>
-					<td class="var-title"><a href="#constRNDIPSC_NAME" title="details" class="const-name-summary">RNDIPSC_NAME</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default names for random data collections</td></tr>
-				</div>
-								<div class="var-title">
-					<tr>
-					<td class="var-title"><a href="#constRNDUSERSC_NAME" title="details" class="const-name-summary">RNDUSERSC_NAME</a>&nbsp;&nbsp;</td>
-					<td class="const-summary-description">Default names for random data collections</td></tr>
+					<td class="const-summary-description"></td></tr>
 				</div>
 								<div class="var-title">
 					<tr>
@@ -307,7 +332,7 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 		<div class="info-box-body">
 			<div class="method-summary">
 				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
-																																																																																																																																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">MySQLRandomElements</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#__construct" title="details" class="method-name">__construct</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Constructor. For creating an instance we need to pass all the parameters for the MongoDB database where the data will be stored (user, password, host &amp; database name).</td></tr>
@@ -333,6 +358,16 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 					<td class="method-definition">Save random IPs in MySQL.</td></tr>
 				</div>
 																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">filehandle</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createRandomNonFTPLogEntryCSV" title="details" class="method-name">createRandomNonFTPLogEntryCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Writes the first line (title) of a CSV file for non ftp log entry (NonFTP_Access_log.csv under CSV directory by default). If it exist it will be truncated. Returns the file handle</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#createURIs" title="details" class="method-name">createURIs</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Save random URIs in MySQL.</td></tr>
+				</div>
+																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#createUsers" title="details" class="method-name">createUsers</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Save random users in MySQL.</td></tr>
@@ -353,9 +388,44 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 					<td class="method-definition">This function verifies if the user exists in the collection passed as second argument. If not collection done then the user will be added to Random_UsersList.</td></tr>
 				</div>
 																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#exportDomainsToCSV" title="details" class="method-name">exportDomainsToCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Export domains table in CSV format saving it in path passed as parameter (Domains.csv under CSV directory by default)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#exportIPsToCSV" title="details" class="method-name">exportIPsToCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Export ip's table in CSV format saving it in path passed as parameter (IPs.csv under CSV directory by default)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#exportURIsToCSV" title="details" class="method-name">exportURIsToCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Export URIs table in CSV format saving it in path passed as parameter (URIs.csv under CSV directory by default)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#exportUsersToCSV" title="details" class="method-name">exportUsersToCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Export user table in CSV format saving it in path passed as parameter (Users.csv under CSV directory by default)</td></tr>
+				</div>
+																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">mysqli</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#getDB" title="details" class="method-name">getDB</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Gets the connection to MySQL</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">array</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getDomainCollectedData" title="details" class="method-name">getDomainCollectedData</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">This function returns the domain data from the reports for a year and month specified. If there is no data returns null</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getDomainFromID" title="details" class="method-name">getDomainFromID</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">This function returns the domain searching by the id. If the domain does not exist null is returner</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">integer</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getDomainNumber" title="details" class="method-name">getDomainNumber</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">This function queries the database to return the domains number (records in Random_DomainsList)</td></tr>
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">array</span>&nbsp;&nbsp;</td>
@@ -398,6 +468,31 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 					<td class="method-definition">This function queries the database to return the users number (records in Random_UsersList)</td></tr>
 				</div>
 																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#importDomainsFromCSV" title="details" class="method-name">importDomainsFromCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Import Domains data in a CSV file to a MySQL table (if the table already exist it will be deleted)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#importIPsFromCSV" title="details" class="method-name">importIPsFromCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Import IPs data in a CSV file to a MySQL table (if the table already exist it will be deleted)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#importURIsFromCSV" title="details" class="method-name">importURIsFromCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Import URIs data in a CSV file to a MySQL table (if the table already exist it will be deleted)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#importUsersFromCSV" title="details" class="method-name">importUsersFromCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Import users data in a CSV file to a MySQL table (if the table already exist it will be deleted)</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#loadDataInRAM" title="details" class="method-name">loadDataInRAM</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Create in memory tables and loads user, ips and domains data from persitent ones</td></tr>
+				</div>
+																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">boolean</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#randomDomains_exists" title="details" class="method-name">randomDomains_exists</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Returns true if the &quot;Random_DomainsList&quot; table has records</td></tr>
@@ -421,6 +516,16 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#saveRandomNonFTPLogEntry" title="details" class="method-name">saveRandomNonFTPLogEntry</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#saveRandomNonFTPLogEntryToCSV" title="details" class="method-name">saveRandomNonFTPLogEntryToCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Adds the non ftp log entry passed as parameter to a CSV file (NonFTP_Access_log.csv under CSV directory by default).</td></tr>
+				</div>
+																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#saveRandomNonFTPLogEntry_fromCSV" title="details" class="method-name">saveRandomNonFTPLogEntry_fromCSV</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Gets a line with a log entry in CSV format and saves the data and, optionally, monthly and daily precalculated values in database.</td></tr>
 				</div>
 																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
@@ -487,10 +592,10 @@ Source Location: /MySQLRandomElements.class.php<br /><br />
 			<a name='method_detail'></a>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a331">331</a>]</span>
+	<span class="method-title">Constructor __construct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a388">388</a>]</span>
 </div>
 <br />
 
@@ -546,10 +651,10 @@ $database = self::DEFAULT_DB]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="method__destruct" id="__destruct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a350">350</a>]</span>
+	<span class="method-title">Destructor __destruct</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a410">410</a>]</span>
 </div>
 <br />
 
@@ -572,10 +677,10 @@ $database = self::DEFAULT_DB]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodaddFakeUser" id="addFakeUser"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">addFakeUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a280">280</a>]</span>
+	<span class="method-title">addFakeUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a337">337</a>]</span>
 </div>
 <br />
 
@@ -585,7 +690,7 @@ $database = self::DEFAULT_DB]&nbsp;
 		<code>boolean addFakeUser(
 string
 $username, [string
-$tablename = self::RNDUSERSC_NAME]&nbsp;
+$tablename = self::DATA_RNDUSERSC_NAME]&nbsp;
 )</code>
     </td></tr></table>
     </td></tr></table><br /></div>
@@ -624,10 +729,10 @@ $tablename = self::RNDUSERSC_NAME]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodcreateDomains" id="createDomains"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a481">481</a>]</span>
+	<span class="method-title">createDomains</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a579">579</a>]</span>
 </div>
 <br />
 
@@ -676,10 +781,10 @@ $dont_repeat = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodcreateIPs" id="createIPs"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a414">414</a>]</span>
+	<span class="method-title">createIPs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a501">501</a>]</span>
 </div>
 <br />
 
@@ -727,11 +832,94 @@ $dont_repeat = TRUE]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodcreateUsers" id="createUsers"><!-- --></a>
+<a name="methodcreateRandomNonFTPLogEntryCSV" id="createRandomNonFTPLogEntryCSV"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">createRandomNonFTPLogEntryCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a858">858</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>filehandle createRandomNonFTPLogEntryCSV(
+[string
+$filename = &quot;CSV/NonFTP_Access_log.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Writes the first line (title) of a CSV file for non ftp log entry (NonFTP_Access_log.csv under CSV directory by default). If it exist it will be truncated. Returns the file handle
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> filename</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateURIs" id="createURIs"><!-- --></a>
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a363">363</a>]</span>
+	<span class="method-title">createURIs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a642">642</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void createURIs(
+integer
+$number&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Save random URIs in MySQL.
+</strong></p>
+<span class="description"><p>The parameter is the number of URIs to create.   The id will be autonumeric (1, 2, 3 ....)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$number:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcreateUsers" id="createUsers"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">createUsers</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a423">423</a>]</span>
 </div>
 <br />
 
@@ -780,10 +968,10 @@ $dont_repeat = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methoddropTable" id="dropTable"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">dropTable</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a141">141</a>]</span>
+	<span class="method-title">dropTable</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a150">150</a>]</span>
 </div>
 <br />
 
@@ -825,10 +1013,10 @@ $tablename&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methoddropTableNonFTPLogEntry" id="dropTableNonFTPLogEntry"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">dropTableNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a161">161</a>]</span>
+	<span class="method-title">dropTableNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a170">170</a>]</span>
 </div>
 <br />
 
@@ -870,10 +1058,10 @@ string
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodexistUser" id="existUser"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">existUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a307">307</a>]</span>
+	<span class="method-title">existUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a364">364</a>]</span>
 </div>
 <br />
 
@@ -921,11 +1109,191 @@ $tablename = self::RNDUSERSC_NAME]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodgetDB" id="getDB"><!-- --></a>
+<a name="methodexportDomainsToCSV" id="exportDomainsToCSV"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">exportDomainsToCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a792">792</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void exportDomainsToCSV(
+[string
+$filename = &quot;CSV/Domains.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Export domains table in CSV format saving it in path passed as parameter (Domains.csv under CSV directory by default)
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodexportIPsToCSV" id="exportIPsToCSV"><!-- --></a>
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getDB</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a72">72</a>]</span>
+	<span class="method-title">exportIPsToCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a759">759</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void exportIPsToCSV(
+[string
+$filename = &quot;CSV/IPs.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Export ip's table in CSV format saving it in path passed as parameter (IPs.csv under CSV directory by default)
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodexportURIsToCSV" id="exportURIsToCSV"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">exportURIsToCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a825">825</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void exportURIsToCSV(
+[string
+$filename = &quot;CSV/URIs.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Export URIs table in CSV format saving it in path passed as parameter (URIs.csv under CSV directory by default)
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodexportUsersToCSV" id="exportUsersToCSV"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">exportUsersToCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a726">726</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void exportUsersToCSV(
+[string
+$filename = &quot;CSV/Users.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Export user table in CSV format saving it in path passed as parameter (Users.csv under CSV directory by default)
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetDB" id="getDB"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">getDB</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a81">81</a>]</span>
 </div>
 <br />
 
@@ -954,11 +1322,148 @@ $tablename = self::RNDUSERSC_NAME]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
+<a name="methodgetDomainCollectedData" id="getDomainCollectedData"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">getDomainCollectedData</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a285">285</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>array getDomainCollectedData(
+string
+$domainname, integer
+$year, integer
+$month&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>This function returns the domain data from the reports for a year and month specified. If there is no data returns null
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$domainname:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$year:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$month:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> Number from 1 to 12</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetDomainFromID" id="getDomainFromID"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">getDomainFromID</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a245">245</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string getDomainFromID(
+integer
+$id&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>This function returns the domain searching by the id. If the domain does not exist null is returner
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">integer</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$id:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetDomainNumber" id="getDomainNumber"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">getDomainNumber</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a234">234</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>integer getDomainNumber(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>This function queries the database to return the domains number (records in Random_DomainsList)
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
 <a name="methodgetOne" id="getOne"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getOne</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a113">113</a>]</span>
+	<span class="method-title">getOne</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a122">122</a>]</span>
 </div>
 <br />
 
@@ -1003,7 +1508,7 @@ $query&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a827">827</a>]</span>
+	<span class="method-title">getRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a1183">1183</a>]</span>
 </div>
 <br />
 
@@ -1048,7 +1553,7 @@ $final_timestamp&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a642">642</a>]</span>
+	<span class="method-title">getRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a963">963</a>]</span>
 </div>
 <br />
 
@@ -1093,7 +1598,7 @@ $final_timestamp&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getResults</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a82">82</a>]</span>
+	<span class="method-title">getResults</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a91">91</a>]</span>
 </div>
 <br />
 
@@ -1138,7 +1643,7 @@ $query&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getRow</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a102">102</a>]</span>
+	<span class="method-title">getRow</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a111">111</a>]</span>
 </div>
 <br />
 
@@ -1183,7 +1688,7 @@ $query&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getUserCollectedData</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a228">228</a>]</span>
+	<span class="method-title">getUserCollectedData</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a260">260</a>]</span>
 </div>
 <br />
 
@@ -1242,7 +1747,7 @@ $month&nbsp;
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">getUserFromID</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a204">204</a>]</span>
+	<span class="method-title">getUserFromID</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a222">222</a>]</span>
 </div>
 <br />
 
@@ -1287,7 +1792,7 @@ $userid&nbsp;
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">getUserNumber</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a193">193</a>]</span>
+	<span class="method-title">getUserNumber</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a211">211</a>]</span>
 </div>
 <br />
 
@@ -1316,11 +1821,217 @@ $userid&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodrandomDomains_exists" id="randomDomains_exists"><!-- --></a>
+<a name="methodimportDomainsFromCSV" id="importDomainsFromCSV"><!-- --></a>
 <div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a535">535</a>]</span>
+	<span class="method-title">importDomainsFromCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a811">811</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void importDomainsFromCSV(
+[string
+$filename = &quot;CSV/Domains.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Import Domains data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+</strong></p>
+<span class="description"><p>The MySQL user must have the global privilege FILE!</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodimportIPsFromCSV" id="importIPsFromCSV"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">importIPsFromCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a778">778</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void importIPsFromCSV(
+[string
+$filename = &quot;CSV/IPs.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Import IPs data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+</strong></p>
+<span class="description"><p>The MySQL user must have the global privilege FILE!</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodimportURIsFromCSV" id="importURIsFromCSV"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">importURIsFromCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a844">844</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void importURIsFromCSV(
+[string
+$filename = &quot;CSV/URIs.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Import URIs data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+</strong></p>
+<span class="description"><p>The MySQL user must have the global privilege FILE!</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodimportUsersFromCSV" id="importUsersFromCSV"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">importUsersFromCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a745">745</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void importUsersFromCSV(
+[string
+$filename = &quot;CSV/Users.csv&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Import users data in a CSV file to a MySQL table (if the table already exist it will be deleted)
+</strong></p>
+<span class="description"><p>The MySQL user must have the global privilege FILE!</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodloadDataInRAM" id="loadDataInRAM"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">loadDataInRAM</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a664">664</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void loadDataInRAM(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Create in memory tables and loads user, ips and domains data from persitent ones
+</strong></p>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodrandomDomains_exists" id="randomDomains_exists"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">randomDomains_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a616">616</a>]</span>
 </div>
 <br />
 
@@ -1343,10 +2054,10 @@ $userid&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodrandomIPs_exists" id="randomIPs_exists"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a468">468</a>]</span>
+	<span class="method-title">randomIPs_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a539">539</a>]</span>
 </div>
 <br />
 
@@ -1369,10 +2080,10 @@ $userid&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodrandomUser_exists" id="randomUser_exists"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a401">401</a>]</span>
+	<span class="method-title">randomUser_exists</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a461">461</a>]</span>
 </div>
 <br />
 
@@ -1395,10 +2106,10 @@ $userid&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsaveRandomFTPLogEntry" id="saveRandomFTPLogEntry"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">saveRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a862">862</a>]</span>
+	<span class="method-title">saveRandomFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a1218">1218</a>]</span>
 </div>
 <br />
 
@@ -1415,7 +2126,7 @@ $create_reports = TRUE]&nbsp;
 
 	<p align="center" class="short-description"><strong>Receives a FTP log entry and saves the data and, optionally, monthly and daily precalculated values in database.
 </strong></p>
-<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated   The id for the document in Mongo is created as an integer autonumeric.</p></span>
+<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated   A id field autonumeric will be created.</p></span>
 			<strong>Parameters:</strong><br />
 			<table border="0" cellspacing="0" cellpadding="0">
 					<tr><td class="indent">
@@ -1440,10 +2151,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsaveRandomNonFTPLogEntry" id="saveRandomNonFTPLogEntry"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">saveRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a785">785</a>]</span>
+	<span class="method-title">saveRandomNonFTPLogEntry</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a1113">1113</a>]</span>
 </div>
 <br />
 
@@ -1460,7 +2171,7 @@ $create_reports = TRUE]&nbsp;
 
 	<p align="center" class="short-description"><strong>Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
 </strong></p>
-<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated   The id for the document in Mongo is created as an integer autonumeric.</p></span>
+<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated.   A id field autonumeric will be created.</p></span>
 			<strong>Parameters:</strong><br />
 			<table border="0" cellspacing="0" cellpadding="0">
 					<tr><td class="indent">
@@ -1484,11 +2195,115 @@ $create_reports = TRUE]&nbsp;
 		<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
-<a name="methodsearchDomain" id="searchDomain"><!-- --></a>
+<a name="methodsaveRandomNonFTPLogEntryToCSV" id="saveRandomNonFTPLogEntryToCSV"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">saveRandomNonFTPLogEntryToCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a875">875</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void saveRandomNonFTPLogEntryToCSV(
+array
+$log_entry, [string
+$filename = &quot;CSV/NonFTP_Access_log.csv&quot;], [filehandle
+$fh = NULL]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Adds the non ftp log entry passed as parameter to a CSV file (NonFTP_Access_log.csv under CSV directory by default).
+</strong></p>
+<span class="description"><p>A third optional parameter is the file handle (to not open and close the file in a for loop which calls this function)</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">array</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$log_entry:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> log entry as returned by <a href="../InternetAccessLog/MySQLRandomElements.html#methodgetRandomNonFTPLogEntry">getRandomNonFTPLogEntry</a></span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$filename:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">filehandle</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$fh:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsaveRandomNonFTPLogEntry_fromCSV" id="saveRandomNonFTPLogEntry_fromCSV"><!-- --></a>
 <div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a591">591</a>]</span>
+	<span class="method-title">saveRandomNonFTPLogEntry_fromCSV</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a1160">1160</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void saveRandomNonFTPLogEntry_fromCSV(
+string
+$line, [boolean
+$create_reports = TRUE]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Gets a line with a log entry in CSV format and saves the data and, optionally, monthly and daily precalculated values in database.
+</strong></p>
+<span class="description"><p>By default the reports are created. If the second argument is FALSE they will not be generated.   A id field autonumeric will be created.</p></span>
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$line:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> Line in CSV format (clientip, user, datetime, method, protocol, domain, uri, return_code, size)</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">boolean</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$create_reports:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsearchDomain" id="searchDomain"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">searchDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a918">918</a>]</span>
 </div>
 <br />
 
@@ -1511,10 +2326,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchFTPMethod" id="searchFTPMethod"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a583">583</a>]</span>
+	<span class="method-title">searchFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a910">910</a>]</span>
 </div>
 <br />
 
@@ -1537,10 +2352,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchHTTPMethod" id="searchHTTPMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a575">575</a>]</span>
+	<span class="method-title">searchHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a902">902</a>]</span>
 </div>
 <br />
 
@@ -1563,10 +2378,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchIP" id="searchIP"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a543">543</a>]</span>
+	<span class="method-title">searchIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a707">707</a>]</span>
 </div>
 <br />
 
@@ -1589,10 +2404,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchProtocol" id="searchProtocol"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a623">623</a>]</span>
+	<span class="method-title">searchProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a944">944</a>]</span>
 </div>
 <br />
 
@@ -1615,10 +2430,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchReturnCode" id="searchReturnCode"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a631">631</a>]</span>
+	<span class="method-title">searchReturnCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a952">952</a>]</span>
 </div>
 <br />
 
@@ -1641,10 +2456,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchSize" id="searchSize"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a615">615</a>]</span>
+	<span class="method-title">searchSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a936">936</a>]</span>
 </div>
 <br />
 
@@ -1667,10 +2482,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchURI" id="searchURI"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
-	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a607">607</a>]</span>
+	<span class="method-title">searchURI</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a927">927</a>]</span>
 </div>
 <br />
 
@@ -1693,10 +2508,10 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodsearchUser" id="searchUser"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
-	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a559">559</a>]</span>
+	<span class="method-title">searchUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a716">716</a>]</span>
 </div>
 <br />
 
@@ -1731,8 +2546,74 @@ $create_reports = TRUE]&nbsp;
 															| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 									</div>
 		<div class="info-box-body">
-			<a name="constDEFAULT_DB" id="DEFAULT_DB"><!-- --></A>
+			<a name="constDATA_RNDDOMAINSC_NAME" id="DATA_RNDDOMAINSC_NAME"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DATA_RNDDOMAINSC_NAME</span>
+			 = <span class="var-default"> &quot;DATA_Random_DomainsList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a24">24</a>]</span>
+		</span>
+	</div>
+
+		
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDATA_RNDIPSC_NAME" id="DATA_RNDIPSC_NAME"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DATA_RNDIPSC_NAME</span>
+			 = <span class="var-default"> &quot;DATA_Random_IPsList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a23">23</a>]</span>
+		</span>
+	</div>
+
+		
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDATA_RNDURISC_NAME" id="DATA_RNDURISC_NAME"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DATA_RNDURISC_NAME</span>
+			 = <span class="var-default"> &quot;DATA_Random_URIsList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a25">25</a>]</span>
+		</span>
+	</div>
+
+		
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDATA_RNDUSERSC_NAME" id="DATA_RNDUSERSC_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-name">DATA_RNDUSERSC_NAME</span>
+			 = <span class="var-default"> &quot;DATA_Random_UsersList&quot;</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a22">22</a>]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Default names for random data collections
+</strong></p>
+	
+
+	<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="constDEFAULT_DB" id="DEFAULT_DB"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -1742,15 +2623,13 @@ $create_reports = TRUE]&nbsp;
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Constants for default connection values
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_HOST" id="DEFAULT_HOST"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -1760,15 +2639,13 @@ $create_reports = TRUE]&nbsp;
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Constants for default connection values
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_PASSWORD" id="DEFAULT_PASSWORD"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -1778,15 +2655,13 @@ $create_reports = TRUE]&nbsp;
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Constants for default connection values
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDEFAULT_USER" id="DEFAULT_USER"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -1804,109 +2679,49 @@ $create_reports = TRUE]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constDOMAINS_REPORT_PREFIX" id="DOMAINS_REPORT_PREFIX"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">DOMAINS_REPORT_PREFIX</span>
 			 = <span class="var-default"> &quot;Domains_Monthly_Report_&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a33">33</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a34">34</a>]</span>
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Default prefixes for monthly reports
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constFTPLOG_NAME" id="FTPLOG_NAME"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">FTPLOG_NAME</span>
 			 = <span class="var-default"> &quot;FTP_Access_log&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a26">26</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a28">28</a>]</span>
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Default names for random data collections
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="constNONFTPLOG_NAME" id="NONFTPLOG_NAME"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-name">NONFTPLOG_NAME</span>
 			 = <span class="var-default"> &quot;NonFTP_Access_log&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a25">25</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a27">27</a>]</span>
 		</span>
 	</div>
 
-	<p align="center" class="short-description"><strong>Default names for random data collections
-</strong></p>
-	
-
-	<br />
-	<div class="top">[ <a href="#top">Top</a> ]</div>
-</div>
-<a name="constRNDDOMAINSC_NAME" id="RNDDOMAINSC_NAME"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-name">RNDDOMAINSC_NAME</span>
-			 = <span class="var-default"> &quot;Random_DomainsList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a24">24</a>]</span>
-		</span>
-	</div>
-
-	<p align="center" class="short-description"><strong>Default names for random data collections
-</strong></p>
-	
-
-	<br />
-	<div class="top">[ <a href="#top">Top</a> ]</div>
-</div>
-<a name="constRNDIPSC_NAME" id="RNDIPSC_NAME"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-name">RNDIPSC_NAME</span>
-			 = <span class="var-default"> &quot;Random_IPsList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a23">23</a>]</span>
-		</span>
-	</div>
-
-	<p align="center" class="short-description"><strong>Default names for random data collections
-</strong></p>
-	
-
-	<br />
-	<div class="top">[ <a href="#top">Top</a> ]</div>
-</div>
-<a name="constRNDUSERSC_NAME" id="RNDUSERSC_NAME"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-name">RNDUSERSC_NAME</span>
-			 = <span class="var-default"> &quot;Random_UsersList&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a22">22</a>]</span>
-		</span>
-	</div>
-
-	<p align="center" class="short-description"><strong>Default names for random data collections
-</strong></p>
-	
+		
 
 	<br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
@@ -1918,7 +2733,7 @@ $create_reports = TRUE]&nbsp;
 		<span class="var-title">
 			<span class="var-name">USERS_REPORT_PREFIX</span>
 			 = <span class="var-default"> &quot;Users_Monthly_Report_&quot;</span>
-			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a32">32</a>]</span>
+			<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__MySQLRandomElements.class.php.html#a33">33</a>]</span>
 		</span>
 	</div>
 
@@ -1934,7 +2749,7 @@ $create_reports = TRUE]&nbsp;
 
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Sun, 18 Nov 2012 19:29:22 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 12 Apr 2013 12:02:20 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

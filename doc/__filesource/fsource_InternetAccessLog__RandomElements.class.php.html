@@ -16,9 +16,7 @@
   <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
   <tr>
     <td colspan="2" class="header-menu">
-      
-                        
-                      		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
+                                                    		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
 		[ <a href="../elementindex_InternetAccessLog.html" class="menu">index: InternetAccessLog</a> ]
             [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -49,7 +47,7 @@
 <li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;File&nbsp;with&nbsp;the&nbsp;class&nbsp;used&nbsp;to&nbsp;generate&nbsp;random&nbsp;elements&nbsp;(users,&nbsp;URL's&nbsp;...)</span></div></li>
 <li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@author</span><span class="src-doc">&nbsp;José&nbsp;Manuel&nbsp;Ciges&nbsp;Regueiro&nbsp;&lt;jmanuel@ciges.net&gt;,&nbsp;Web&nbsp;page&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;http://www.ciges.net}</span></div></li>
 <li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@license</span><span class="src-doc">&nbsp;http://www.gnu.org/copyleft/gpl.html&nbsp;GNU&nbsp;GPLv3</span></div></li>
-<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;20120718</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;20130313</span></div></li>
 <li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*</span></div></li>
 <li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;InternetAccessLog</span></div></li>
 <li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;</span><span class="src-doc-coretag">@filesource</span></div></li>
@@ -76,7 +74,7 @@
 <li><div class="src-line"><a name="a31"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@access</span><span class="src-doc">&nbsp;private</span></div></li>
 <li><div class="src-line"><a name="a32"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@var&nbsp;</span><span class="src-doc-type">array&nbsp;</span></div></li>
 <li><div class="src-line"><a name="a33"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></div></li>
-<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$listOfProtocols&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;ftp&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;http&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;tunn&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$listOfProtocols&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;http&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;tunn&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a36"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;List&nbsp;of&nbsp;possible&nbsp;first&nbsp;level&nbsp;internet&nbsp;domains</span></div></li>
 <li><div class="src-line"><a name="a37"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@access</span><span class="src-doc">&nbsp;private</span></div></li>
@@ -97,10 +95,10 @@
 <li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../InternetAccessLog/RandomElements.html#methodgetRandomUser">getRandomUser</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$letter&nbsp;</span>=&nbsp;<span class="src-str">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$user&nbsp;</span>=&nbsp;<span class="src-var">$letter</span><span class="src-sym">{</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">25</span><span class="src-sym">)</span><span class="src-sym">}</span>.<a href="http://www.php.net/sprintf">sprintf</a><span class="src-sym">(</span><span class="src-str">&quot;%06d&quot;</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">,</span><span class="src-num">999999</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="http://www.php.net/ucfirst">ucfirst</a><span class="src-sym">(</span><span class="src-var">$user</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a60"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;random&nbsp;IP&nbsp;(string&nbsp;with&nbsp;4&nbsp;numbers&nbsp;between&nbsp;0&nbsp;and&nbsp;255).&nbsp;No&nbsp;check&nbsp;for&nbsp;validity&nbsp;is&nbsp;made</span></div></li>
 <li><div class="src-line"><a name="a61"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
@@ -109,7 +107,7 @@
 <li><div class="src-line"><a name="a64"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ip&nbsp;</span>=&nbsp;<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">255</span><span class="src-sym">)</span>.<span class="src-str">&quot;.&quot;</span>.<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">255</span><span class="src-sym">)</span>.<span class="src-str">&quot;.&quot;</span>.<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">255</span><span class="src-sym">)</span>.<span class="src-str">&quot;.&quot;</span>.<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">255</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$ip</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a66"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a67"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a68"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a69"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;semi&nbsp;random&nbsp;HTTP&nbsp;method&nbsp;(90%&nbsp;will&nbsp;be&nbsp;GET)</span></div></li>
 <li><div class="src-line"><a name="a70"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
@@ -124,22 +122,22 @@
 <li><div class="src-line"><a name="a79"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
 <li><div class="src-line"><a name="a80"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a81"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a82"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
-<li><div class="src-line"><a name="a83"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a82"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a83"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a84"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;semi&nbsp;random&nbsp;HTTP&nbsp;method&nbsp;(90%&nbsp;will&nbsp;be&nbsp;RETR)</span></div></li>
 <li><div class="src-line"><a name="a85"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
 <li><div class="src-line"><a name="a86"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></div></li>
 <li><div class="src-line"><a name="a87"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../InternetAccessLog/RandomElements.html#methodgetRandomFTPMethod">getRandomFTPMethod</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-sym">{</span></div></li>
-<li><div class="src-line"><a name="a88"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">9</span><span class="src-sym">)&nbsp;</span>==&nbsp;<span class="src-num">9</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-sym">{</span></div></li>
-<li><div class="src-line"><a name="a89"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfFTPMethods</span><span class="src-sym">[</span><a href="http://www.php.net/array_rand">array_rand</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfFTPMethods</span><span class="src-sym">)</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a90"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a91"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
-<li><div class="src-line"><a name="a92"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
-<li><div class="src-line"><a name="a93"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">&quot;RETR&quot;</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a94"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a95"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a88"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">9</span><span class="src-sym">)&nbsp;</span>==&nbsp;<span class="src-num">9</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a89"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfFTPMethods</span><span class="src-sym">[</span><a href="http://www.php.net/array_rand">array_rand</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfFTPMethods</span><span class="src-sym">)</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a90"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a91"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line"><a name="a92"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a93"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">&quot;RETR&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a94"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a95"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a96"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a97"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a97"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a98"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a99"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;random&nbsp;protocol&nbsp;(90%&nbsp;will&nbsp;be&nbsp;http)</span></div></li>
 <li><div class="src-line"><a name="a100"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
@@ -153,7 +151,7 @@
 <li><div class="src-line"><a name="a108"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">&quot;http&quot;</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a109"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
 <li><div class="src-line"><a name="a110"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a111"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a111"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a112"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a113"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;random&nbsp;Internet&nbsp;domain&nbsp;(a&nbsp;www&nbsp;followed&nbsp;by&nbsp;a&nbsp;random&nbsp;string&nbsp;ended&nbsp;by&nbsp;a&nbsp;valid&nbsp;internet</span></div></li>
 <li><div class="src-line"><a name="a114"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
@@ -162,11 +160,11 @@
 <li><div class="src-line"><a name="a117"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$word&nbsp;</span>=&nbsp;<a href="http://www.php.net/range">range</a><span class="src-sym">(</span><span class="src-str">'a'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'z'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a118"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$len&nbsp;</span>=&nbsp;<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$word</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a119"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.php.net/shuffle">shuffle</a><span class="src-sym">(</span><span class="src-var">$word</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a120"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$domain&nbsp;</span>.=&nbsp;<span class="src-str">&quot;www.&quot;</span>.<a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><a href="http://www.php.net/implode">implode</a><span class="src-sym">(</span><span class="src-var">$word</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-var">$len</span><span class="src-sym">)</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfInternetDomains</span><span class="src-sym">[</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfInternetDomains</span><span class="src-sym">)</span>-<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a121"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a120"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$domain&nbsp;</span>=&nbsp;<span class="src-str">&quot;www.&quot;</span>.<a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><a href="http://www.php.net/implode">implode</a><span class="src-sym">(</span><span class="src-var">$word</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-var">$len</span><span class="src-sym">)</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfInternetDomains</span><span class="src-sym">[</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">listOfInternetDomains</span><span class="src-sym">)</span>-<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a121"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a122"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$domain</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a123"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a124"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a124"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a125"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a126"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;random&nbsp;string&nbsp;of&nbsp;the&nbsp;length&nbsp;demanded&nbsp;(10&nbsp;characters&nbsp;by&nbsp;default)</span></div></li>
 <li><div class="src-line"><a name="a127"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">integer&nbsp;</span><span class="src-doc-var">$length&nbsp;</span></div></li>
@@ -176,10 +174,10 @@
 <li><div class="src-line"><a name="a131"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$res&nbsp;</span>=&nbsp;<a href="http://www.php.net/array_merge">array_merge</a><span class="src-sym">(</span><a href="http://www.php.net/range">range</a><span class="src-sym">(</span><span class="src-str">'a'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'z'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/range">range</a><span class="src-sym">(</span><span class="src-str">'A'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Z'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/range">range</a><span class="src-sym">(</span><span class="src-str">'0'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'9'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;/&quot;</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a132"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$len&nbsp;</span>=&nbsp;<a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-var">$length</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a133"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.php.net/shuffle">shuffle</a><span class="src-sym">(</span><span class="src-var">$res</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a name="a134"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a134"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a135"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><a href="http://www.php.net/implode">implode</a><span class="src-sym">(</span><span class="src-var">$res</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-var">$length</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a136"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a137"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a137"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a138"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a139"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;semirandom&nbsp;return&nbsp;code&nbsp;(90%&nbsp;are&nbsp;200&nbsp;return&nbsp;code)</span></div></li>
 <li><div class="src-line"><a name="a140"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">integer&nbsp;</span></div></li>
@@ -193,7 +191,7 @@
 <li><div class="src-line"><a name="a148"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-num">200</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a149"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
 <li><div class="src-line"><a name="a150"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a151"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a151"></a>&nbsp;</div></li>
 <li><div class="src-line"><a name="a152"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
 <li><div class="src-line"><a name="a153"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Return&nbsp;a&nbsp;random&nbsp;size&nbsp;between&nbsp;0&nbsp;and&nbsp;50K</span></div></li>
 <li><div class="src-line"><a name="a154"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">integer&nbsp;</span></div></li>
@@ -201,15 +199,27 @@
 <li><div class="src-line"><a name="a156"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../InternetAccessLog/RandomElements.html#methodgetRandomSize">getRandomSize</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line"><a name="a157"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="http://www.php.net/mt_rand">mt_rand</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-num">50</span>*<span class="src-num">1024</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><a name="a158"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a159"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
-<li><div class="src-line"><a name="a160"></a><span class="src-sym">}</span></div></li>
-<li><div class="src-line"><a name="a161"></a>&nbsp;</div></li>
-<li><div class="src-line"><a name="a162"></a><span class="src-php">?&gt;</span></div></li>
+<li><div class="src-line"><a name="a159"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a160"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a161"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Return&nbsp;a&nbsp;random&nbsp;date&nbsp;between&nbsp;the&nbsp;two&nbsp;dates&nbsp;passes&nbsp;as&nbsp;parameters.&nbsp;Parameters&nbsp;and&nbsp;return&nbsp;value&nbsp;are&nbsp;English&nbsp;textual&nbsp;datetime&nbsp;descriptions&nbsp;'Y-m-d&nbsp;H:i:s'</span></div></li>
+<li><div class="src-line"><a name="a162"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">string&nbsp;</span><span class="src-doc-var">$mindate&nbsp;</span><span class="src-doc">&nbsp;English&nbsp;textual&nbsp;datetime&nbsp;description&nbsp;'Y-m-d&nbsp;H:i:s'&nbsp;of&nbsp;minimun&nbsp;date</span></div></li>
+<li><div class="src-line"><a name="a163"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">string&nbsp;</span><span class="src-doc-var">$maxdate&nbsp;</span><span class="src-doc">&nbsp;English&nbsp;textual&nbsp;datetime&nbsp;description&nbsp;'Y-m-d&nbsp;H:i:s'&nbsp;of&nbsp;maximun&nbsp;date</span></div></li>
+<li><div class="src-line"><a name="a164"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">string&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a165"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a166"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDate">getRandomDate</a><span class="src-sym">(</span><span class="src-var">$mindate</span><span class="src-sym">,&nbsp;</span><span class="src-var">$maxdate</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a167"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$min&nbsp;</span>=&nbsp;<a href="http://www.php.net/strtotime">strtotime</a><span class="src-sym">(</span><span class="src-var">$mindate</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a168"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$max&nbsp;</span>=&nbsp;<a href="http://www.php.net/strtotime">strtotime</a><span class="src-sym">(</span><span class="src-var">$maxdate</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a169"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="http://www.php.net/date">date</a><span class="src-sym">(</span><span class="src-str">'Y-m-d&nbsp;H:i:s'</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/rand">rand</a><span class="src-sym">(</span><span class="src-var">$min</span><span class="src-sym">,&nbsp;</span><span class="src-var">$max</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a170"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a171"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a172"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a173"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a174"></a><span class="src-php">?&gt;</span></div></li>
 </ol>
 </span></div>
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Sun, 18 Nov 2012 19:29:23 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 12 Apr 2013 12:02:21 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

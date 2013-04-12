@@ -2,21 +2,22 @@
 set_include_path(get_include_path() . PATH_SEPARATOR . "classes");
 require_once("MySQLRandomElements.class.php");
 
-$logentries = 80000000;
+$logentries = 60000000;
 
 echo "Loading data in RAM ...";
 $mre = new MySQLRandomElements();
+$mre->loadDataInRAM();
 echo "Done\n";
 
-// Export random elements from database to CSV files
-$mre->exportUsersToCSV();
-echo "Users list exported to CSV/Users.csv\n";
-$mre->exportIPsToCSV();
-echo "IPs list exported to CSV/IPs.csv\n";
-$mre->exportDomainsToCSV();
-echo "Domains list exported to CSV/Domains.csv\n";
-$mre->exportURIsToCSV();
-echo "URIs list exported to CSV/URIs.csv\n";
+// // Export random elements from database to CSV files
+// $mre->exportUsersToCSV();
+// echo "Users list exported to CSV/Users.csv\n";
+// $mre->exportIPsToCSV();
+// echo "IPs list exported to CSV/IPs.csv\n";
+// $mre->exportDomainsToCSV();
+// echo "Domains list exported to CSV/Domains.csv\n";
+// $mre->exportURIsToCSV();
+// echo "URIs list exported to CSV/URIs.csv\n";
 
 // Generate & write random log entires
 $start = mktime(0,0,0,1,1,2012);

@@ -4,7 +4,7 @@
  *  File with the class used to generate random elements and save then in MySQL (users, URL's and IP's)
  *  @author José Manuel Ciges Regueiro <jmanuel@ciges.net>, Web page {@link http://www.ciges.net}
  *  @license http://www.gnu.org/copyleft/gpl.html GNU GPLv3
- *  @version 20130314
+ *  @version 20130325
  *
  *  @package InternetAccessLog
  *  @filesource
@@ -401,7 +401,7 @@ require_once("RandomElements.class.php");
         $this->rnd_domains_number = $this->recordNumber(self::DATA_RNDDOMAINSC_NAME);
         $this->rnd_uris_number = $this->recordNumber(self::DATA_RNDURISC_NAME);
         // Load the data in RAM
-        $this->loadDataInRAM();
+        //$this->loadDataInRAM();
     }
 
     /**
@@ -886,7 +886,9 @@ require_once("RandomElements.class.php");
                 $fh = fopen($filename, "a");
             }
         }
-        fputcsv($fh, $log_entry) || die("Not possible to write in  ".$filename." file");
+
+        $log_entry['datetime'] = strftime("%Y-%m-%d %H:%M:%S", $log_entry['datetime']);
+        fprintf($fh, "%s\n", implode(",", $log_entry));
         if (is_null($fh))       {
             fclose($fh);
         }
@@ -1094,6 +1096,13 @@ require_once("RandomElements.class.php");
     }
 
     /**
+     *  Helper function to create Domains table in database
+     *  @param string $tablename
+     *  @param boolean $useindex    Sets if a unique index for IP name must be created
+     *  @access private
+     */
+
+    /**
      *  Receives a log entry and saves the data and, optionally, monthly and daily precalculated values in database.
      *  By default the reports are created. If the second argument is FALSE they will not be generated.
      *  A id field autonumeric will be created.
@@ -1106,17 +1115,20 @@ require_once("RandomElements.class.php");
         // Table creation if it does not exists
         if (!$this->tableExists(self::NONFTPLOG_NAME)) {
             $query = "CREATE TABLE ".self::NONFTPLOG_NAME." (
-                id int not null auto_increment,
-                clientip VARCHAR(15) NOT NULL,
-                user CHAR(7) NOT NULL,
-                datetime TIMESTAMP NOT NULL,
-                method VARCHAR(10) NOT NULL,
-                protocol VARCHAR(10) NOT NULL,
-                domain VARCHAR(255) NOT NULL,
-                uri VARCHAR(100) NOT NULL,
-                return_code SMALLINT UNSIGNED NOT NULL,
-                size INTEGER UNSIGNED NOT NULL
-                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `clientip` varchar(15) NOT NULL,
+                `user` char(7) NOT NULL,
+                `datetime` datetime NOT NULL,
+                `method` varchar(10) NOT NULL,
+                `protocol` varchar(10) NOT NULL,
+                `domain` varchar(255) NOT NULL,
+                `uri` varchar(100) NOT NULL,
+                `return_code` smallint(5) unsigned NOT NULL,
+                `size` int(10) unsigned NOT NULL,
+                PRIMARY KEY (`id`),
+                INDEX `domain` (`domain`),
+                INDEX `datetime` (`datetime`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
             $this->db_conn->query($query) ||
                 die ("Error sending the query '".$query."' to MySQL: ".$this->db_conn->error."\n");
@@ -1135,6 +1147,30 @@ require_once("RandomElements.class.php");
             $this->saveDomainReport($log_entry["domain"], $timestamp, $log_entry['size']);
             }
 
+    }
+
+    /**
+     *  Gets a line with a log entry in CSV format and saves the data and, optionally, monthly and daily precalculated values in database.
+     *  By default the reports are created. If the second argument is FALSE they will not be generated.
+     *  A id field autonumeric will be created.
+     *
+     *  @param string $line Line in CSV format (clientip, user, datetime, method, protocol, domain, uri, return_code, size)
+     *  @param boolean $create_reports
+     */
+    function saveRandomNonFTPLogEntry_fromCSV($line, $create_reports=TRUE) {
+        (list($clientip, $user, $datetime, $method, $protocol, $domain, $uri, $return_code, $size) = explode(",", $line)) || die("Not possible to read from ".$filename." file");
+        $logentry = array(
+            'clientip' => $clientip,
+            'user' => $user,
+            'datetime' => $datetime,
+            'method' => $method,
+            'protocol' => $protocol,
+            'domain' => $domain,
+            'uri' => $uri,
+            'return_code' => $return_code,
+            'size' => $size
+            );
+        $this->saveRandomNonFTPLogEntry($logentry, $create_reports);
     }
 
     /**
@@ -1187,7 +1223,7 @@ require_once("RandomElements.class.php");
                 id int not null auto_increment,
                 clientip VARCHAR(15) NOT NULL,
                 user CHAR(7) NOT NULL,
-                datetime TIMESTAMP NOT NULL,
+                datetime DATETIME NOT NULL,
                 method VARCHAR(10) NOT NULL,
                 domain VARCHAR(255) NOT NULL,
                 uri VARCHAR(100) NOT NULL,
@@ -1199,7 +1235,7 @@ require_once("RandomElements.class.php");
         }
 
         $query = "insert into ".self::FTPLOG_NAME." (clientip, user, datetime, method, domain, uri, size) values (".
-                "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y:m:d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
+                "\"".$log_entry['clientip']."\", \"".$log_entry['user']."\", \"".date("Y-m-d H:i:s", $log_entry['datetime'])."\", \"".$log_entry['method']."\", ".
                 "\"".$log_entry['domain']."\", \"".$log_entry['uri']."\", ".$log_entry['size'].")";
 		$this->db_conn->query($query) ||
 			die ("Error sending the query '".$query."' to MySQL: ".$this->mysrnd_con->error."\n");
@@ -1213,6 +1249,7 @@ require_once("RandomElements.class.php");
 
     }
 
-
 }
+
+
 ?>

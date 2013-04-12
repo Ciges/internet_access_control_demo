@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web load tests MySQL Partitioning</title>
+    <meta content="José Manuel Ciges Regueiro" name="author">
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <style type="text/css" media="screen">
+      body { margin: 1em 3em }
+    </style>
+  </head>
+  <body>
+    <p>Hello,</p>
+    <p>In this directory you will find scripts which make part of the load tests collection for a comparative read & write performance tests I have made over a MySQL table (MyISAM) with millions of log records and the same MySQL table but using <a href="http://dev.mysql.com/doc/refman/5.5/en/partitioning.html">partitioning</a> (partitioned by month):</p>
+    <p>The scripts included are:</p>
+    <ul>
+      <li><a href="write_a_2012_log_record.php">write_a_2012_log_record.php</a> :&nbsp; Writes a predefined Non FTPlog record (only 'datetime' record is randomly generated) in "NonFTP_Access_log" table.<br>
+      </li>
+      <li><a href="write_a_2012S52_log_record.php">write_a_2012S52_log_record.php</a> :&nbsp; Writes a predefined Non FTPlog record (only 'datetime' record is randomly generated <u>but only for last week of 2012</u>) in "NonFTP_Access_log" table.<br>
+      </li>
+  </body>
+</html>

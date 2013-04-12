@@ -16,9 +16,7 @@
   <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
   <tr>
     <td colspan="2" class="header-menu">
-      
-                        
-                      		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
+                                                    		[ <a href="../classtrees_InternetAccessLog.html" class="menu">class tree: InternetAccessLog</a> ]
 		[ <a href="../elementindex_InternetAccessLog.html" class="menu">index: InternetAccessLog</a> ]
             [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -89,6 +87,7 @@ Source Location: /RandomElements.class.php<br /><br />
 				<td valign="top" width="20%" class="class-overview">
 		<p align="center" class="short-description"><strong><a href="#sec_methods">Methods</a></strong></p>
 		<ul>
+		  		  <li><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDate">getRandomDate</a></li>
 		  		  <li><a href="../InternetAccessLog/RandomElements.html#methodgetRandomDomain">getRandomDomain</a></li>
 		  		  <li><a href="../InternetAccessLog/RandomElements.html#methodgetRandomFTPMethod">getRandomFTPMethod</a></li>
 		  		  <li><a href="../InternetAccessLog/RandomElements.html#methodgetRandomHTTPMethod">getRandomHTTPMethod</a></li>
@@ -121,15 +120,15 @@ Source Location: /RandomElements.class.php<br /><br />
 					<th class="class-table-header">Description</th>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../InternetAccessLog/MySQLRandomElements.html">MySQLRandomElements</a></td>
-					<td>
-											This class is used to generate random elements (users, IP's and URL's) and save them into MySQL
-										</td>
-				</tr>
-								<tr>
 					<td style="padding-right: 2em"><a href="../InternetAccessLog/MongoRandomElements.html">MongoRandomElements</a></td>
 					<td>
 											This class is used to generate random elements (users, IP's and URL's) and save them into MongoDB
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../InternetAccessLog/MySQLRandomElements.html">MySQLRandomElements</a></td>
+					<td>
+											This class is used to generate random elements (users, IP's and URL's) and save them into MySQL
 										</td>
 				</tr>
 							</table>
@@ -151,7 +150,12 @@ Source Location: /RandomElements.class.php<br /><br />
 		<div class="info-box-body">
 			<div class="method-summary">
 				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
-																																																																																								<div class="method-definition">
+																																																																																																<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#getRandomDate" title="details" class="method-name">getRandomDate</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Return a random date between the two dates passes as parameters. Parameters and return value are English textual datetime descriptions 'Y-m-d H:i:s'</td></tr>
+				</div>
+																<div class="method-definition">
 											<tr><td class="method-definition"><span class="method-result">string</span>&nbsp;&nbsp;</td>
 										<td class="method-definition"><a href="#getRandomDomain" title="details" class="method-name">getRandomDomain</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">Returns a random Internet domain (a www followed by a random string ended by a valid internet</td></tr>
@@ -214,8 +218,53 @@ Source Location: /RandomElements.class.php<br /><br />
 		<div class="info-box-body">
 			<a name='method_detail'></a>
 
-<a name="methodgetRandomDomain" id="getRandomDomain"><!-- --></a>
+<a name="methodgetRandomDate" id="getRandomDate"><!-- --></a>
 <div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">getRandomDate</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a166">166</a>]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>string getRandomDate(
+string
+$mindate, string
+$maxdate&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Return a random date between the two dates passes as parameters. Parameters and return value are English textual datetime descriptions 'Y-m-d H:i:s'
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$mindate:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> English textual datetime description 'Y-m-d H:i:s' of minimun date</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$maxdate:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> English textual datetime description 'Y-m-d H:i:s' of maximun date</span>			</td></tr>
+				</table>
+
+	<br />
+	
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodgetRandomDomain" id="getRandomDomain"><!-- --></a>
+<div class="oddrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomDomain</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a116">116</a>]</span>
@@ -241,7 +290,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomFTPMethod" id="getRandomFTPMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomFTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a87">87</a>]</span>
@@ -267,7 +316,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomHTTPMethod" id="getRandomHTTPMethod"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomHTTPMethod</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a72">72</a>]</span>
@@ -293,7 +342,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomIP" id="getRandomIP"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomIP</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a63">63</a>]</span>
@@ -319,7 +368,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomProtocol" id="getRandomProtocol"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomProtocol</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a102">102</a>]</span>
@@ -345,7 +394,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomRetourCode" id="getRandomRetourCode"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomRetourCode</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a142">142</a>]</span>
@@ -371,7 +420,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomSize" id="getRandomSize"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomSize</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a156">156</a>]</span>
@@ -397,7 +446,7 @@ Source Location: /RandomElements.class.php<br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomString" id="getRandomString"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomString</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a130">130</a>]</span>
@@ -435,7 +484,7 @@ $length = 10]&nbsp;
 	<div class="top">[ <a href="#top">Top</a> ]</div>
 </div>
 <a name="methodgetRandomUser" id="getRandomUser"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 
 <div class="method-header">
 	<span class="method-title">getRandomUser</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="../__filesource/fsource_InternetAccessLog__RandomElements.class.php.html#a52">52</a>]</span>
@@ -466,7 +515,7 @@ $length = 10]&nbsp;
 
         <div class="credit">
 		    <hr class="separator" />
-		    Documentation generated on Sun, 18 Nov 2012 19:29:23 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 12 Apr 2013 12:02:21 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>
